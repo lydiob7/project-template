@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Smart Studios UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Current version: v0.1.0
 
-## Available Scripts
+## About
 
-In the project directory, you can run:
+This projects has UI Components to use on a React project with all the styles of Smart Studios and the basic structure with Redux and a basic routing for any App or Website. Is built over Material UI v4 and uses Material Icons as well as Redux Toolkit and react-router-dom for the routing.
 
-### `yarn start`
+## Requirements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You will need a node environment version 14 and React version 16 or above and basic knowledge of React, Redux, Axios and Routing.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `yarn test`
+Clone this repository into your local environment and run this script on the console:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install
+```
 
-### `yarn build`
+## Config files
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Navigation menus and submenus
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The file src/config/navigationConfig.js contains an object with the names and links for every section on the website. These are going to be shown on the Navigation Bar component as well as in the footer if needed and other sections.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Theme
 
-### `yarn eject`
+The theme provider is in src/components/theme. It wraps all the App and applies the default theme for Material UI + the customization made on src/components/theme/theme.js
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## UI Components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### General Components
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Logo
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Page Title
 
-## Learn More
+#### Breadcrumb
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Search bar
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Listing results bar (w/ view mode)
 
-### Code Splitting
+#### Simple card
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Horizontal card with image
 
-### Analyzing the Bundle Size
+#### Vertical card with image
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### Social media menu
 
-### Making a Progressive Web App
+#### Copyright claim
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Footer menu (terms&conditions, privacy policy, etc)
 
-### Advanced Configuration
+### Composite Components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### Navigation Bar
 
-### Deployment
+#### Listings with view mode
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### Footer
 
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Redux Store

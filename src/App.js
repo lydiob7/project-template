@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import configureStore from 'store/configureStore';
+import AppRoute from 'utils/AppRoute';
+import { ThemeProvider } from 'components/theme';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Home from 'pages/home/Home';
+import Error from 'pages/others/Error';
+
+const store = configureStore();
+
+const App = () => {
+    return (
+        <>
+            <Provider store={store}>
+                <ThemeProvider>
+                    <Switch>
+                        <AppRoute exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+                        <AppRoute component={Error} />
+                    </Switch>
+                </ThemeProvider>
+            </Provider>
+        </>
+    );
+};
 
 export default App;
