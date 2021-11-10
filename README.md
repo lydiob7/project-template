@@ -116,7 +116,7 @@ This component holds the menu for the footer. It's a simple list with links.
 | -------- | ---------- | ----------- | ------------------ |
 | menus    | MenuItem[] | -           | List of menu items |
 
-MenuItem
+**MenuItem**
 
 | **Name** | **Type** | **Default** | **Description**         |
 | -------- | -------- | ----------- | ----------------------- |
@@ -147,7 +147,7 @@ This component displays a rectangle card with an image on top, a title, descript
 | -------- | -------- | ----------- | ------------------------------------------- |
 | item     | Item     | -           | Item object with title and image to display |
 
-Item
+**Item**
 
 | **Name**   | **Type**         | **Default** | **Description**                                |
 | ---------- | ---------------- | ----------- | ---------------------------------------------- |
@@ -158,7 +158,7 @@ Item
 | abstract   | string           | -           | Small description for the item                 |
 | url        | url              | -           | External url to link in the bottom button      |
 
-Category
+**Category**
 
 | **Name** | **Type** | **Default** | **Description** |
 | -------- | -------- | ----------- | --------------- |
@@ -189,7 +189,7 @@ This component displays a horizontal rectangle with an image on the left, a titl
 | -------- | -------- | ----------- | ------------------------------------------- |
 | item     | Item     | -           | Item object with title and image to display |
 
-Item
+**Item**
 
 | **Name**   | **Type**         | **Default** | **Description**                                |
 | ---------- | ---------------- | ----------- | ---------------------------------------------- |
@@ -200,7 +200,7 @@ Item
 | abstract   | string           | -           | Small description for the item                 |
 | url        | url              | -           | External url to link in the bottom button      |
 
-Category
+**Category**
 
 | **Name** | **Type** | **Default** | **Description** |
 | -------- | -------- | ----------- | --------------- |
@@ -247,7 +247,7 @@ This component is a horizontal bar to be displayed on top of a results list. It 
 | onGridViewClick | function         | -           | Method to handle the 'on click' of the grid button |
 | onListViewClick | function         | -           | Method to handle the 'on click' of the list button |
 
-Pagination
+**Pagination**
 
 | **Name**     | **Type** | **Default** | **Description**                              |
 | ------------ | -------- | ----------- | -------------------------------------------- |
@@ -327,7 +327,7 @@ This is a small card only showing an icon and a title.
 | -------- | -------- | ----------- | ------------------------ |
 | item     | Item     | -           | Item to show in the card |
 
-Item
+**Item**
 
 | **Name** | **Type** | **Default** | **Description**                         |
 | -------- | -------- | ----------- | --------------------------------------- |
@@ -354,7 +354,7 @@ This is a simple list with social media icons and links to external websites.
 | -------- | ------------ | ----------- | -------------------- |
 | socials  | SocialLink[] | -           | List of social media |
 
-SocialLink
+**SocialLink**
 
 | **Name** | **Type**                                             | **Default** | **Description**                  |
 | -------- | ---------------------------------------------------- | ----------- | -------------------------------- |
@@ -450,7 +450,7 @@ Contains a collapsable menu with the App title (content is supplied from the mai
 | appTitle  | string     | -           | Brand name                 |
 | menuItems | MenuItem[] | -           | List of menus and submenus |
 
-MenuItem
+**MenuItem**
 
 | **Name** | **Type**  | **Default** | **Description**            |
 | -------- | --------- | ----------- | -------------------------- |
@@ -458,7 +458,7 @@ MenuItem
 | path     | uri       | -           | Path to some internal page |
 | dropdown | Submenu[] | -           | List of submenus           |
 
-Submenu
+**Submenu**
 
 | **Name** | **Type** | **Default** | **Description**            |
 | -------- | -------- | ----------- | -------------------------- |
