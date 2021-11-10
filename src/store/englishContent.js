@@ -1,9 +1,11 @@
 const englishContent = {
     general: {
         appTitle: 'Smart Studios UI',
+        appLogo: '/images/ss-web-36.svg',
         creator: 'Smart Studios',
         creatorWebsite: 'https://smartstudios.io/'
     },
+    content: {},
     footerdata: {
         sociallinks: [
             {
@@ -22,21 +24,7 @@ const englishContent = {
                 icon: 'instagram',
                 url: 'https://instagram.com'
             }
-        ],
-
-        copyright: {
-            menus: [
-                {
-                    path: '#',
-                    title: 'Terms & Conditions'
-                },
-                {
-                    path: '#',
-                    title: 'Privacy Policy'
-                }
-            ],
-            languages: ['English', 'Spanish']
-        }
+        ]
     }
 };
 export default englishContent;

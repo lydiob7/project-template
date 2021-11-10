@@ -18,6 +18,16 @@ const navigationConfig = {
             title: 'Menu 2',
             path: `${process.env.PUBLIC_URL}`
         }
+    ],
+    footermenu: [
+        {
+            path: '#',
+            title: 'Terms & Conditions'
+        },
+        {
+            path: '#',
+            title: 'Privacy Policy'
+        }
     ]
 };
 

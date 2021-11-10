@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
             },
             '& h2': {
                 display: 'inline',
-                color: theme.palette.background.default,
+                color: theme.palette.text.primary,
                 marginLeft: '10px'
             }
         }
@@ -28,8 +29,8 @@ export default function Logo({ imageSrc, className, title }) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Link to={process.env.PUBLIC_URL} className={className}>
-                <img src={imageSrc} alt={`${title} Logo`} />
+            <Link to={parsePath()} className={className}>
+                {imageSrc && <img src={imageSrc} alt={`${title} Logo`} />}
                 &nbsp;<h2>{title}</h2>
             </Link>
         </div>

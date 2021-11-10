@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { parsePath } from 'utils/helpers';
 import Navbar from './Navbar';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Logo from './Logo';
-import logosrc from '../../assets/images/ss-web-36.svg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,18 +15,7 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '80px',
         zIndex: '1199',
         minWidth: '100vw',
-        padding: '0 5vw',
-        '&::after': {
-            position: 'absolute',
-            content: '""',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: -1,
-            opacity: 0.9,
-            backgroundColor: theme.palette.secondary.main
-        }
+        padding: '0 5vw'
     },
     logo: {
         justifyContent: 'center',
@@ -45,14 +35,20 @@ const useStyles = makeStyles((theme) => ({
 export default function GeneralHeader() {
     const classes = useStyles();
     const menuItems = useSelector(({ ui }) => ui.sidebar.menuItems);
+    const appInformation = useSelector(({ ui }) => ui.appInformation);
+
     return (
-        <Grid container className={classes.root}>
+        <Paper component={Grid} container className={classes.root}>
             <Grid container className={classes.logo} item xs={12} lg={6}>
-                <Logo style={{ transform: 'translateX(5vw)' }} imageSrc={logosrc} title="Top3" />
+                <Logo
+                    style={{ transform: 'translateX(5vw)' }}
+                    title={appInformation?.appTitle}
+                    imageSrc={parsePath(appInformation?.appLogo)}
+                />
             </Grid>
             <Grid className={classes.navbar} item container lg={6} alignItems="center">
-                <Navbar appTitle="Top3" menuItems={menuItems} />
+                <Navbar appTitle={appInformation?.appTitle} menuItems={menuItems} />
             </Grid>
-        </Grid>
+        </Paper>
     );
 }

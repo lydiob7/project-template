@@ -8,7 +8,12 @@ const slice = createSlice({
         sidebar: {
             menuItems: navigationConfig.headermenu
         },
-        textContent: englishContent
+        appInformation: englishContent.general,
+        textContent: englishContent.content,
+        footerContent: {
+            general: englishContent.footerdata,
+            menuItems: navigationConfig.footermenu
+        }
     },
     reducers: {}
 });

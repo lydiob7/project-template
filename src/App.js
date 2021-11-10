@@ -16,7 +16,7 @@ const App = () => {
             <Provider store={store}>
                 <ThemeProvider>
                     <Switch>
-                        <AppRoute exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+                        <AppRoute exact path="/" component={Home} />
                         <AppRoute component={Error} />
                     </Switch>
                 </ThemeProvider>

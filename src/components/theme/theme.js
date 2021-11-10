@@ -25,6 +25,11 @@ export const theme = createTheme({
             root: {
                 textTransform: 'none'
             }
+        },
+        MuiSvgIcon: {
+            root: {
+                fontSize: '1.5rem'
+            }
         }
     },
     props: {

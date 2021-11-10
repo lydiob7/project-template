@@ -1,26 +1,23 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { parsePath } from './helpers';
 
-const AppRoute = ({
-  component: Component,
-  layout: Layout,
-  ...rest
-}) => {
+const AppRoute = ({ path, component: Component, layout: Layout, ...rest }) => {
+    Layout = Layout === undefined ? (props) => <>{props.children}</> : Layout;
 
-  Layout = (Layout === undefined) ? props => (<>{props.children}</>) : Layout;
-
-  return (
-    <Route
-      {...rest}
-      render={props => (
-        <>
-          <Layout>
-            <Component {...props} />
-          </Layout>
-        </>
-      )}
-    />
-  );
-}
+    return (
+        <Route
+            path={parsePath(path)}
+            {...rest}
+            render={(props) => (
+                <>
+                    <Layout>
+                        <Component {...props} />
+                    </Layout>
+                </>
+            )}
+        />
+    );
+};
 
 export default AppRoute;
