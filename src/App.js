@@ -5,8 +5,8 @@ import configureStore from 'store/configureStore';
 import AppRoute from 'utils/AppRoute';
 import { ThemeProvider } from 'components/theme';
 
-import Home from 'pages/home/Home';
-import Error from 'pages/others/Error';
+// Routes
+import RoutesSwitch from 'utils/RoutesSwitch';
 
 const store = configureStore();
 
@@ -15,10 +15,7 @@ const App = () => {
         <>
             <Provider store={store}>
                 <ThemeProvider>
-                    <Switch>
-                        <AppRoute exact path="/" component={Home} />
-                        <AppRoute component={Error} />
-                    </Switch>
+                    <RoutesSwitch />
                 </ThemeProvider>
             </Provider>
         </>

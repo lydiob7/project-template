@@ -5,19 +5,28 @@ import englishContent from 'store/englishContent';
 const slice = createSlice({
     name: 'ui',
     initialState: {
-        sidebar: {
-            menuItems: navigationConfig.headermenu
-        },
         appInformation: englishContent.general,
-        textContent: englishContent.content,
         footerContent: {
             general: englishContent.footerdata,
             menuItems: navigationConfig.footermenu
-        }
+        },
+        sidebar: {
+            menuItems: navigationConfig.headermenu
+        },
+        textContent: englishContent.content,
+        theme: 'light'
     },
-    reducers: {}
+    reducers: {
+        themeDark: (state, action) => {
+            state.theme = 'dark';
+        },
+
+        themeLight: (state, action) => {
+            state.theme = 'light';
+        }
+    }
 });
 
-// export const {} = slice.actions;
+export const { themeDark, themeLight } = slice.actions;
 
 export default slice.reducer;

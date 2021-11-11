@@ -20,13 +20,17 @@ npm install
 
 ## Config files
 
+### Routing
+
+The routes are manages on _src/config/routesConfig.js_. You can use the same properties that the custom AppRoute component accepts (see below) and also a _redirectTo_ property that accepts a uri string for the internal route to redirect to.
+
 ### Navigation menus and submenus
 
 The file _src/config/navigationConfig.js_ contains an object with the names and links for every section on the website. These are going to be shown on the Navigation Bar component as well as in the footer if needed and other sections.
 
 ### Theme
 
-The theme provider is in _src/components/theme.js_. It wraps all the App and applies the default theme for Material UI + the customization made on _src/components/theme/theme.js_
+The theme provider is in _src/components/theme.js_. It wraps all the App and applies the default theme for Material UI + the customization made on _src/components/theme/theme.js_. By default the theme color scheme is light but it can be toggled to dark on the ui slice of the redux store.
 
 # UI Components
 
@@ -34,7 +38,7 @@ The theme provider is in _src/components/theme.js_. It wraps all the App and app
 
 ### AppRoute
 
-This component is built over a Route component from react-router-dom, it adds a layout if needed and parse the path to have the PUBLIC_URL before the URI
+This component is built over a Route component from react-router-dom, it adds a layout if needed and parse the path to have the PUBLIC_URL before the URI. You can also indicate a private route and it will check the user state from the auth slice on the redux store.
 
 ```
 <AppRoute
@@ -42,15 +46,19 @@ This component is built over a Route component from react-router-dom, it adds a 
     path="/"
     component={Home}
     layout={MainLayout}
+    privateRoute={true}
+    redirectRoute="/some-public-uri"
 />
 ```
 
-| **Name**    | **Type**       | **Default** | **Description**                                                                                        |
-| ----------- | -------------- | ----------- | ------------------------------------------------------------------------------------------------------ |
-| exact       | boolean        | false       | Use if you want the path to be exact (see react-router-dom documentation)                              |
-| path\*      | uri            | -           | Use the relative path for each page (see react-router-dom documentation)                               |
-| component\* | ReactComponent | -           | A React Component to be rendered when the location match the path (see react-router-dom documentation) |
-| layout      | ReactComponent | -           | A layout to be displayed around the main component                                                     |
+| **Name**      | **Type**       | **Default** | **Description**                                                                                                                      |
+| ------------- | -------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| exact         | boolean        | false       | Use if you want the path to be exact (see react-router-dom documentation)                                                            |
+| path\*        | uri            | -           | Use the relative path for each page (see react-router-dom documentation)                                                             |
+| component\*   | ReactComponent | -           | A React Component to be rendered when the location match the path (see react-router-dom documentation)                               |
+| layout        | ReactComponent | -           | A layout to be displayed around the main component                                                                                   |
+| privateRoute  | boolean        | false       | If you want to make this route private turn this property to true, it will check the authentication from the auth slice of the store |
+| redirectRoute | uri            | '/'         | Pass down a custom page path to redirect on a private route                                                                          |
 
 ### Breadcrumb
 
@@ -223,6 +231,44 @@ This is the main Logo of the page. It can contain an image with a brand name or 
 | imageSrc | imgUrl   | -           | Url for the brand logo |
 | title    | string   | -           | Brand title            |
 
+### PageHeader
+
+This is a page header with title, description, a category and two buttons
+
+```
+<PageHeader
+   categories={[
+       {
+           title: 'Category 1'
+       }
+   ]}
+    title="Page 1"
+    abstract="Small description"
+    websiteURL="https://some-url.com/"
+    primaryBtn={false}
+    primaryBtnText='Primary button'
+    secondaryBtn={false}
+    secondaryBtnText='Secondary button'
+/>
+```
+
+| **Name**         | **Type**   | **Default**     | **Description**                            |
+| ---------------- | ---------- | --------------- | ------------------------------------------ |
+| categories       | Category[] | -               | List of categories to show above the title |
+| title            | string     | -               | Page title                                 |
+| abstract         | string     | -               | Small description to show below the title  |
+| websiteURL       | string     | -               | Main external link for the primary button  |
+| primaryBtn       | boolean    | true            | Indicate false to hide primary button      |
+| primaryBtnText   | string     | 'Visit Website' | Primary button text                        |
+| secondaryBtn     | boolean    | true            | Indicate false to hide secondary button    |
+| secondaryBtnText | string     | 'Report'        | Secondary button text                      |
+
+**Category**
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+| title    | string   | -           | Category title  |
+
 ### ResultsHeader
 
 This component is a horizontal bar to be displayed on top of a results list. It has a pagination on the left and a view mode control on the right.
@@ -377,6 +423,34 @@ This is a simple component with a title and subtitle for any page or section hea
 | title    | string   | -           | Section/Page title       |
 | subtitle | string   | -           | Section/Page description |
 
+### TitleDecoration
+
+This is a simple component for a title underline decoration
+
+```
+<TitleDecoration
+    className="custom-decoration"
+/>
+```
+
+| **Name**  | **Type** | **Default** | **Description**                                 |
+| --------- | -------- | ----------- | ----------------------------------------------- |
+| className | string   | -           | This will be passed down to the wrapper element |
+
+### WidgetWrapper
+
+This is a component to place around the widgets.
+
+```
+<WidgetWrapper>
+    <SomeWidget>
+</WidgetWrapper>
+```
+
+| **Name** | **Type**                      | **Default** | **Description**                                       |
+| -------- | ----------------------------- | ----------- | ----------------------------------------------------- |
+| children | ReactComponent \| HTMLElement | -           | These elements will be displayed inside the component |
+
 ## Composite Components
 
 ### Footer
@@ -465,6 +539,17 @@ Contains a collapsable menu with the App title (content is supplied from the mai
 | title    | string   | -           | Link name                  |
 | path     | uri      | -           | Path to some internal page |
 
+### RoutesSwitch
+
+This component gets the routes array from the _routesConfig.js_ file and returns a react-router-dom Switch with all the appropriate routes.
+
+```
+<RoutesSwitch />
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+
 # Redux Store
 
 ## Configuration
@@ -477,7 +562,7 @@ The main reducer file is called _reducer.js_ and combines the entities reducer a
 
 ### UI Reducer
 
-This is the reducer slice responsible for injecting all the text in the app. It has a sidebar with a menu, the app general information, the main content and the footer data.
+This is the reducer slice responsible for injecting all the text in the app. It has a sidebar with a menu, the app general information, the main content and the footer data. Furthermore it manages the theme color, you can manage toggling the theme between _'light'_ and _'dark'_.
 
 ### Auth Reducer
 
