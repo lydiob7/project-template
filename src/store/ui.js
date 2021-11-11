@@ -10,6 +10,7 @@ const slice = createSlice({
             general: englishContent.footerdata,
             menuItems: navigationConfig.footermenu
         },
+        mantainanceMode: false,
         sidebar: {
             menuItems: navigationConfig.headermenu
         },
@@ -23,10 +24,18 @@ const slice = createSlice({
 
         themeLight: (state, action) => {
             state.theme = 'light';
+        },
+
+        mantainanceModeEnabled: (state, action) => {
+            state.mantainanceMode = true;
+        },
+
+        mantainanceModeDisabled: (state, action) => {
+            state.mantainanceMode = false;
         }
     }
 });
 
-export const { themeDark, themeLight } = slice.actions;
+export const { themeDark, themeLight, mantainanceModeEnabled, mantainanceModeDisabled } = slice.actions;
 
 export default slice.reducer;

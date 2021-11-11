@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { parsePath } from './helpers';
 import LayoutDefault from 'layouts/LayoutDefault';
 import NoLayout from 'layouts/NoLayout';
+import { mantainancePath } from 'utils/helpers';
 
 const AppRoute = ({
     path,
@@ -18,7 +19,10 @@ const AppRoute = ({
     ...rest
 }) => {
     const authenticated = useSelector(({ auth }) => auth.authenticated);
+    const mantainanceMode = useSelector(({ ui }) => ui.mantainanceMode);
 
+    if (mantainanceMode && path !== mantainancePath) return <Redirect to={parsePath(mantainancePath)} />;
+    if (!mantainanceMode && path === mantainancePath) return <Redirect to={parsePath('/error')} />;
     if (privateRoute && !authenticated) return <Redirect to={parsePath(redirectRoute)} />;
 
     return (

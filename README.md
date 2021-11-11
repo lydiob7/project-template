@@ -1,6 +1,6 @@
 # Smart Studios UI
 
-Current version: v0.1.0
+Current version: v0.2.0
 
 ## About
 
@@ -38,7 +38,7 @@ The theme provider is in _src/components/theme.js_. It wraps all the App and app
 
 ### AppRoute
 
-This component is built over a Route component from react-router-dom, it adds a layout that can be disabled if needed and parse the path to have the PUBLIC_URL before the URI. You can also indicate a private route and it will check the user state from the auth slice on the redux store.
+This component is built over a Route component from react-router-dom, it adds a layout that can be disabled if needed and parse the path to have the PUBLIC*URL before the URI. You can also indicate a private route and it will check the user state from the auth slice on the redux store. If the mantainanceMode on the ui slice of the redux store is \_true* then all the routes will redirect to the mantainance page.
 
 ```
 <AppRoute
@@ -544,6 +544,20 @@ This component wraps by default all the routes, you can add the components that 
 | footer    | boolean                       | true        | You can disable the footer on each individual route               |
 | scrollBtn | boolean                       | true        | You can disable the scroll button on each individual page         |
 
+### Mantainance
+
+This is a default page for the mantainance route. It includes an image and a link button to the creator website (you can update this on the main text content file).
+
+```
+<Mantainance
+    mantainanceimg="/images/custom-image.svg"
+/>
+```
+
+| **Name**       | **Type** | **Default**               | **Description**                            |
+| -------------- | -------- | ------------------------- | ------------------------------------------ |
+| mantainanceimg | imgUrl   | '/images/mantainance.svg' | You can choose a custom image to show here |
+
 ### Navbar
 
 Contains a collapsable menu with the App title (content is supplied from the main text content file and the navigationConfig file)
@@ -627,7 +641,7 @@ The main reducer file is called _reducer.js_ and combines the entities reducer a
 
 ### UI Reducer
 
-This is the reducer slice responsible for injecting all the text in the app. It has a sidebar with a menu, the app general information, the main content and the footer data. Furthermore it manages the theme color, you can manage toggling the theme between _'light'_ and _'dark'_.
+This is the reducer slice responsible for injecting all the text in the app. It has a sidebar with a menu, the app general information, the main content and the footer data. Furthermore it manages the theme color, you can toggle the theme between _'light'_ and _'dark'_. You can also set the _mantainanceMode_ in which case all the routes will be redirected to the mantainance page.
 
 ### Auth Reducer
 
