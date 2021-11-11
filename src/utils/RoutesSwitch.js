@@ -8,14 +8,14 @@ import { routes } from 'config/routesConfig';
 const RoutesSwitch = () => {
     return (
         <Switch>
-            {routes.map((route, index) => {
-                if (route.redirectTo)
+            {routes.map(({ redirectTo, ...rest }, index) => {
+                if (redirectTo)
                     return (
-                        <AppRoute path={route.path} exact={route.exact}>
-                            <Redirect to={route.redirectTo} />
+                        <AppRoute {...rest}>
+                            <Redirect to={redirectTo} />
                         </AppRoute>
                     );
-                return <AppRoute exact={route.exact} path={route.path} component={route.component} />;
+                return <AppRoute {...rest} />;
             })}
         </Switch>
     );

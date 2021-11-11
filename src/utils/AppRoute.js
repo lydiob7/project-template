@@ -2,18 +2,22 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { parsePath } from './helpers';
+import LayoutDefault from 'layouts/LayoutDefault';
+import NoLayout from 'layouts/NoLayout';
 
 const AppRoute = ({
     path,
     component: Component,
-    layout: Layout,
+    layout = true,
+    footer = true,
+    scrollBtn,
+    noLayoutFooter,
+    noLayoutBtn,
     privateRoute = false,
     redirectRoute = '/',
     ...rest
 }) => {
     const authenticated = useSelector(({ auth }) => auth.authenticated);
-
-    Layout = Layout === undefined ? (props) => <>{props.children}</> : Layout;
 
     if (privateRoute && !authenticated) return <Redirect to={parsePath(redirectRoute)} />;
 
@@ -23,9 +27,15 @@ const AppRoute = ({
             {...rest}
             render={(props) => (
                 <>
-                    <Layout>
-                        <Component {...props} />
-                    </Layout>
+                    {layout ? (
+                        <LayoutDefault footer={footer} scrollBtn={scrollBtn}>
+                            <Component {...props} />
+                        </LayoutDefault>
+                    ) : (
+                        <NoLayout footer={noLayoutFooter} scrollBtn={noLayoutBtn}>
+                            <Component {...props} />
+                        </NoLayout>
+                    )}
                 </>
             )}
         />

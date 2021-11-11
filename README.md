@@ -38,27 +38,35 @@ The theme provider is in _src/components/theme.js_. It wraps all the App and app
 
 ### AppRoute
 
-This component is built over a Route component from react-router-dom, it adds a layout if needed and parse the path to have the PUBLIC_URL before the URI. You can also indicate a private route and it will check the user state from the auth slice on the redux store.
+This component is built over a Route component from react-router-dom, it adds a layout that can be disabled if needed and parse the path to have the PUBLIC_URL before the URI. You can also indicate a private route and it will check the user state from the auth slice on the redux store.
 
 ```
 <AppRoute
     exact
     path="/"
     component={Home}
-    layout={MainLayout}
+    layout={false}
+    footer={false}
+    scrollBtn={false}
+    noLayoutFooter={true}
+    noLayoutBtn={true}
     privateRoute={true}
     redirectRoute="/some-public-uri"
 />
 ```
 
-| **Name**      | **Type**       | **Default** | **Description**                                                                                                                      |
-| ------------- | -------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| exact         | boolean        | false       | Use if you want the path to be exact (see react-router-dom documentation)                                                            |
-| path\*        | uri            | -           | Use the relative path for each page (see react-router-dom documentation)                                                             |
-| component\*   | ReactComponent | -           | A React Component to be rendered when the location match the path (see react-router-dom documentation)                               |
-| layout        | ReactComponent | -           | A layout to be displayed around the main component                                                                                   |
-| privateRoute  | boolean        | false       | If you want to make this route private turn this property to true, it will check the authentication from the auth slice of the store |
-| redirectRoute | uri            | '/'         | Pass down a custom page path to redirect on a private route                                                                          |
+| **Name**       | **Type**       | **Default** | **Description**                                                                                                                                                                                             |
+| -------------- | -------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| exact          | boolean        | false       | Use if you want the path to be exact (see react-router-dom documentation)                                                                                                                                   |
+| path           | uri            | -           | Use the relative path for each page (see react-router-dom documentation)                                                                                                                                    |
+| component\*    | ReactComponent | -           | A React Component to be rendered when the location match the path (see react-router-dom documentation)                                                                                                      |
+| layout         | boolean        | true        | You can manage the default layout on _src/layouts/LayoutDefault.js_ and the simplest layout on _src/layouts/NoLayout.js_. By default the _NoLayout.js_ file contains the footer and the ScrollTopBtn anyway |
+| privateRoute   | boolean        | false       | If you want to make this route private turn this property to true, it will check the authentication from the auth slice of the store                                                                        |
+| redirectRoute  | uri            | '/'         | Pass down a custom page path to redirect on a private route                                                                                                                                                 |
+| footer         | boolean        | -           | You can disable the footer for the main layout here for each individual route                                                                                                                               |
+| scrollBtn      | boolean        | -           | You can disable the scroll to top button for the main layout here for each individual route                                                                                                                 |
+| noLayoutFooter | boolean        | -           | You can enable the footer for the simple layout here (when layout=false) for each individual route                                                                                                          |
+| noLayoutBtn    | boolean        | -           | You can enable the scroll to top button for the simple layout here (when layout=false) for each individual route                                                                                            |
 
 ### Breadcrumb
 
@@ -453,6 +461,20 @@ This is a component to place around the widgets.
 
 ## Composite Components
 
+### Error
+
+This is a default page for any incorrect route. It includes an image and a link button to the home page.
+
+```
+<Error
+    errorimg="/images/custom-image.svg"
+/>
+```
+
+| **Name** | **Type** | **Default**       | **Description**                            |
+| -------- | -------- | ----------------- | ------------------------------------------ |
+| errorimg | imgUrl   | '/images/404.svg' | You can choose a custom image to show here |
+
 ### Footer
 
 Contains a Copyright claim, a social media menu and a footer menu (everything is supplied by the store and can be configured from the main text content file, the menu from the navigationConfig file)
@@ -461,6 +483,9 @@ Contains a Copyright claim, a social media menu and a footer menu (everything is
 <Footer />
 ```
 
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+
 ### GeneralHeader
 
 Contains a navigation bar and the Logo (name and logo are supplied by the store and can be configured from the main text content file, the navigation menu from the navigationConfig file)
@@ -468,6 +493,9 @@ Contains a navigation bar and the Logo (name and logo are supplied by the store 
 ```
 <GeneralHeader />
 ```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
 
 ### ItemsList
 
@@ -496,6 +524,25 @@ Contains a navigation bar and the Logo (name and logo are supplied by the store 
 | items    | string           | -           | List of items to be displayed |
 
 Item (see Item params on ItemHorizontal above)
+
+### LayoutDefault
+
+This component wraps by default all the routes, you can add the components that will be displayed in all the pages. Remember you can also disable the layout on each individual route. On that case the NoLayout component will be used instead.
+
+```
+<LayoutDefault
+    footer={false}
+    scrollBtn={false}
+>
+    <Component />
+</LayoutDefault>
+```
+
+| **Name**  | **Type**                      | **Default** | **Description**                                                   |
+| --------- | ----------------------------- | ----------- | ----------------------------------------------------------------- |
+| children  | ReactComponent \| HTMLElement | ----------- | These are the components that will be displayed inside the layout |
+| footer    | boolean                       | true        | You can disable the footer on each individual route               |
+| scrollBtn | boolean                       | true        | You can disable the scroll button on each individual page         |
 
 ### Navbar
 
@@ -538,6 +585,24 @@ Contains a collapsable menu with the App title (content is supplied from the mai
 | -------- | -------- | ----------- | -------------------------- |
 | title    | string   | -           | Link name                  |
 | path     | uri      | -           | Path to some internal page |
+
+### NoLayout
+
+This component wraps the routes that explicitly has a layout={false}, you can add the components that will be displayed in these cases. By default it contains the footer and a ScrollTopBtn that you can disable.
+
+```
+<LayoutDefault
+    footer={true}
+    scrollBtn={true}
+>
+    <Component />
+</LayoutDefault>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| children | ReactComponent \| HTMLElement | - | Component that will be rendered inside the layout |
+| footer | boolean | false | You can enable here the footer |
+| scrollBtn | boolean | false | You can enable here the scroll to top button |
 
 ### RoutesSwitch
 
