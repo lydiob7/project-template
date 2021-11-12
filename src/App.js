@@ -6,6 +6,8 @@ import { ThemeProvider } from 'components/theme';
 // Routes
 import RoutesSwitch from 'utils/RoutesSwitch';
 
+import './reset.css';
+
 const store = configureStore();
 
 const App = () => {
