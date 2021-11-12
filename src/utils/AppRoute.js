@@ -15,19 +15,19 @@ const AppRoute = ({
     noLayoutFooter,
     noLayoutBtn,
     privateRoute = false,
-    redirectRoute = '/',
+    redirectRoute = parsePath(),
     ...rest
 }) => {
     const authenticated = useSelector(({ auth }) => auth.authenticated);
     const mantainanceMode = useSelector(({ ui }) => ui.mantainanceMode);
 
-    if (mantainanceMode && path !== mantainancePath) return <Redirect to={parsePath(mantainancePath)} />;
-    if (!mantainanceMode && path === mantainancePath) return <Redirect to={parsePath('/error')} />;
+    if (mantainanceMode && path !== parsePath(mantainancePath)) return <Redirect to={parsePath(mantainancePath)} />;
+    if (!mantainanceMode && path === parsePath(mantainancePath)) return <Redirect to={parsePath('/error')} />;
     if (privateRoute && !authenticated) return <Redirect to={parsePath(redirectRoute)} />;
 
     return (
         <Route
-            path={parsePath(path)}
+            path={path}
             {...rest}
             render={(props) => (
                 <>

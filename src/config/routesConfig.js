@@ -3,30 +3,32 @@ import Mantainance from 'pages/others/Mantainance';
 import Error from 'pages/others/Error';
 import Home from 'pages/home/Home';
 
-import { mantainancePath } from 'utils/helpers';
+import { mantainancePath, parsePath } from 'utils/helpers';
 
 const PrivateComponent = () => <p>Private</p>;
 
 export const routes = [
     {
-        path: '/',
+        path: parsePath('/'),
         component: Home,
         exact: true
     },
     {
-        path: '/home',
-        redirectTo: '/'
+        path: parsePath('/home'),
+        redirectTo: '/',
+        exact: true
     },
     {
-        path: '/private-route',
+        path: parsePath('/private-route'),
         component: PrivateComponent,
         privateRoute: true,
         redirectRoute: '/public-route',
+        exact: true,
         footer: false,
         scrollBtn: false
     },
     {
-        path: mantainancePath,
+        path: parsePath(mantainancePath),
         component: Mantainance,
         layout: false
     },

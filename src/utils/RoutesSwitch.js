@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 import AppRoute from 'utils/AppRoute';
+import { parsePath } from 'utils/helpers';
 
 // Pages
 import { routes } from 'config/routesConfig';
@@ -12,7 +13,7 @@ const RoutesSwitch = () => {
                 if (redirectTo)
                     return (
                         <AppRoute {...rest}>
-                            <Redirect to={redirectTo} />
+                            <Redirect to={parsePath(redirectTo)} />
                         </AppRoute>
                     );
                 return <AppRoute {...rest} />;

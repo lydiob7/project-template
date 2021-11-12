@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { parsePath } from 'utils/helpers';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Logo from 'components/common/Logo';
@@ -41,7 +42,7 @@ export default function GeneralHeader() {
                 <Logo
                     style={{ transform: 'translateX(5vw)' }}
                     title={appInformation?.appTitle}
-                    imageSrc={appInformation?.appLogo}
+                    imageSrc={parsePath(appInformation?.appLogo)}
                 />
             </Grid>
             <Grid className={classes.navbar} item container lg={6} alignItems="center">

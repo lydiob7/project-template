@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { parsePath } from 'utils/helpers';
 import { makeStyles } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -29,7 +30,7 @@ function Mantainance({ mantainanceimg = '/images/mantainance.svg' }) {
                     <Grid container justifyContent="center">
                         <Grid container spacing={4} justifyContent="center" item xs={6}>
                             <Grid item xs={12}>
-                                <img src={mantainanceimg} alt="Mantainance" />
+                                <img src={parsePath(mantainanceimg)} alt="Mantainance" />
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography variant="h3" color="textPrimary">

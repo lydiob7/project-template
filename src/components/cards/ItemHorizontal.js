@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
+import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -100,11 +101,11 @@ const ItemHorizontal = ({ item }) => {
 
     return (
         <Card className={classes.root}>
-            <CardMedia className={classes.cardImage} image={logo} />
+            <CardMedia className={classes.cardImage} image={parsePath(logo)} />
             <CardContent className={classes.cardContent}>
                 <div className="card-content">
                     <div className="card-content-text">
-                        <Link to={internalURI}>
+                        <Link to={parsePath(internalURI)}>
                             {category && (
                                 <Typography variant="h5" className="card-meta">
                                     <span>{category?.logo || category?.icon}</span> {category?.title}
