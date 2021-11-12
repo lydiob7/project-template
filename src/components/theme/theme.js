@@ -20,6 +20,34 @@ export const theme = (color) =>
             fontFamily: "'Barlow', sans-serif"
         },
         overrides: {
+            MuiCssBaseline: {
+                '@global': {
+                    '*': {
+                        boxSizing: 'border-box'
+                    },
+                    body: {
+                        fontFamily: "'Barlow', sans-serif",
+                        minHeight: '100vh',
+                        margin: 0,
+                        padding: 0
+                    },
+                    '#root': {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        minHeight: '100vh'
+                    },
+                    ul: {
+                        padding: 0,
+                        margin: 0,
+                        listStyleType: 'none'
+                    },
+                    a: {
+                        backgroundColor: 'transparent',
+                        textDecoration: 'none !important'
+                    }
+                }
+            },
             MuiButton: {
                 root: {
                     textTransform: 'none'
