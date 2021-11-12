@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ListIcon from '@material-ui/icons/List';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
@@ -13,41 +14,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         position: 'relative',
         zIndex: 999,
-        padding: '20px 20px',
-        '& .generic-nav': {
-            display: 'flex',
-            justifyContent: 'center',
-            '& li div': {
-                display: 'block',
-                color: theme.palette.primary.main,
-                marginRight: '4px',
-                fontSize: '20px',
-                width: '40px',
-                height: '40px',
-                backgroundColor: 'rgba(255, 107, 107, 0.1)',
-                lineHeight: '39px',
-                textAlign: 'center',
-                borderRadius: '50%',
-                cursor: 'pointer',
-                '&.active': {
-                    backgroundColor: theme.palette.primary.main,
-                    color: '#fff'
-                }
-            }
-        },
-        '& .showing__text': {
-            textAlign: 'center',
-            flex: 5,
-            color: '#808996'
-        },
-
-        '& .generic-nav li a': {
-            backgroundColor: theme.palette.primary.main,
-            color: '#fff',
-            '&.active': {
-                background: 'rgba(255, 107, 107, 0.1)',
-                color: theme.palette.primary.main
-            }
+        padding: '10px 20px',
+        '& p': {
+            padding: '12px'
         }
     },
     viewModeBtn: {
@@ -58,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResultsHeader({
+    className,
+    style,
+    id,
     pagination = {
         firstIndex: 0,
         lastIndex: 0,
@@ -70,27 +42,25 @@ function ResultsHeader({
     const classes = useStyles();
 
     return (
-        <>
-            <Grid className={classes.root} item xs={12}>
-                <p className="showing__text text-left">
-                    Showing {pagination.firstIndex} to {pagination.lastIndex} of {pagination.totalResults} entries
-                </p>
+        <div className={className} id={id} style={style}>
+            <Grid container className={classes.root} item xs={12}>
+                <Grid item xs={viewMode ? 6 : 12}>
+                    <Typography variant="body1" color="textSecondary">
+                        Showing {pagination.firstIndex} to {pagination.lastIndex} of {pagination.totalResults} entries
+                    </Typography>
+                </Grid>
                 {viewMode && (
-                    <ul className="generic-nav">
-                        <li>
-                            <IconButton className={classes.viewModeBtn} onClick={onListViewClick}>
-                                <ListIcon fontSize="large" color={viewMode === 'list' ? 'primary' : 'default'} />
-                            </IconButton>
-                        </li>
-                        <li>
-                            <IconButton className={classes.viewModeBtn} onClick={onGridViewClick}>
-                                <ViewModuleIcon fontSize="large" color={viewMode === 'grid' ? 'primary' : 'default'} />
-                            </IconButton>
-                        </li>
-                    </ul>
+                    <Grid container item xs={6} justifyContent="flex-end">
+                        <IconButton className={classes.viewModeBtn} onClick={onListViewClick}>
+                            <ListIcon fontSize="large" color={viewMode === 'list' ? 'primary' : 'default'} />
+                        </IconButton>
+                        <IconButton className={classes.viewModeBtn} onClick={onGridViewClick}>
+                            <ViewModuleIcon fontSize="large" color={viewMode === 'grid' ? 'primary' : 'default'} />
+                        </IconButton>
+                    </Grid>
                 )}
             </Grid>
-        </>
+        </div>
     );
 }
 

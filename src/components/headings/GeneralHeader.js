@@ -2,14 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { parsePath } from 'utils/helpers';
-import Navbar from './Navbar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Logo from './Logo';
+import Logo from 'components/common/Logo';
+import Navbar from 'components/common/Navbar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        position: 'fixed',
         display: 'flex',
         alignItems: 'center',
         minHeight: '80px',

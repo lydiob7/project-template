@@ -27,11 +27,12 @@ const useStyles = makeStyles((theme) => ({
                 marginRight: 0
             },
             '& a': {
-                display: 'block',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 color: theme.palette.text.secondary,
                 width: '38px',
                 height: '38px',
-                lineHeight: '38px',
                 textAlign: 'center',
                 backgroundColor: 'rgba(128, 137, 150, 0.1)',
                 transition: 'all 0.3s',
@@ -49,7 +50,7 @@ function SocialProfile({ socials }) {
     const classes = useStyles();
     return (
         <ul className={classes.root}>
-            {socials.map((item, i) => {
+            {socials?.map((item, i) => {
                 return (
                     <li key={i}>
                         <a target="_blank" rel="noreferrer" href={item.url}>

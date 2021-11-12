@@ -44,7 +44,7 @@ const SearchInput = ({
     className,
     id,
     style,
-    placeholder,
+    placeholder = 'Search...',
     onSubmit,
     onChange,
     searchIcon = true,

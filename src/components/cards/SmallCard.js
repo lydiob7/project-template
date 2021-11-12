@@ -5,9 +5,12 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         marginBottom: '10px',
         textAlign: 'center',
-        display: 'block',
         color: theme.palette.text.secondary,
         backgroundColor: '#fff',
         padding: '18px 20px 12px 20px',
@@ -50,14 +53,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const SmallCard = ({ item }) => {
+const SmallCard = (props) => {
     const classes = useStyles();
 
+    const { icon, url, title } = props;
+
     return (
-        <Paper component={Link} to={item.url} className={classes.root}>
+        <Paper component={Link} to={url} className={classes.root}>
             <div>
-                <span className="icon">{item.icon}</span>
-                {item.title}
+                {icon && <span className="icon">{icon}</span>}
+                {title}
             </div>
         </Paper>
     );

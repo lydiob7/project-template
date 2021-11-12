@@ -6,6 +6,8 @@ import { parsePath } from 'utils/helpers';
 
 import App from './App';
 
+import './reset.css';
+
 const history = createBrowserHistory();
 
 ReactDOM.render(

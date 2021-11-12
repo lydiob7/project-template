@@ -44,6 +44,13 @@ const useStyles = makeStyles((theme) => ({
         '&:focus': {
             outline: 'none'
         }
+    },
+    submitBtn: {
+        display: 'flex',
+        alignItems: 'center',
+        '& .MuiSvgIcon-root': {
+            marginRight: '8px'
+        }
     }
 }));
 
@@ -82,10 +89,8 @@ const ReportItemModal = ({ open, onClose, onSubmit, ...rest }) => {
                                     required
                                 />
 
-                                <Button type="submit">
-                                    <i>
-                                        <SendIcon />
-                                    </i>{' '}
+                                <Button className={classes.submitBtn} type="submit">
+                                    <SendIcon />
                                     Send message
                                 </Button>
                             </form>

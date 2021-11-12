@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         textAlign: 'center',
         paddingTop: '80px',
+        minHeight: '100vh',
         '& img': {
             width: '100%'
         }

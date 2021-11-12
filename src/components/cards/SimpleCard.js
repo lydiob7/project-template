@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, alpha } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,24 +57,22 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const SimpleCard = ({ title, btnText, icon, img, href }) => {
+const SimpleCard = ({ title, btnText, icon, href }) => {
     const classes = useStyles();
 
     return (
-        <Grid container justifyContent="center" item xs={12} sm={6} md={4} lg={3}>
-            <figure className={classes.root}>
-                <figcaption>
-                    <Link to={href}>
-                        <div className={classes.icon}>{icon}</div>
+        <figure className={classes.root}>
+            <figcaption>
+                <Link to={href}>
+                    <div className={classes.icon}>{icon}</div>
 
-                        <Typography className={classes.title} variant="body1">
-                            {title}
-                        </Typography>
-                        <div className={classes.btn}>{btnText}</div>
-                    </Link>
-                </figcaption>
-            </figure>
-        </Grid>
+                    <Typography className={classes.title} variant="body1">
+                        {title}
+                    </Typography>
+                    {btnText && <div className={classes.btn}>{btnText}</div>}
+                </Link>
+            </figcaption>
+        </figure>
     );
 };
 

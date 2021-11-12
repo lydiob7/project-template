@@ -1,31 +1,53 @@
+import { parsePath } from 'utils/helpers';
+
 const navigationConfig = {
     headermenu: [
         {
             title: 'Home',
-            path: process.env.PUBLIC_URL,
             dropdown: [
                 {
-                    title: 'Sub-menu One',
-                    path: '/'
+                    title: 'Error page',
+                    path: parsePath('/error')
+                },
+                {
+                    title: 'Sub-menu Two',
+                    path: parsePath('/')
+                },
+                {
+                    title: 'Sub-menu Three',
+                    path: parsePath()
                 }
             ]
         },
         {
             title: 'Menu 1',
-            path: `${process.env.PUBLIC_URL}`
+            dropdown: [
+                {
+                    title: 'Sub-menu Three',
+                    path: parsePath()
+                },
+                {
+                    title: 'Sub-menu Four',
+                    path: parsePath()
+                },
+                {
+                    title: 'Sub-menu Five',
+                    path: parsePath()
+                }
+            ]
         },
         {
             title: 'Menu 2',
-            path: `${process.env.PUBLIC_URL}`
+            path: parsePath()
         }
     ],
     footermenu: [
         {
-            path: '#',
+            path: parsePath(),
             title: 'Terms & Conditions'
         },
         {
-            path: '#',
+            path: parsePath(),
             title: 'Privacy Policy'
         }
     ]

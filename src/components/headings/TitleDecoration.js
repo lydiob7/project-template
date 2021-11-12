@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const TitleDecoration = ({ className }) => {
+const TitleDecoration = ({ className, id, style }) => {
     const classes = useStyles();
     return (
-        <div className={className}>
+        <div className={className} id={id} style={style}>
             <div className={classes.root}></div>
         </div>
     );

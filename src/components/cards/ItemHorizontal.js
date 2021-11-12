@@ -42,8 +42,11 @@ const useStyles = makeStyles((theme) => ({
                         color: '#808996'
                     },
                     '& span': {
-                        fontSize: '20px',
                         position: 'absolute',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '20px',
                         top: '-9px',
                         left: 0,
                         color: '#fff',
@@ -90,30 +93,35 @@ const useStyles = makeStyles((theme) => ({
 
 const ItemHorizontal = ({ item }) => {
     const classes = useStyles();
+
+    if (!item) return null;
+
+    const { logo, internalURI, category, title, abstract, url, btnText } = item;
+
     return (
         <Card className={classes.root}>
-            <CardMedia className={classes.cardImage} image={item?.logo} />
+            <CardMedia className={classes.cardImage} image={logo} />
             <CardContent className={classes.cardContent}>
                 <div className="card-content">
                     <div className="card-content-text">
-                        <Link to={`${process.env.PUBLIC_URL}/${item?.internalURI}`}>
-                            {item?.category && (
+                        <Link to={`${process.env.PUBLIC_URL}/${internalURI}`}>
+                            {category && (
                                 <Typography variant="h5" className="card-meta">
-                                    <span>{item?.category?.logo || item?.category?.icon}</span> {item?.category?.title}
+                                    <span>{category?.logo || category?.icon}</span> {category?.title}
                                 </Typography>
                             )}
                             <Typography variant="h4" className="card-title">
-                                {item?.title}
+                                {title}
                             </Typography>
                             <Typography variant="body1" className="card-sub">
-                                {item?.abstract}
+                                {abstract}
                             </Typography>
                         </Link>
                     </div>
-                    {item.btnText && (
+                    {btnText && (
                         <div className="card-content-btn">
-                            <a target="_blank" rel="noreferrer" href={item?.url}>
-                                <Button>{item.btnText}</Button>
+                            <a target="_blank" rel="noreferrer" href={url}>
+                                <Button>{btnText}</Button>
                             </a>
                         </div>
                     )}

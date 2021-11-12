@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,35 +12,52 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
+
+import MenuButton from 'components/menus/MenuButton';
 
 const useStyles = makeStyles((theme) => ({
     menuBtn: {
-        color: theme.palette.background.default,
+        color: theme.palette.text.primary,
         '&:focus': {
             outline: 'none'
         }
     },
     mainNavigationListItem: {
         '& .MuiButton-textPrimary': {
-            color: theme.palette.background.default,
+            color: theme.palette.text.primary,
             textTransform: 'capitalize',
             '&:focus': {
                 outline: 'none'
             }
         }
     },
+    subMenu: {
+        top: '80px!important'
+    },
     drawerList: {
-        width: 400
+        width: '100vw',
+        [theme.breakpoints.up('sm')]: {
+            width: 400
+        }
     },
     drawerListTitle: {
         margin: '20px',
-        fontWeight: '500'
+        fontWeight: '500',
+        fontSize: '1.4rem',
+        [theme.breakpoints.up('sm')]: {
+            fontSize: '1.8rem'
+        }
     },
     closeMenuBtn: {
         position: 'absolute',
         right: '10px',
         top: '10px',
+        '& .MuiSvgIcon-root': {
+            fontSize: '1.4rem',
+            [theme.breakpoints.up('sm')]: {
+                fontSize: '1.8rem'
+            }
+        },
         '&:focus': {
             outline: 'none'
         }
@@ -56,15 +74,23 @@ export default function Navbar({ appTitle = '', menuItems = [] }) {
     const classes = useStyles();
     const [navOpen, setNavOpen] = useState(false);
 
-    const mainNavigationList = () => (
-        <>
-            {menuItems.map((item, index) => (
-                <Link className={classes.mainNavigationListItem} to={item.path} key={index}>
-                    <Button variant="text">{item.title}</Button>
-                </Link>
-            ))}
-        </>
-    );
+    const mainNavigationList = () => {
+        return (
+            <>
+                {menuItems?.map((item, index) => (
+                    <>
+                        {item.dropdown ? (
+                            <MenuButton items={item.dropdown}>{item.title}</MenuButton>
+                        ) : (
+                            <Link className={classes.mainNavigationListItem} to={item.path} key={index}>
+                                <Button variant="text">{item.title}</Button>
+                            </Link>
+                        )}
+                    </>
+                ))}
+            </>
+        );
+    };
 
     const drawerList = () => (
         <div>
@@ -73,7 +99,7 @@ export default function Navbar({ appTitle = '', menuItems = [] }) {
             </Typography>
             <Divider />
             <List className={classes.drawerList}>
-                {menuItems.map((item, index) => (
+                {menuItems?.map((item, index) => (
                     <>
                         <ListItem className={classes.listItem} button key={index} onClick={() => setNavOpen(false)}>
                             <Link to={item.path}>
@@ -107,7 +133,7 @@ export default function Navbar({ appTitle = '', menuItems = [] }) {
 
             <Drawer anchor="left" open={navOpen} onClose={() => setNavOpen(false)}>
                 <IconButton className={classes.closeMenuBtn} onClick={() => setNavOpen(false)}>
-                    <CloseIcon fontSize="large" />
+                    <CloseIcon />
                 </IconButton>
                 {drawerList()}
             </Drawer>

@@ -9,14 +9,14 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: '8vh',
-        marginBottom: '2vh'
+        padding: '2vh 0'
     }
 }));
 
 function Footer() {
     const classes = useStyles();
-    const sectiondata = useSelector(({ ui }) => ui.textContent);
+    const appInformation = useSelector(({ ui }) => ui.appInformation);
+    const footerContent = useSelector(({ ui }) => ui.footerContent);
 
     return (
         <footer className={classes.root}>
@@ -24,15 +24,15 @@ function Footer() {
                 <Grid container justifyContent="space-between" alignItems="center">
                     <Grid item sm={12} md={5}>
                         <Copyright
-                            rightsOwner={sectiondata.general.creator}
-                            rightsOwnerWebsite={sectiondata.general.creatorWebsite}
+                            rightsOwner={appInformation?.creator}
+                            rightsOwnerWebsite={appInformation?.creatorWebsite}
                         />
                     </Grid>
                     <Grid item sm={12} md={4}>
-                        <CopyrightMenu menus={sectiondata.footerdata.copyright.menus} />
+                        <CopyrightMenu menus={footerContent?.menuItems} />
                     </Grid>
                     <Grid item sm={12} md={3}>
-                        <SocialProfile socials={sectiondata.footerdata.sociallinks} />
+                        <SocialProfile socials={footerContent?.general?.sociallinks} />
                     </Grid>
                 </Grid>
             </Container>

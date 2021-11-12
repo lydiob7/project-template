@@ -332,14 +332,14 @@ This component is a custom search bar.
 />
 ```
 
-| **Name**      | **Type** | **Default** | **Description**                                                               |
-| ------------- | -------- | ----------- | ----------------------------------------------------------------------------- |
-| placeholder   | string   | -           | Text to be displayed inside the search input                                  |
-| onChange      | function | -           | Method to apply on input change                                               |
-| onSubmit      | function | -           | Method to apply on form submit                                                |
-| searchIcon    | boolean  | true        | Indicate false to disable the Looking glass icon inside the input area        |
-| searchBtn     | boolean  | true        | Indicate false to hide the submit button (it can still be submitted on enter) |
-| searchBtnText | string   | 'Search'    | Text to show on the submit button                                             |
+| **Name**      | **Type**          | **Default** | **Description**                                                                                              |
+| ------------- | ----------------- | ----------- | ------------------------------------------------------------------------------------------------------------ |
+| placeholder   | string \| boolean | 'Search...' | Text to be displayed inside the search input. You can also disable the placeholder by passing down a _false_ |
+| onChange      | function          | -           | Method to apply on input change                                                                              |
+| onSubmit      | function          | -           | Method to apply on form submit                                                                               |
+| searchIcon    | boolean           | true        | Indicate false to disable the Looking glass icon inside the input area                                       |
+| searchBtn     | boolean           | true        | Indicate false to hide the submit button (it can still be submitted on enter)                                |
+| searchBtnText | string            | 'Search'    | Text to show on the submit button                                                                            |
 
 ### SimpleCard
 

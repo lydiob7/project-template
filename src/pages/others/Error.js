@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
     root: {
         textAlign: 'center',
-        paddingTop: '140px',
+        paddingTop: '60px',
         '& img': {
             width: '100%'
         }

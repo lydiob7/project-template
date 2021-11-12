@@ -7,9 +7,11 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         right: '30px',
         bottom: '40px',
-        zIndex: 9999,
+        zIndex: 999,
         '& .back-to-top': {
             display: 'none',
+            alignItems: 'center',
+            justifyContent: 'center',
             width: '40px',
             height: '40px',
             textAlign: 'center',
@@ -48,7 +50,7 @@ function ScrollTopBtn() {
             // do something on scroll
             if (rootElement.scrollTop > 200) {
                 //show button
-                scrollToTopBtn.style.display = 'block';
+                scrollToTopBtn.style.display = 'flex';
             } else {
                 //hide button
                 scrollToTopBtn.style.display = 'none';

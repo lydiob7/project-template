@@ -1,7 +1,7 @@
 //* Import components here 👇👇
-import Mantainance from 'pages/others/Mantainance'
-import Error from 'pages/others/Error'
-import Home from 'pages/home/Home'
+import Mantainance from 'pages/others/Mantainance';
+import Error from 'pages/others/Error';
+import Home from 'pages/home/Home';
 
 import { mantainancePath } from 'utils/helpers';
 
@@ -15,7 +15,7 @@ export const routes = [
     },
     {
         path: '/home',
-        redirectTo='/'
+        redirectTo: '/'
     },
     {
         path: '/private-route',
@@ -28,8 +28,7 @@ export const routes = [
     {
         path: mantainancePath,
         component: Mantainance,
-        layout: false,
-        noLayoutFooter: true,
+        layout: false
     },
     {
         component: Error,

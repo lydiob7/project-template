@@ -5,13 +5,14 @@ import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '140px',
+        maxWidth: '250px',
         position: 'relative',
         zIndex: '1199',
         '& a': {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            textDecoration: 'none',
             '& img': {
                 width: '30px',
                 height: '30px'
