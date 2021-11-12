@@ -104,7 +104,7 @@ const ItemHorizontal = ({ item }) => {
             <CardContent className={classes.cardContent}>
                 <div className="card-content">
                     <div className="card-content-text">
-                        <Link to={`${process.env.PUBLIC_URL}/${internalURI}`}>
+                        <Link to={internalURI}>
                             {category && (
                                 <Typography variant="h5" className="card-meta">
                                     <span>{category?.logo || category?.icon}</span> {category?.title}

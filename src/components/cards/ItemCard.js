@@ -95,7 +95,7 @@ const ItemCard = ({ item }) => {
             <CardMedia className={classes.cardImage} image={logo} />
             <CardContent className={classes.cardContent}>
                 <div className="card-content">
-                    <Link to={`${process.env.PUBLIC_URL}/${internalURI}`}>
+                    <Link to={internalURI}>
                         {category && (
                             <Typography variant="h5" className="card-meta">
                                 <span>{category?.logo || category?.icon}</span> {category?.title}

@@ -27,7 +27,7 @@ function Error({ errorimg = '/images/404.svg' }) {
                     <Grid container justifyContent="center">
                         <Grid container spacing={4} justifyContent="center" item xs={6}>
                             <Grid item xs={12}>
-                                <img src={parsePath(errorimg)} alt="error" />
+                                <img src={errorimg} alt="error" />
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography variant="h3" color="textPrimary">
