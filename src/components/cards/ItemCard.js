@@ -31,10 +31,7 @@ const useStyles = makeStyles((theme) => ({
                 fontWeight: 600,
                 position: 'relative',
                 paddingLeft: '39px',
-                color: '#808996',
-                '& a': {
-                    color: '#808996'
-                },
+                color: theme.palette.text.secondary,
                 '& span': {
                     position: 'absolute',
                     display: 'flex',
@@ -43,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
                     fontSize: '20px',
                     top: '-9px',
                     left: 0,
-                    color: '#fff',
+                    color: theme.palette.background.default,
                     width: '33px',
                     height: '33px',
                     backgroundColor: theme.palette.primary.main,
@@ -54,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
             },
             '& .card-title': {
                 fontSize: '18px',
-                color: theme.palette.secondary.main,
+                color: theme.palette.text.primary,
                 fontWeight: 600,
                 textTransform: 'capitalize',
                 marginTop: '24px',

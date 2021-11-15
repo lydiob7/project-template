@@ -52,10 +52,10 @@ function ResultsHeader({
                 {viewMode && (
                     <Grid container item xs={6} justifyContent="flex-end">
                         <IconButton className={classes.viewModeBtn} onClick={onListViewClick}>
-                            <ListIcon fontSize="large" color={viewMode === 'list' ? 'primary' : 'default'} />
+                            <ListIcon fontSize="large" color={viewMode === 'list' ? 'primary' : 'disabled'} />
                         </IconButton>
                         <IconButton className={classes.viewModeBtn} onClick={onGridViewClick}>
-                            <ViewModuleIcon fontSize="large" color={viewMode === 'grid' ? 'primary' : 'default'} />
+                            <ViewModuleIcon fontSize="large" color={viewMode === 'grid' ? 'primary' : 'disabled'} />
                         </IconButton>
                     </Grid>
                 )}

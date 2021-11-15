@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
             right: '13px',
             width: '5px',
             height: '5px',
-            backgroundColor: '#fff'
+            backgroundColor: theme.palette.background.default
         }
     }
 }));

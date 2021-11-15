@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        color: theme.palette.text.primary,
         marginTop: '2vh',
         '& .title': {
             textTransform: 'capitalize',

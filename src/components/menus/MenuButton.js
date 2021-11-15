@@ -1,60 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
-class MenuButton extends React.Component {
-    state = {
-        anchorEl: null
-    };
-
-    handleChange = (event, checked) => {
-        this.setState({ auth: checked });
-    };
-
-    handleMenu = (event) => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
-
-    render() {
-        const { anchorEl } = this.state;
-        const open = Boolean(anchorEl);
-        const title = this.props.children;
-        const listItems = this.props.items?.map((link) => (
-            <Link to={link.path}>
-                <MenuItem onClick={this.handleClose}>{link.title}</MenuItem>
-            </Link>
-        ));
-
-        return (
-            <div>
-                <Button onClick={this.handleMenu} variant="text">
-                    {title}
-                </Button>
-                <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right'
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right'
-                    }}
-                    open={open}
-                    onClose={this.handleClose}
-                >
-                    {listItems}
-                </Menu>
-            </div>
-        );
+const useStyles = makeStyles((theme) => ({
+    root: {},
+    dropdown: {
+        top: '56px!important'
+    },
+    link: {
+        color: theme.palette.text.primary
     }
+}));
+
+function MenuButton({ children: title, items }) {
+    const classes = useStyles();
+
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const listItems = items?.map((link) => (
+        <Link className={classes.link} to={link.path}>
+            <MenuItem onClick={handleClose}>{link.title}</MenuItem>
+        </Link>
+    ));
+
+    return (
+        <div className={classes.root}>
+            <Button onClick={handleMenu} variant="text">
+                {title}
+            </Button>
+            <Menu
+                classes={{ paper: classes.dropdown }}
+                anchorEl={anchorEl}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={open}
+                onClose={handleClose}
+            >
+                {listItems}
+            </Menu>
+        </div>
+    );
 }
 
 export default MenuButton;

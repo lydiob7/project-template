@@ -45,8 +45,8 @@ const SearchInput = ({
     id,
     style,
     placeholder = 'Search...',
-    onSubmit,
-    onChange,
+    onSubmit = () => {},
+    onChange = () => {},
     searchIcon = true,
     searchBtn = true,
     searchBtnText = 'Search',
@@ -56,12 +56,12 @@ const SearchInput = ({
     const [searchValue, setSearchValue] = useState('');
 
     const handleSubmit = (ev) => {
-        ev.preventDefault();
+        ev?.preventDefault();
         onSubmit(searchValue);
     };
 
     const handleChange = (ev) => {
-        setSearchValue(ev.target.value);
+        setSearchValue(ev?.target?.value);
         onChange(ev);
     };
 

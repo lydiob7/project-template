@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,8 +12,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         marginBottom: '10px',
         textAlign: 'center',
-        color: theme.palette.text.secondary,
-        backgroundColor: '#fff',
         padding: '18px 20px 12px 20px',
         fontSize: '14px',
         fontWeight: 500,
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
             borderRadius: '50%',
             fontSize: '24px',
             transition: 'all 0.3s',
-            color: '#fff'
+            color: theme.palette.background.default
         },
         '&:hover': {
             backgroundColor: theme.palette.primary.main,
@@ -62,7 +61,7 @@ const SmallCard = (props) => {
         <Paper component={Link} to={url} className={classes.root}>
             <div>
                 {icon && <span className="icon">{icon}</span>}
-                {title}
+                <Typography variant="body2">{title}</Typography>
             </div>
         </Paper>
     );

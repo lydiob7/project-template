@@ -54,11 +54,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ReportItemModal = ({ open, onClose, onSubmit, ...rest }) => {
+const ReportItemModal = ({ open, onClose, onSubmit = () => {}, ...rest }) => {
     const classes = useStyles();
 
     const handleSubmit = (ev) => {
-        ev.preventDefault();
+        ev?.preventDefault();
         onSubmit(ev);
     };
 

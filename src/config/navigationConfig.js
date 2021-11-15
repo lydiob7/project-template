@@ -10,12 +10,12 @@ const navigationConfig = {
                     path: parsePath('/error')
                 },
                 {
-                    title: 'Sub-menu Two',
-                    path: parsePath('/')
+                    title: 'Sub-menu One',
+                    path: parsePath()
                 },
                 {
-                    title: 'Sub-menu Three',
-                    path: parsePath()
+                    title: 'Sub-menu Two',
+                    path: parsePath('/')
                 }
             ]
         },

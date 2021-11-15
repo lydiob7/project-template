@@ -1,4 +1,5 @@
 import { createTheme } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
 
 export const theme = (color) =>
     createTheme({
@@ -10,10 +11,7 @@ export const theme = (color) =>
                 contrastText: '#32474c'
             },
             secondary: {
-                main: '#2a2c4d'
-            },
-            text: {
-                primary: '#18233f'
+                main: purple[600]
             }
         },
         typography: {
@@ -23,13 +21,24 @@ export const theme = (color) =>
             MuiCssBaseline: {
                 '@global': {
                     '*': {
-                        boxSizing: 'border-box'
+                        boxSizing: 'border-box',
+                        '&::-webkit-scrollbar': {
+                            width: '0.4em'
+                        },
+                        '&::-webkit-scrollbar-track': {
+                            boxShadow: 'inset 0 0 6px rgba(0, 0, 0, 0)'
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                            outline: 'none'
+                        }
                     },
                     body: {
                         fontFamily: "'Barlow', sans-serif",
                         minHeight: '100vh',
                         margin: 0,
-                        padding: 0
+                        padding: 0,
+                        overflowX: 'hidden'
                     },
                     '#root': {
                         display: 'flex',

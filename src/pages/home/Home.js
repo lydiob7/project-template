@@ -118,6 +118,15 @@ const Home = () => {
             </Grid>
 
             <ReportItemModal open={reportModalOpen} onClose={() => setReportModalOpen(false)} />
+
+            <Grid container style={{ marginTop: '20px' }} justifyContent="center">
+                <Grid item xs={10} md={6}>
+                    Login form
+                </Grid>
+                <Grid item xs={10} md={6}>
+                    Signup form
+                </Grid>
+            </Grid>
         </Container>
     );
 };
