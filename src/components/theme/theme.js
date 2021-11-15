@@ -6,12 +6,16 @@ export const theme = (color) =>
         palette: {
             type: color,
             primary: {
-                main: '#00e49d',
-                dark: '#00b67c',
-                contrastText: '#32474c'
+                main: '#00E49D',
+                dark: '#00B67C',
+                contrastText: '#32474C'
             },
             secondary: {
                 main: purple[600]
+            },
+            background: {
+                default: color === 'light' ? '#FAFAFA' : '#202020',
+                paper: color === 'light' ? '#FFFFFF' : '#303030'
             }
         },
         typography: {
