@@ -19,6 +19,13 @@ import SimpleCard from 'components/cards/SimpleCard';
 import SmallCard from 'components/cards/SmallCard';
 import Loader from 'components/common/Loader';
 import ReportItemModal from 'components/modals/ReportItemModal';
+import ConfirmationModal from 'components/modals/ConfirmationModal';
+import WidgetWrapper from 'components/widgets/WidgetWrapper';
+import TagsWidget from 'components/widgets/TagsWidget';
+import CheckboxWidget from 'components/widgets/CheckboxWidget';
+import LoginForm from 'components/forms/LoginForm';
+import SignupForm from 'components/forms/SignupForm';
+import AuthCard from 'components/cards/AuthCard';
 
 const cardItem = {
     logo: '/images/ss-web-36.svg',
@@ -31,11 +38,30 @@ const cardItem = {
     btnText: 'Go go go'
 };
 
+const tags = [
+    { url: 'https://www.something.com/', text: 'Tag1' },
+    { url: 'https://www.something.com/', text: 'Tag2' },
+    { url: 'https://www.something.com/', text: 'Tag3' },
+    { url: 'https://www.something.com/', text: 'Tag4' }
+];
+
+const checkboxes = [
+    { text: 'Checkbox 1', number: 2, id: 0, active: false },
+    { text: 'Checkbox 2', number: 1, id: 1, active: false },
+    { text: 'Checkbox 3', number: 6, id: 2, active: true },
+    { text: 'Checkbox 4', number: 9, id: 3, active: false },
+    { text: 'Checkbox 5', id: 4, active: false },
+    { text: 'Checkbox 6', id: 5, active: true },
+    { text: 'Checkbox 7', id: 6, active: false },
+    { text: 'Checkbox 8', number: 2, id: 7, active: false }
+];
+
 const Home = () => {
     const dispatch = useDispatch();
     const currentTheme = useSelector(({ ui }) => ui.theme);
 
     const [reportModalOpen, setReportModalOpen] = useState(false);
+    const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
     const toggleTheme = () => {
         if (currentTheme === 'light') return dispatch(themeDark());
@@ -111,7 +137,15 @@ const Home = () => {
                     <Typography variant="h4">A Section Title</Typography>
                     <TitleDecoration style={{ marginBottom: '20px' }} />
                     <Button onClick={() => setReportModalOpen(true)} fullWidth>
-                        Open Modal
+                        Report Modal
+                    </Button>
+                    <Button
+                        style={{ margin: '2rem 0' }}
+                        color="danger"
+                        onClick={() => setConfirmationModalOpen(true)}
+                        fullWidth
+                    >
+                        Confirmation Modal
                     </Button>
                     <Loader style={{ height: '150px' }} />
                 </Grid>
@@ -119,13 +153,28 @@ const Home = () => {
 
             <ReportItemModal open={reportModalOpen} onClose={() => setReportModalOpen(false)} />
 
-            <Grid container style={{ marginTop: '20px' }} justifyContent="center">
-                <Grid item xs={10} md={6}>
-                    Login form
+            <ConfirmationModal open={confirmationModalOpen} onClose={() => setConfirmationModalOpen(false)} />
+
+            <Grid spacing={4} container style={{ marginTop: '60px' }} justifyContent="center">
+                <Grid item xs={10} md={4}>
+                    <WidgetWrapper>
+                        <TagsWidget title="Tags Widget" tagList={tags} />
+                        <CheckboxWidget title="Checkbox Widget" items={checkboxes} style={{ marginTop: '2rem' }} />
+                    </WidgetWrapper>
                 </Grid>
-                <Grid item xs={10} md={6}>
-                    Signup form
+                <Grid item xs={10} md={4}>
+                    <LoginForm />
                 </Grid>
+                <Grid item xs={10} md={4}>
+                    <SignupForm />
+                </Grid>
+            </Grid>
+
+            <Grid spacing={2} container style={{ marginTop: '60px' }} justifyContent="center">
+                <Grid item xs={10} md={6}>
+                    <AuthCard form="login" />
+                </Grid>
+                <Grid item xs={10} md={6}></Grid>
             </Grid>
         </Container>
     );

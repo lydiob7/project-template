@@ -8,7 +8,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,16 +47,20 @@ const useStyles = makeStyles((theme) => ({
             outline: 'none'
         }
     },
-    submitBtn: {
+    button: {
         display: 'flex',
-        alignItems: 'center',
-        '& .MuiSvgIcon-root': {
-            marginRight: '8px'
-        }
+        alignItems: 'center'
     }
 }));
 
-const ReportItemModal = ({ open, onClose, onSubmit = () => {}, ...rest }) => {
+const ConfirmationModal = ({
+    confirmationType = 'deletion',
+    message = 'Are you sure you want to delete permanently this item?',
+    open,
+    onClose,
+    onSubmit = () => {},
+    ...rest
+}) => {
     const classes = useStyles();
 
     const handleSubmit = (ev) => {
@@ -76,27 +79,25 @@ const ReportItemModal = ({ open, onClose, onSubmit = () => {}, ...rest }) => {
                                 <CloseOutlinedIcon />
                             </IconButton>
                             <Typography className={classes.title} variant="h5">
-                                Report this Listing
+                                Confirm {confirmationType}
                             </Typography>
                             <TitleDecoration />
                         </Grid>
                         <Grid item xs={12}>
-                            <form className={classes.form} onSubmit={handleSubmit}>
-                                <TextField
-                                    multiline
-                                    label="Write a Message"
-                                    minRows="6"
-                                    className={classes.textArea}
-                                    variant="outlined"
-                                    name="message"
-                                    placeholder="What's wrong with this listing?"
-                                    required
-                                />
-
-                                <Button className={classes.submitBtn} type="submit">
-                                    Send message
+                            <Typography variant="body1">{message}</Typography>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1}>
+                            <Grid item xs={0} sm={6}></Grid>
+                            <Grid item xs={12} sm={3}>
+                                <Button fullWidth variant="outlined" className={classes.button} onClick={onClose}>
+                                    Cancel
                                 </Button>
-                            </form>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <Button fullWidth color="danger" className={classes.button} onClick={handleSubmit}>
+                                    Delete
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Paper>
                 </Container>
@@ -105,4 +106,4 @@ const ReportItemModal = ({ open, onClose, onSubmit = () => {}, ...rest }) => {
     );
 };
 
-export default ReportItemModal;
+export default ConfirmationModal;
