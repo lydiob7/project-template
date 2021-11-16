@@ -11,6 +11,15 @@ const useStyles = makeStyles((theme) => ({
     root: {
         padding: '2vh 0',
         marginTop: '5vh'
+    },
+    container: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        [theme.breakpoints.up('md')]: {
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        }
     }
 }));
 
@@ -22,11 +31,12 @@ function Footer() {
     return (
         <footer className={classes.root}>
             <Container maxWidth="lg">
-                <Grid container justifyContent="space-between" alignItems="center">
+                <Grid className={classes.container} container>
                     <Grid item sm={12} md={5}>
                         <Copyright
                             rightsOwner={appInformation?.creator}
                             rightsOwnerWebsite={appInformation?.creatorWebsite}
+                            version={process.env.REACT_APP_VERSION}
                         />
                     </Grid>
                     <Grid item sm={12} md={4}>

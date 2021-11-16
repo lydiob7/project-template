@@ -1,6 +1,6 @@
 # Smart Studios UI
 
-Current version: v0.2.0
+Current version: v0.3.0
 
 ## About
 
@@ -74,11 +74,11 @@ This component shows the title of the page with an icon on top, a description an
 
 ```
 <Breadcrumb
-    CurrentPgIcon={<Icon />}
-    CurrentPgTitle="Current page title"
-    MenuPgTitle="Parent page"
-    MenuPgLink="/parent-page"
-    img="/images/image.jpg"
+    currentPgIcon={<Icon />}
+    currentPgTitle="Current page title"
+    parentPgTitle="Parent page"
+    parentPgLink="/parent-page"
+    divider="/"
 >
     <div>
         Some children
@@ -88,11 +88,11 @@ This component shows the title of the page with an icon on top, a description an
 
 | **Name**       | **Type**                      | **Default** | **Description**                                            |
 | -------------- | ----------------------------- | ----------- | ---------------------------------------------------------- |
-| CurrentPgIcon  | svgIcon                       | -           | An icon to show at the top of the header                   |
-| CurrentPgTitle | string                        | -           | Name of the current page                                   |
-| MenuPgTitle    | string                        | -           | Name of the parent section                                 |
-| MenuPgLink     | url                           | -           | Link to the parent section                                 |
-| img            | imgUrl                        | -           | Url for a background image                                 |
+| currentPgIcon  | svgIcon                       | -           | An icon to show at the top of the header                   |
+| currentPgTitle | string                        | -           | Name of the current page                                   |
+| parentPgTitle  | string                        | -           | Name of the parent section                                 |
+| parentPgLink   | url                           | -           | Link to the parent section                                 |
+| divider        | string                        | '-'         | Symbol to use to separate breadcrumb elements              |
 | children       | ReactComponent \| HTMLElement | -           | React components or HTML Element to show after the heading |
 
 ### Copyright
@@ -104,6 +104,7 @@ This is the copyright claim, it contains a copyright symbol, the name of the rig
     rightsOwner="Smart Studios"
     rightsOwnerWebsite="https://smartstudios.io/"
     year="2021"
+    versin="1.0.0"
 />
 ```
 
@@ -112,6 +113,7 @@ This is the copyright claim, it contains a copyright symbol, the name of the rig
 | rightsOwner        | string           | -              | App Owner's name                  |
 | rightsOwnerWebsite | url              | -              | Url for the App Owner's website   |
 | year               | string \| number | (Current year) | Last year of the copyrights claim |
+| version            | string           | -              | App version                       |
 
 ### CopyrightMenu
 

@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Loader from 'components/common/Loader';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '120px 0 80px 0',
+        padding: '80px 0 80px 0',
         position: 'relative',
         zIndex: 1,
         overflow: 'hidden',
@@ -31,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
                 fontSize: '15px',
                 fontWeight: 500,
                 position: 'relative',
-                paddingRight: '22px',
+                paddingRight: '8px',
                 [theme.breakpoints.up('md')]: {
                     fontSize: '16px'
                 },
@@ -77,62 +75,46 @@ const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-        '& .category-icon': {
-            fontSize: '4rem'
+        '& .category-icon svg': {
+            fontSize: '4rem!important'
         }
     }
 }));
 
-function Breadcrumb({ CurrentPgIcon, CurrentPgTitle, MenuPgTitle, MenuPgLink, img, children, ParentCategory }) {
+function Breadcrumb({ currentPgIcon, currentPgTitle, divider = '-', parentPgTitle, parentPgLink, children }) {
     const classes = useStyles();
-
-    const [parentCategoryTitle, setParentCategoryTitle] = useState(null);
-    const categoryLoading = useSelector(({ entities }) => entities.categories.currentCategoryLoading);
-    const categoriesList = useSelector(({ entities }) => entities.categories.list);
-
-    useEffect(() => {
-        const category = categoriesList?.filter((category) => category.id?.toString() === ParentCategory?.toString());
-        if (category && category.length > 0) setParentCategoryTitle(category[0].title);
-    }, [categoriesList, ParentCategory]);
 
     return (
         <Paper component="header" className={classes.root}>
             <div className="breadcrumb-wrap">
-                <Loader style={{ minHeight: '20vh' }} loading={categoryLoading} />
-                {!categoryLoading && (
-                    <Container maxWidth="md">
-                        <Grid container justifyContent="center">
-                            <Grid item lg={12}>
-                                <div className="breadcrumb-content">
-                                    {CurrentPgIcon && <div className="category-icon">{CurrentPgIcon}</div>}
-                                    <Typography variant="h2" className="breadcrumb__title">
-                                        {CurrentPgTitle}
-                                    </Typography>
-                                    <ul className="breadcrumb__list">
-                                        <li className="active__list-item">
-                                            <Link to={process.env.PUBLIC_URL}>home</Link>
-                                        </li>
-                                        {MenuPgTitle && (
-                                            <li className="active__list-item">
-                                                <Link to={`${process.env.PUBLIC_URL}${MenuPgLink}`}>{MenuPgTitle}</Link>
-                                            </li>
-                                        )}
-                                        {parentCategoryTitle && (
-                                            <li className="active__list-item">
-                                                <Link to={`${process.env.PUBLIC_URL}/categories/${ParentCategory}`}>
-                                                    {parentCategoryTitle}
-                                                </Link>
-                                            </li>
-                                        )}
+                <Container maxWidth="md">
+                    <Grid container justifyContent="center">
+                        <Grid item lg={12}>
+                            <div className="breadcrumb-content">
+                                {currentPgIcon && <div className="category-icon">{currentPgIcon}</div>}
+                                <Typography variant="h2" className="breadcrumb__title">
+                                    {currentPgTitle}
+                                </Typography>
+                                <ul className="breadcrumb__list">
+                                    <li className="active__list-item">
+                                        <Link to={process.env.PUBLIC_URL}>home</Link>
+                                    </li>
 
-                                        <li>{CurrentPgTitle}</li>
-                                    </ul>
-                                </div>
-                                {children}
-                            </Grid>
+                                    {parentPgTitle && <li>{divider}</li>}
+                                    {parentPgTitle && (
+                                        <li className="active__list-item">
+                                            <Link to={`${process.env.PUBLIC_URL}${parentPgLink}`}>{parentPgTitle}</Link>
+                                        </li>
+                                    )}
+
+                                    <li>{divider}</li>
+                                    <li>{currentPgTitle || 'Current page'}</li>
+                                </ul>
+                            </div>
+                            {children}
                         </Grid>
-                    </Container>
-                )}
+                    </Grid>
+                </Container>
             </div>
         </Paper>
     );

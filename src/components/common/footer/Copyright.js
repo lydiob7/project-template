@@ -17,18 +17,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Copyright({ rightsOwner, rightsOwnerWebsite, year }) {
+function Copyright({ rightsOwner, rightsOwnerWebsite, version, year }) {
     const classes = useStyles();
     const lastYearWithRights = year ? year : new Date().getFullYear();
 
     return (
         <Grid item lg={12} className={classes.root}>
             <Typography variant="body2">
-                &copy;{' '}
+                &copy; All rights reserved.{' '}
                 <a style={{ color: 'inherit' }} target="_blank" rel="noreferrer" href={rightsOwnerWebsite}>
                     {rightsOwner}
                 </a>{' '}
-                {lastYearWithRights}.
+                {lastYearWithRights}. {version && `v${version}`}
             </Typography>
         </Grid>
     );

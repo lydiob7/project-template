@@ -20,6 +20,7 @@ import SmallCard from 'components/cards/SmallCard';
 import Loader from 'components/common/Loader';
 import ReportItemModal from 'components/modals/ReportItemModal';
 import ConfirmationModal from 'components/modals/ConfirmationModal';
+import Breadcrumb from 'components/headings/Breadcrumb';
 import WidgetWrapper from 'components/widgets/WidgetWrapper';
 import TagsWidget from 'components/widgets/TagsWidget';
 import CheckboxWidget from 'components/widgets/CheckboxWidget';
@@ -79,7 +80,7 @@ const Home = () => {
         <Container maxWidth="md" style={{ minHeight: '100vh' }}>
             <Title title="Home page" subtitle="This is a small description of the page." />
             <Typography variant="body1">Theme mode (work in progress)</Typography>
-            <Switch onClick={toggleTheme} />
+            <Switch defaultChecked={currentTheme === 'dark'} onClick={toggleTheme} />
             <Typography variant="body1">
                 Mantainance mode (this will be automatically turned off after 5 seconds, it can be turned on/off from a
                 backend)
@@ -103,16 +104,10 @@ const Home = () => {
                 <Grid item xs={12} sm={8}>
                     <ItemHorizontal item={cardItem} />
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                    <SimpleCard title="Simple Card" icon={<AccessAlarm />} btnText="Button" />
-                    <SimpleCard title="Simple Card without button" icon={<AccessAlarm />} />
-                </Grid>
+
                 <Grid container item xs={12} sm={6} md={4} justifyContent="center" spacing={4}>
-                    <Grid container justifyContent="center" item xs={12} sm={8}>
-                        <SmallCard icon={<AccessAlarm />} title="Small card" url="/some-path" />
-                    </Grid>
-                    <Grid container justifyContent="center" item xs={12} sm={8}>
-                        <SmallCard title="Small card without icon" url="/some-path" />
+                    <Grid item xs={12} sm={8}>
+                        <Loader style={{ height: '150px' }} />
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <Button fullWidth>Primary Button</Button>
@@ -133,6 +128,7 @@ const Home = () => {
                         </Button>
                     </Grid>
                 </Grid>
+
                 <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="h4">A Section Title</Typography>
                     <TitleDecoration style={{ marginBottom: '20px' }} />
@@ -147,13 +143,35 @@ const Home = () => {
                     >
                         Confirmation Modal
                     </Button>
-                    <Loader style={{ height: '150px' }} />
+                    <Grid container justifyContent="center" item xs={12} sm={8}>
+                        <SmallCard icon={<AccessAlarm />} title="Small card" url="/some-path" />
+                    </Grid>
+                    <Grid container justifyContent="center" item xs={12} sm={8}>
+                        <SmallCard title="Small card without icon" url="/some-path" />
+                    </Grid>
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={4}>
+                    <SimpleCard title="Simple Card" icon={<AccessAlarm />} btnText="Button" />
+                    <SimpleCard title="Simple Card without button" icon={<AccessAlarm />} />
                 </Grid>
             </Grid>
 
             <ReportItemModal open={reportModalOpen} onClose={() => setReportModalOpen(false)} />
 
             <ConfirmationModal open={confirmationModalOpen} onClose={() => setConfirmationModalOpen(false)} />
+
+            <Grid spacing={4} container style={{ marginTop: '60px' }} justifyContent="center">
+                <Grid item xs={12}>
+                    <Breadcrumb
+                        currentPgTitle="new page"
+                        currentPgIcon={<AccessAlarm />}
+                        parentPgLink="#"
+                        parentPgTitle="parent page"
+                        divider="/"
+                    />
+                </Grid>
+            </Grid>
 
             <Grid spacing={4} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={10} md={4}>
