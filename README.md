@@ -68,6 +68,20 @@ This component is built over a Route component from react-router-dom, it adds a 
 | noLayoutFooter | boolean        | -           | You can enable the footer for the simple layout here (when layout=false) for each individual route                                                                                                          |
 | noLayoutBtn    | boolean        | -           | You can enable the scroll to top button for the simple layout here (when layout=false) for each individual route                                                                                            |
 
+### AuthCard
+
+This components wraps the Login or Signup form. It shows the app title and logo (from the ui slice of the store) and some text with a link to toggle within login/signup pages.
+
+```
+<AuthCard
+    form="signup"
+/>
+```
+
+| **Name** | **Type**            | **Default** | **Description**                                            |
+| -------- | ------------------- | ----------- | ---------------------------------------------------------- |
+| form     | 'login' \| 'signup' | 'login'     | You can choose wheter to show the login or the signup form |
+
 ### Breadcrumb
 
 This component shows the title of the page with an icon on top, a description and a breadcrumb with internal links to the parent pages. It can also receive children to show below the description.
@@ -94,6 +108,74 @@ This component shows the title of the page with an icon on top, a description an
 | parentPgLink   | url                           | -           | Link to the parent section                                 |
 | divider        | string                        | '-'         | Symbol to use to separate breadcrumb elements              |
 | children       | ReactComponent \| HTMLElement | -           | React components or HTML Element to show after the heading |
+
+### Button
+
+This component is built over the Material UI Button and it only extends its properties. You can still use all the same props you would use on a Material UI Button.
+
+```
+<Button
+    color="danger"
+/>
+```
+
+| **Name** | **Type**                              | **Default** | **Description** |
+| -------- | ------------------------------------- | ----------- | --------------- |
+| color    | (All the MuiButton props) \| 'danger' | 'primary'   | -               |
+
+### CheckboxWidget
+
+This is a widget that shows a list of checkboxes with a label and some aditional information.
+
+```
+<CheckboxWidget
+    title="Widget 1"
+    items={[
+        {text: 'checkbox1', active: true, number: 3},
+        {text: 'checkbox2', active: false, number: 1},
+        {text: 'checkbox3', active: false}
+    ]}
+    onChange={(ev) => console.log(ev.target.value)}
+/>
+```
+
+| **Name** | **Type**       | **Default** | **Description**                                  |
+| -------- | -------------- | ----------- | ------------------------------------------------ |
+| items    | CheckboxItem[] | -           | Main array of items to show as checkbox          |
+| title    | string         | -           | Main title of the widget                         |
+| onChange | function       | -           | Pass down the function to run on checkbox change |
+
+**CheckboxItem**
+
+| **Name** | **Type** | **Default** | **Description**                                                   |
+| -------- | -------- | ----------- | ----------------------------------------------------------------- |
+| text     | string   | -           | Label to show next to the checkbox                                |
+| number   | number   | -           | You can show a small round label on the right to show quantities. |
+| active   | boolean  | false       | Wether the checkbox is active or not by default.                  |
+
+### ConfirmationModal
+
+<!-- TODO -->
+
+Description
+
+```
+<ConfirmationModal
+    confirmationType="deletion",
+    message="Do you want to delete this?",
+    open={false},
+    onClose={() => setModal(false)},
+    onSubmit={() => console.log('done')},
+/>
+```
+
+| **Name**         | **Type** | **Default**                                              | **Description**                                                           |
+| ---------------- | -------- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
+| confirmationType | string   | 'deletion'                                               | This string will be shown on the modal title 'Confirm {confirmationType}' |
+| message          | string   | 'Are you sure you want to delete permanently this item?' | Write a small question type text to show as content in the modal          |
+| open             | boolean  | false                                                    | -                                                                         |
+| onClose          | function | -                                                        | Handle the modal closure from here.                                       |
+| onSubmit         | function | -                                                        | Indicate what you want to do after confirmation.                          |
 
 ### Copyright
 
@@ -225,6 +307,21 @@ This component displays a horizontal rectangle with an image on the left, a titl
 | logo     | svgIcon  | -           | Category icon   |
 | title    | string   | -           | Category title  |
 
+### LoginForm
+
+<!-- TODO -->
+
+Description
+
+```
+<LoginForm
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+
 ### Logo
 
 This is the main Logo of the page. It can contain an image with a brand name or just the name. It's built to be used on the top navigation bar.
@@ -240,6 +337,21 @@ This is the main Logo of the page. It can contain an image with a brand name or 
 | -------- | -------- | ----------- | ---------------------- |
 | imageSrc | imgUrl   | -           | Url for the brand logo |
 | title    | string   | -           | Brand title            |
+
+### MenuButton
+
+<!-- TODO -->
+
+Description
+
+```
+<MenuButton
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
 
 ### PageHeader
 
@@ -343,6 +455,21 @@ This component is a custom search bar.
 | searchBtn     | boolean           | true        | Indicate false to hide the submit button (it can still be submitted on enter)                                |
 | searchBtnText | string            | 'Search'    | Text to show on the submit button                                                                            |
 
+### SignupForm
+
+<!-- TODO -->
+
+Description
+
+```
+<SignupForm
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+
 ### SimpleCard
 
 This is a simple square card that displays an icon, a title and a button. The whole component can be used as a link.
@@ -416,6 +543,21 @@ This is a simple list with social media icons and links to external websites.
 | -------- | ---------------------------------------------------- | ----------- | -------------------------------- |
 | icon     | 'facebook' \| 'twitter' \| 'instagram' \| 'linkedin' | -           | Icon to be displayed on the list |
 | url      | url                                                  | -           | External website                 |
+
+### TagsWidget
+
+<!-- TODO -->
+
+Description
+
+```
+<TagsWidget
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
 
 ### Title
 
