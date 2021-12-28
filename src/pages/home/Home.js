@@ -60,7 +60,7 @@ const checkboxes = [
 
 const imageToOpen = 'http://smartstudios.io/wp-content/uploads/2021/01/ss-web-36.svg';
 
-const inputFields = [
+const inputFields = (setFormValues) => [
     {
         Component: ToggableArrayInput,
         label: 'Array Input',
@@ -90,12 +90,23 @@ const inputFields = [
     {
         Component: ToggablePicker,
         label: 'Picker',
-        name: 'picker'
+        name: 'picker',
+        onFileChange: (value) => value,
+        onRemoveFile: () => setFormValues((oldValues) => ({ ...oldValues, picker: '' }))
     },
     {
         Component: ToggableSelect,
         label: 'Select',
-        name: 'select'
+        name: 'select',
+        options: ['First Option', 'Second Option']
+    },
+    {
+        Component: ToggableSelect,
+        label: 'Select Multiple',
+        multiple: true,
+        name: 'multiple-select',
+        options: ['First Option', 'Second Option'],
+        type: 'location'
     }
 ];
 
@@ -114,6 +125,15 @@ const Home = () => {
     const [isReportModalOpen, setIsReportModalOpen] = useState(false);
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
+    const [formValues, setFormValues] = useState({
+        'text-input': '',
+        'array-input': '',
+        'autocomplete-input': [{ title: 'First Option' }],
+        picker: '',
+        select: '',
+        'multiple-select': []
+    });
+
     const toggleTheme = () => {
         if (currentTheme === 'light') return dispatch(themeDark());
         dispatch(themeLight());
@@ -128,7 +148,16 @@ const Home = () => {
 
     return (
         <Container maxWidth="md" style={{ minHeight: '100vh' }}>
-            <Title title="Home page" subtitle="This is a small description of the page." />
+            <Title
+                title="Examples"
+                subtitle="These are all the components available on this library."
+                subtitleSize="large"
+            />
+            <Title
+                title="Smaller title"
+                size="small"
+                subtitle="This is a slightly smaller description than the one before."
+            />
             <Typography variant="body1">Theme mode (work in progress)</Typography>
             <Switch defaultChecked={currentTheme === 'dark'} onClick={toggleTheme} />
             <Typography variant="body1">
@@ -251,18 +280,25 @@ const Home = () => {
             <Grid spacing={2} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={10} md={6}>
                     <AuthCard form="login" />
+                    <ContentCard style={{ marginTop: '2rem' }} title="Card with text content">
+                        <p>
+                            Cursus ipsum accumsan urna placerat ac amet sollicitudin accumsan proin eget lorem fusce eu
+                            sollicitudin erat magna nunc felis sem quam adipiscing dolor nisl ut.
+                        </p>
+                    </ContentCard>
                 </Grid>
                 <Grid item xs={10} md={6}>
-                    <FormCard title="Form" inputFields={inputFields} />
+                    <FormCard
+                        inputFields={inputFields(setFormValues)}
+                        onSubmit={(values) => setFormValues((oldValues) => ({ ...oldValues, ...values }))}
+                        title="Form with toggable inputs"
+                        values={formValues}
+                    />
                 </Grid>
             </Grid>
 
             <Grid spacing={2} container style={{ marginTop: '60px' }} justifyContent="center">
-                <Grid item xs={10} md={6}>
-                    <ContentCard title="Card with text content">
-                        <p>Something</p>
-                    </ContentCard>
-                </Grid>
+                <Grid item xs={10} md={6}></Grid>
                 <Grid item xs={10} md={6}></Grid>
             </Grid>
         </Container>

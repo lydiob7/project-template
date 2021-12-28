@@ -66,7 +66,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ToggablePicker = ({
+    allValues,
     label,
+    name,
     onFileChange = () => {},
     onRemoveFile = () => {},
     onSubmit = () => {},
@@ -87,7 +89,7 @@ const ToggablePicker = ({
                 setLoading(true);
                 const fileToLoad = e.target.files[0];
                 const uploadedFile = await onFileChange(fileToLoad);
-                onSubmit(uploadedFile);
+                onSubmit({ ...allValues, [name]: uploadedFile });
             }
         } catch (error) {
             console.error(error);

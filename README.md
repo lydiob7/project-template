@@ -247,7 +247,6 @@ This is a wrapper component for any Form. It uses react-hook-forms and yup valid
 ```
 <FormCard
     className="card"
-    defaultValues={{firstName: 'John', lastName: 'Doe'}}
     formMode="onSubmit"
     inputFields={[
         {
@@ -261,19 +260,20 @@ This is a wrapper component for any Form. It uses react-hook-forms and yup valid
     schema={{firstName: yup.string().required(), lastName: yup.string()}}
     style={{margin: '0 auto'}}
     title="Card title"
+    values={{ firstName: 'John', lastName: 'Doe' }}
 />
 ```
 
 | **Name**       | **Type**                                             | **Default** | **Description**                                                                                                                                                                                  |
 | -------------- | ---------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | className      | string                                               | -           | Class name to be passed down to wrapper element                                                                                                                                                  |
-| defaultValues  | object                                               | -           | Object with default values for the form                                                                                                                                                          |
 | formMode       | string (react-hook-forms valid property for useForm) | 'onChange'  | This option allows you to configure the validation strategy before user submit the form (onSubmit event). Read more on [react-hook-forms documentation](https://react-hook-form.com/api/useform) |
 | inputFields \* | FormInput[]                                          | -           | Array of objects with the form Component and their props.                                                                                                                                        |
 | onSubmit       | function                                             | -           | Function to trigger on submit                                                                                                                                                                    |
 | schema         | object                                               | -           | Object with the shape for Yup validation                                                                                                                                                         |
 | style          | object                                               | -           | Valid style object to be passed down to wrapper element.                                                                                                                                         |
 | title          | string                                               | -           | Title for the card                                                                                                                                                                               |
+| values         | object                                               | -           | Object with default values for the form                                                                                                                                                          |
 
 **FormInput**
 

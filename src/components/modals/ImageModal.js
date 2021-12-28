@@ -46,7 +46,7 @@ const ImageModal = ({ imageUrl, onClose, open }) => {
                 <Icon onClick={onClose} className={classes.closeFile}>
                     close
                 </Icon>
-                {imageUrl?.includes('pdf') ? (
+                {typeof imageUrl === 'string' && imageUrl?.includes('pdf') ? (
                     <embed src={imageUrl} width={size.width} height={size.height} type="application/pdf" />
                 ) : (
                     <div className={classes.imageWrapper}>

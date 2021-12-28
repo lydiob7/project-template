@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,22 +26,26 @@ const useStyles = makeStyles((theme) => ({
 
 const FormCard = ({
     className,
-    defaultValues = {},
     formMode = 'onChange',
     inputFields = [],
     onSubmit = () => {},
     schema: defaultSchema = {},
     style,
-    title
+    title,
+    values = {}
 }) => {
     const classes = useStyles();
     const schema = yup.object().shape(defaultSchema);
 
-    const { handleSubmit, control } = useForm({
+    const { handleSubmit, reset, control } = useForm({
         mode: formMode,
-        defaultValues,
+        defaultValues: values,
         resolver: yupResolver(schema)
     });
+
+    useEffect(() => {
+        if (values) reset({ ...values });
+    }, [values, reset]);
 
     return (
         <div className={className} style={style}>
@@ -55,12 +59,15 @@ const FormCard = ({
                 </AppBar>
 
                 <CardContent>
-                    {inputFields?.map(({ Component, ...otherProps }, index) => (
+                    {inputFields?.map(({ Component, name, value, ...otherProps }, index) => (
                         <Component
+                            allValues={values}
                             control={control}
                             handleSubmit={handleSubmit}
                             key={index}
+                            name={name}
                             onSubmit={onSubmit}
+                            value={values[name] || value}
                             {...otherProps}
                         />
                     ))}

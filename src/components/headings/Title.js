@@ -14,19 +14,13 @@ const useStyles = makeStyles((theme) => ({
             textTransform: 'capitalize',
             marginBottom: 0,
             fontWeight: '700',
-            textAlign: 'center',
-            [theme.breakpoints.up('md')]: {
-                textAlign: 'left'
-            }
+            textAlign: 'center'
         },
         '& .sub-title': {
             marginTop: '15px',
             maxWidth: '700px',
             lineHeight: 'inherit',
-            textAlign: 'center',
-            [theme.breakpoints.up('md')]: {
-                textAlign: 'left'
-            }
+            textAlign: 'center'
         }
     }
 }));

@@ -84,7 +84,12 @@ const ToggableArrayInput = ({
 
     return (
         <div style={style} className={classes.field}>
-            <form onSubmit={handleSubmit((values) => onSubmit(values))}>
+            <form
+                onSubmit={handleSubmit((values) => {
+                    setEdit(false);
+                    onSubmit(values);
+                })}
+            >
                 <div className={classes.flexBetween}>
                     <Typography className={classes.label}>
                         {label} {required && <span className={classes.requiredSymbol}>*</span>}
