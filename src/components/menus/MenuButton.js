@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function MenuButton({ children: title, items }) {
+function MenuButton({ children, items }) {
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -38,7 +38,7 @@ function MenuButton({ children: title, items }) {
     return (
         <div className={classes.root}>
             <Button onClick={handleMenu} variant="text">
-                {title}
+                {children}
             </Button>
             <Menu
                 classes={{ paper: classes.dropdown }}

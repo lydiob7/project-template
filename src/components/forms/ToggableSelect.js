@@ -43,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
 
 const ToggableSelect = ({
     control,
-    name,
     handleSubmit = () => {},
     label,
     multiple,
+    name,
     options = [],
     onSubmit = () => {},
     required = false,
@@ -131,26 +131,10 @@ const ToggableSelect = ({
                                         {...field}
                                         style={{ width: '100%' }}
                                         multiple={Array.isArray(value) && multiple}
-                                        renderValue={(selected) => {
-                                            if (typeof selected === 'string') return selected;
-                                            return type === 'chip' ? (
-                                                <div className={classes.chips}>
-                                                    {selected.map((value) => (
-                                                        <Chip key={value} label={value} className={classes.chip} />
-                                                    ))}
-                                                </div>
-                                            ) : (
-                                                <div>
-                                                    {selected.map((value) => (
-                                                        <p key={value}>{value}</p>
-                                                    ))}
-                                                </div>
-                                            );
-                                        }}
                                     >
                                         {options.map((option, index) => (
-                                            <MenuItem key={option + index} value={option}>
-                                                {option}
+                                            <MenuItem key={option + index} value={option.value}>
+                                                {option.title}
                                             </MenuItem>
                                         ))}
                                     </Select>

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import { useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -36,9 +35,8 @@ const defaultValues = {
     password: ''
 };
 
-function LoginForm(props) {
+function LoginForm({ onSubmit = () => {} }) {
     const classes = useStyles();
-    // const dispatch = useDispatch();
 
     const { control, formState, handleSubmit } = useForm({
         mode: 'onChange',
@@ -49,11 +47,6 @@ function LoginForm(props) {
     const { isValid, errors } = formState;
 
     const [showPassword, setShowPassword] = useState(false);
-
-    function onSubmit(model) {
-        console.log(model);
-        // dispatch(submitLogin(model));
-    }
 
     return (
         <div>

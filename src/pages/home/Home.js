@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
 
 import AuthCard from 'components/cards/AuthCard';
+import AuthUserCard from 'components/cards/AuthUserCard';
+import AuthUserSmallCard from 'components/cards/AuthUserSmallCard';
 import Breadcrumb from 'components/headings/Breadcrumb';
 import Button from 'components/common/Button';
 import CheckboxWidget from 'components/widgets/CheckboxWidget';
@@ -98,14 +100,20 @@ const inputFields = (setFormValues) => [
         Component: ToggableSelect,
         label: 'Select',
         name: 'select',
-        options: ['First Option', 'Second Option']
+        options: [
+            { title: 'First Option', value: 'First Option' },
+            { title: 'Second Option', value: 'Second Option' }
+        ]
     },
     {
         Component: ToggableSelect,
         label: 'Select Multiple',
         multiple: true,
         name: 'multiple-select',
-        options: ['First Option', 'Second Option'],
+        options: [
+            { title: 'First Option', value: 'First Option' },
+            { title: 'Second Option', value: 'Second Option' }
+        ],
         type: 'location'
     }
 ];
@@ -165,6 +173,7 @@ const Home = () => {
                 backend)
             </Typography>
             <Switch onClick={handleMantainanceMode} />
+
             <SearchInput />
             <ResultsHeader style={{ margin: '20px 0' }} />
             <ResultsHeader
@@ -271,6 +280,8 @@ const Home = () => {
                 </Grid>
                 <Grid item xs={10} md={4}>
                     <LoginForm />
+                    <AuthUserCard items={[{ title: 'Profile', path: '/' }]} />
+                    <AuthUserSmallCard onClick={() => setIsImageModalOpen(true)} />
                 </Grid>
                 <Grid item xs={10} md={4}>
                     <SignupForm />

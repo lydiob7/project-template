@@ -70,7 +70,7 @@ const ToggablePicker = ({
     label,
     name,
     onFileChange = () => {},
-    onRemoveFile = () => {},
+    onRemoveFile,
     onSubmit = () => {},
     required = false,
     style,
@@ -118,7 +118,7 @@ const ToggablePicker = ({
                             </Button>
                         )}
 
-                        {value && !loading && (
+                        {onRemoveFile && value && !loading && (
                             <IconButton onClick={onRemoveFile}>
                                 <Icon className={classes.deleteResumeButton}>delete_outline</Icon>
                             </IconButton>

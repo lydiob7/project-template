@@ -6,7 +6,7 @@ const initialState = {
         role: [],
         data: {
             displayName: 'User',
-            email: ''
+            email: 'user@email.com'
         },
         language: 'EN'
     }

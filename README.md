@@ -71,12 +71,54 @@ This components wraps the Login or Signup form. It shows the app title and logo 
 ```
 <AuthCard
     form="signup"
+    onSubmit={(values) => authenticate(values)}
 />
 ```
 
 | **Name** | **Type**            | **Default** | **Description**                                            |
 | -------- | ------------------- | ----------- | ---------------------------------------------------------- |
 | form     | 'login' \| 'signup' | 'login'     | You can choose wheter to show the login or the signup form |
+| onSubmit | function            | -           | Function that will be triggered on submit                  |
+
+### AuthUserCard
+
+This is a component that takes de user information from the user slice of the redux store and displays the profile picture, name and email. You can also choose to show some links on the bottom of the card.
+
+```
+<AuthUserCard
+    items=[{
+        path: '/profile',
+        title: 'Profile page'
+    }]
+/>
+```
+
+| **Name** | **Type**  | **Default** | **Description**                                                              |
+| -------- | --------- | ----------- | ---------------------------------------------------------------------------- |
+| items    | NavItem[] | -           | List of navigation items to be displayed as links at the bottom of the card. |
+
+**NavItem**
+
+| **Name** | **Type**   | **Default** | **Description**                     |
+| -------- | ---------- | ----------- | ----------------------------------- |
+| path     | url \| uri | -           | Url to be redirected on item click  |
+| title    | string     | -           | Text to be used for navigation item |
+
+### AuthUserSmallCard
+
+<!-- TODO -->
+
+This is a component that takes de user information from the user slice of the redux store and displays the profile picture, name and email in a compact fashion. You can choose an action to trigger on click (thought to be used as a dropdown menu button)
+
+```
+<AuthUserSmallCard
+    onClick={() => openModal()}
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description**                         |
+| -------- | -------- | ----------- | --------------------------------------- |
+| onClick  | function | -           | Function to be triggered on card click. |
 
 ### Breadcrumb
 
@@ -298,7 +340,7 @@ This is a Modal to display an Image or a PDF file.
 
 | **Name** | **Type** | **Default** | **Description**                            |
 | -------- | -------- | ----------- | ------------------------------------------ |
-| imageUrl | 'string' | -           | Url string for the image or pdf to display |
+| imageUrl | string   | -           | Url string for the image or pdf to display |
 | onClose  | function | -           | Function to call on modal close            |
 | open     | boolean  | false       | Visibility state for the modal component.  |
 
@@ -388,18 +430,17 @@ This component displays a horizontal rectangle with an image on the left, a titl
 
 ### LoginForm
 
-<!-- TODO -->
-
-Description
+This is a component that shows a Login form with email and password fields and a submit button.
 
 ```
 <LoginForm
-
+    onSubmit={(values) => authenticate(values)}
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
+| **Name** | **Type** | **Default** | **Description**                           |
+| -------- | -------- | ----------- | ----------------------------------------- |
+| onSubmit | function | -           | Function that will be triggered on submit |
 
 ### Logo
 
@@ -419,18 +460,27 @@ This is the main Logo of the page. It can contain an image with a brand name or 
 
 ### MenuButton
 
-<!-- TODO -->
-
-Description
+This is a component that takes a title and a list of navigation items and displays them as a dropdown menu.
 
 ```
 <MenuButton
-
-/>
+    items=[]
+>
+    Something
+</MenuButton>
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
+| **Name** | **Type**  | **Default** | **Description**                                              |
+| -------- | --------- | ----------- | ------------------------------------------------------------ |
+| children | string    | -           | Text to be displayed on the button element.                  |
+| items    | NavItem[] | -           | List of navigation items to be displayed as a dropdown menu. |
+
+**NavItem**
+
+| **Name** | **Type**   | **Default** | **Description**                        |
+| -------- | ---------- | ----------- | -------------------------------------- |
+| path     | url \| uri | -           | Url to be redirected on click.         |
+| title    | string     | -           | Text to be displayed on the menu item. |
 
 ### PageHeader
 
@@ -536,18 +586,17 @@ This component is a custom search bar.
 
 ### SignupForm
 
-<!-- TODO -->
-
-Description
+This is a component that shows a Signup form with full name, email, password and password confirmation fields and a submit button.
 
 ```
 <SignupForm
-
+    onSubmit={(values) => authenticate(values)}
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
+| **Name** | **Type** | **Default** | **Description**                           |
+| -------- | -------- | ----------- | ----------------------------------------- |
+| onSubmit | function | -           | Function that will be triggered on submit |
 
 ### SimpleCard
 
@@ -625,18 +674,29 @@ This is a simple list with social media icons and links to external websites.
 
 ### TagsWidget
 
-<!-- TODO -->
-
-Description
+This is a simple Widget that renders a tag cloud.
 
 ```
 <TagsWidget
-
+    title="Widget title"
+    tagList=[
+        { url: 'https://www.something.com/', text: 'Tag1' },
+        { url: 'https://www.something.com/', text: 'Tag2' }
+    ]
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
+| **Name** | **Type** | **Default** | **Description**                     |
+| -------- | -------- | ----------- | ----------------------------------- |
+| title    | string   | -           | Title to be displayed on the Widget |
+| tagList  | Tag[]    | -           | List of tags to be displayed        |
+
+**Tag**
+
+| **Name** | **Type** | **Default** | **Description**                   |
+| -------- | -------- | ----------- | --------------------------------- |
+| url      | string   | -           | Url to be redirected on tag click |
+| text     | string   | -           | Tag text content                  |
 
 ### Title
 
@@ -718,19 +778,44 @@ It is meant to be used inside a react-hook-form context.
 ### ToggableAutocomplete
 
 This is a form component that accepts an array value and display it on different ways (type property). It has an edit mode that turns the component into a Autocomplete component.
-It is meant to be used inside a react-hook-form context.
-
-<!-- !TODO -->
 
 ```
 <ToggableAutocomplete
-
+    addOption={(value) => pushToDatabase(value)}
+    label="Label"
+    options=[
+        { title: 'First Option' },
+        { title: 'Second Option' }
+    ]
+    onSubmit ={onSubmit}
+    placeholder="Placeholder"
+    required={true}
+    requiredLength={3}
+    style={{margin: '0 auto'}}
+    type="chip"
+    value=["this", "this, "and that"]
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
+| **Name**       | **Type**             | **Default** | **Description**                                                                                                                         |
+| -------------- | -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| addOption      | function             | -           | Function to trigger for adding new options.                                                                                             |
+| label          | string               | -           | Label to be rendered on top of the TextField or value.                                                                                  |
+| name           | string               | -           | Name to control the field                                                                                                               |
+| options        | Option[]             | -           | Array of options to show in the select.                                                                                                 |
+| onSubmit       | function             | -           | You can customize the function that will be triggered on submit.                                                                        |
+| placeholder    | string               | -           | Placeholder to be rendered inside the Autocomplete component                                                                            |
+| required       | boolean              | false       | If you wish to indicate this field as required it will show a red asterisk next to the label and a red border if no value               |
+| requiredLength | number               | 1           | If required you can indicate the minimum length of the array.                                                                           |
+| style          | object               | -           | Any valid style object to be passed down to wrapper element                                                                             |
+| type           | 'chip' \| 'location' | -           | This is how the values are going to be displayed, as chips, locations, etc. If you leave this empty it will be a regular list component |
+| value          | array                | -           | Pass down the controlled values for the autocomplete.                                                                                   |
+
+**Option**
+
+| **Name** | **Type** | **Default** | **Description**                                                                          |
+| -------- | -------- | ----------- | ---------------------------------------------------------------------------------------- |
+| title    | string   | -           | Text to display within the Autocomplete menu and pass as title in the addOption function |
 
 ### ToggableInput
 
@@ -773,36 +858,86 @@ It is meant to be used inside a react-hook-form context.
 
 ### ToggablePicker
 
-<!-- TODO -->
-
-This is a form component
+This is a form component that accepts a image or pdf url and display it on a modal. It has a picker button to upload the file and accepts a function to delete such file.
 
 ```
 <ToggablePicker
-
+    allValues={{
+        oneProp: 'Something,
+        anotherProp: ['array of', 'something']
+    }}
+    label="Picker"
+    name="picker"
+    onFileChange={async (value) => {
+        const url = await pushToCloud(value)}
+        return url;
+        }
+    onRemoveFile={() => removeFromCloud()}
+    onSubmit={(value) => doSomething(value)}
+    required={true}
+    style={{ margin: '0 auto' }}
+    value="https://www.somesite.com/image.jpg"
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
+| **Name**     | **Type** | **Default** | **Description**                                                                                                           |
+| ------------ | -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
+| allValues    | object   | -           | Object with all the values of the form (without this the submit function will return only the url of the file submitted)  |
+| label        | string   | -           | Label to be rendered on top of the TextField or value.                                                                    |
+| name \*      | string   | -           | Name to control the field                                                                                                 |
+| onFileChange | function | -           | This function will be triggered on change of the picker input.                                                            |
+| onRemoveFile | function | -           | This function will be triggered on click of the remove button.                                                            |
+| onSubmit     | function | -           | You can customize the function that will be triggered on submit.                                                          |
+| required     | boolean  | false       | If you wish to indicate this field as required it will show a red asterisk next to the label and a red border if no value |
+| style        | object   | -           | Any valid style object to be passed down to wrapper element                                                               |
+| value        | url      | -           | Pass down the url to show in the modal.                                                                                   |
 
 ### ToggableSelect
 
-<!-- TODO -->
-
-In construction
+This is a form component that accepts a string or array value and display it on different ways (type property). It has an edit mode that turns the component into a Select component.
 It is meant to be used inside a react-hook-form context.
 
 ```
 <ToggableSelect
-
+    control={control}
+    handleSubmit={handleSubmit}
+    label="Label"
+    multiple={true}
+    name="input"
+    options=[
+        { title: 'First Option', value: 1 },
+        { title: 'Second Option', value: 2 }
+    ]
+    onSubmit ={onSubmit}
+    required={true}
+    requiredLength={3}
+    style={{margin: '0 auto'}}
+    type="chip"
+    value=["this", "this, "and that"]
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
+| **Name**       | **Type**             | **Default** | **Description**                                                                                                                         |
+| -------------- | -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| control        | object               | -           | react-hook-form control from useForm                                                                                                    |
+| handleSubmit   | function             | -           | react-hook-form function from useForm                                                                                                   |
+| label          | string               | -           | Label to be rendered on top of the TextField or value.                                                                                  |
+| multiple       | boolean              | false       | You can choose if the Select component accepts multiple values or just one                                                              |
+| name           | string               | -           | Name to control the field                                                                                                               |
+| options        | Option[]             | -           | Array of options to show in the select.                                                                                                 |
+| onSubmit       | function             | -           | You can customize the function that will be triggered on submit.                                                                        |
+| required       | boolean              | false       | If you wish to indicate this field as required it will show a red asterisk next to the label and a red border if no value               |
+| requiredLength | number               | 1           | If required you can indicate the minimum length of the array.                                                                           |
+| style          | object               | -           | Any valid style object to be passed down to wrapper element                                                                             |
+| type           | 'chip' \| 'location' | -           | This is how the values are going to be displayed, as chips, locations, etc. If you leave this empty it will be a regular list component |
+| value          | string \| array      | -           | Pass down the controlled value for the input, make sure to pass down an array if you choose to make the select "multiple".              |
+
+**Option**
+
+| **Name** | **Type** | **Default** | **Description**                           |
+| -------- | -------- | ----------- | ----------------------------------------- |
+| title    | string   | -           | Text to display within the Select menu    |
+| value    | any      | -           | Value to pass down to the submit function |
 
 ### WidgetWrapper
 
@@ -972,10 +1107,11 @@ This component wraps the routes that explicitly has a layout={false}, you can ad
 </LayoutDefault>
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| children | ReactComponent \| HTMLElement | - | Component that will be rendered inside the layout |
-| footer | boolean | false | You can enable here the footer |
-| scrollBtn | boolean | false | You can enable here the scroll to top button |
+| **Name**  | **Type**                      | **Default** | **Description**                                   |
+| --------- | ----------------------------- | ----------- | ------------------------------------------------- |
+| children  | ReactComponent \| HTMLElement | -           | Component that will be rendered inside the layout |
+| footer    | boolean                       | false       | You can enable here the footer                    |
+| scrollBtn | boolean                       | false       | You can enable here the scroll to top button      |
 
 ### RoutesSwitch
 

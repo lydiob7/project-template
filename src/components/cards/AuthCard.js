@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const AuthCard = ({ form = 'login' }) => {
+const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
     const classes = useStyles();
 
     const appInformation = useSelector(({ ui }) => ui.appInformation);
@@ -49,14 +49,14 @@ const AuthCard = ({ form = 'login' }) => {
             </div>
             {form === 'signup' ? (
                 <>
-                    <SignupForm />
+                    <SignupForm onSubmit={onSubmit} />
                     <Typography className={classes.linkText} variant="body1">
                         Already have an account?&nbsp;&nbsp;&nbsp;<Link to={parsePath('/login')}>Login</Link>
                     </Typography>
                 </>
             ) : (
                 <>
-                    <LoginForm />
+                    <LoginForm onSubmit={onSubmit} />
                     <Typography className={classes.linkText} variant="body1">
                         Don't have an account?&nbsp;&nbsp;&nbsp;<Link to={parsePath('/register')}>Register</Link>
                     </Typography>

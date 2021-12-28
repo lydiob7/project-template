@@ -1,6 +1,5 @@
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-// import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -42,7 +41,7 @@ const defaultValues = {
     passwordConfirm: ''
 };
 
-function SignupForm(props) {
+function SignupForm({ onSubmit }) {
     const classes = useStyles();
     // const dispatch = useDispatch();
 
@@ -53,11 +52,6 @@ function SignupForm(props) {
     });
 
     const { isValid, errors } = formState;
-
-    function onSubmit(model) {
-        console.log(model);
-        // dispatch(registerWithFirebase(model));
-    }
 
     return (
         <div>
