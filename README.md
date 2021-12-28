@@ -42,23 +42,19 @@ This component is built over a Route component from react-router-dom, it adds a 
 
 ```
 <AppRoute
-    exact
-    path="/"
     component={Home}
-    layout={false}
     footer={false}
-    scrollBtn={false}
-    noLayoutFooter={true}
+    layout={false}
     noLayoutBtn={true}
+    noLayoutFooter={true}
     privateRoute={true}
     redirectRoute="/some-public-uri"
+    scrollBtn={false}
 />
 ```
 
 | **Name**       | **Type**       | **Default** | **Description**                                                                                                                                                                                             |
 | -------------- | -------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| exact          | boolean        | false       | Use if you want the path to be exact (see react-router-dom documentation)                                                                                                                                   |
-| path           | uri            | -           | Use the relative path for each page (see react-router-dom documentation)                                                                                                                                    |
 | component\*    | ReactComponent | -           | A React Component to be rendered when the location match the path (see react-router-dom documentation)                                                                                                      |
 | layout         | boolean        | true        | You can manage the default layout on _src/layouts/LayoutDefault.js_ and the simplest layout on _src/layouts/NoLayout.js_. By default the _NoLayout.js_ file contains the footer and the ScrollTopBtn anyway |
 | privateRoute   | boolean        | false       | If you want to make this route private turn this property to true, it will check the authentication from the auth slice of the store                                                                        |
@@ -177,6 +173,26 @@ Description
 | onClose          | function | -                                                        | Handle the modal closure from here.                                       |
 | onSubmit         | function | -                                                        | Indicate what you want to do after confirmation.                          |
 
+### ContentCard
+
+<!-- TODO -->
+
+Description
+
+```
+<ContentCard
+    className="card"
+    style={{margin: '0 auto'}}
+    title="Card title"
+>
+    <SomeChild />
+</ContentCard>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+| -        | -        | -           | -               |
+
 ### Copyright
 
 This is the copyright claim, it contains a copyright symbol, the name of the rights owner and the last year for the copyrights. It's built to be used on the footer of the page.
@@ -222,6 +238,21 @@ This component holds the menu for the footer. It's a simple list with links.
 | -------- | -------- | ----------- | ----------------------- |
 | path     | uri      | -           | Menu item internal path |
 | title    | string   | -           | Menu item title         |
+
+### ImageModal
+
+<!-- TODO -->
+
+Description
+
+```
+<ImageModal />
+
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+| -        | -        | -           | -               |
 
 ### ItemCard
 
@@ -565,15 +596,23 @@ This is a simple component with a title and subtitle for any page or section hea
 
 ```
 <Title
+    className="title"
     title={string}
+    size="small"
+    style={{margin: '0 auto'}}
     subtitle={string}
+    subtitleSize="large"
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description**          |
-| -------- | -------- | ----------- | ------------------------ |
-| title    | string   | -           | Section/Page title       |
-| subtitle | string   | -           | Section/Page description |
+| **Name**     | **Type**           | **Default** | **Description**                                           |
+| ------------ | ------------------ | ----------- | --------------------------------------------------------- |
+| className    | string             | -           | Class name to be passed down to external div              |
+| title        | string             | -           | Section/Page title                                        |
+| size         | 'small' \| 'large' | 'large'     | Size for title typography component                       |
+| style        | object             | -           | Any compatible style object to be applied to external div |
+| subtitle     | string             | -           | Section/Page description                                  |
+| subtitleSize | 'large' \| 'small' | 'small'     | Size for subtitle typography component                    |
 
 ### TitleDecoration
 
@@ -588,6 +627,86 @@ This is a simple component for a title underline decoration
 | **Name**  | **Type** | **Default** | **Description**                                 |
 | --------- | -------- | ----------- | ----------------------------------------------- |
 | className | string   | -           | This will be passed down to the wrapper element |
+
+### ToggableArrayInput
+
+<!-- TODO -->
+
+This is a form component
+
+```
+<ToggableArrayInput
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+| -        | -        | -           | -               |
+
+### ToggableAutocomplete
+
+<!-- TODO -->
+
+This is a form component
+
+```
+<ToggableAutocomplete
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+| -        | -        | -           | -               |
+
+### ToggableInput
+
+<!-- TODO -->
+
+This is a form component
+
+```
+<ToggableInput
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+| -        | -        | -           | -               |
+
+### ToggablePicker
+
+<!-- TODO -->
+
+This is a form component
+
+```
+<ToggablePicker
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+| -        | -        | -           | -               |
+
+### ToggableSelect
+
+<!-- TODO -->
+
+This is a form component
+
+```
+<ToggableSelect
+
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
+| -        | -        | -           | -               |
 
 ### WidgetWrapper
 

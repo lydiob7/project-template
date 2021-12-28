@@ -2,31 +2,38 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { themeDark, themeLight, mantainanceModeEnabled, mantainanceModeDisabled } from 'store/ui';
 
+import { AccessAlarm } from '@material-ui/icons';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
-import { AccessAlarm } from '@material-ui/icons';
 
-import Title from 'components/headings/Title';
-import TitleDecoration from 'components/headings/TitleDecoration';
+import AuthCard from 'components/cards/AuthCard';
+import Breadcrumb from 'components/headings/Breadcrumb';
 import Button from 'components/common/Button';
-import SearchInput from 'components/forms/SearchInput';
-import ResultsHeader from 'components/common/ResultsHeader';
+import CheckboxWidget from 'components/widgets/CheckboxWidget';
+import ConfirmationModal from 'components/modals/ConfirmationModal';
+import ContentCard from 'components/cards/ContentCard';
+import FormCard from 'components/cards/FormCard';
 import ItemCard from 'components/cards/ItemCard';
 import ItemHorizontal from 'components/cards/ItemHorizontal';
+import Loader from 'components/common/Loader';
+import LoginForm from 'components/forms/LoginForm';
+import ReportItemModal from 'components/modals/ReportItemModal';
+import ResultsHeader from 'components/common/ResultsHeader';
+import SearchInput from 'components/forms/SearchInput';
+import SignupForm from 'components/forms/SignupForm';
 import SimpleCard from 'components/cards/SimpleCard';
 import SmallCard from 'components/cards/SmallCard';
-import Loader from 'components/common/Loader';
-import ReportItemModal from 'components/modals/ReportItemModal';
-import ConfirmationModal from 'components/modals/ConfirmationModal';
-import Breadcrumb from 'components/headings/Breadcrumb';
-import WidgetWrapper from 'components/widgets/WidgetWrapper';
 import TagsWidget from 'components/widgets/TagsWidget';
-import CheckboxWidget from 'components/widgets/CheckboxWidget';
-import LoginForm from 'components/forms/LoginForm';
-import SignupForm from 'components/forms/SignupForm';
-import AuthCard from 'components/cards/AuthCard';
+import Title from 'components/headings/Title';
+import TitleDecoration from 'components/headings/TitleDecoration';
+import ToggableArrayInput from 'components/forms/ToggableArrayInput';
+import ToggableInput from 'components/forms/ToggableInput';
+import ToggableAutocomplete from 'components/forms/ToggableAutocomplete';
+import ToggablePicker from 'components/forms/ToggablePicker';
+import ToggableSelect from 'components/forms/ToggableSelect';
+import WidgetWrapper from 'components/widgets/WidgetWrapper';
 
 const cardItem = {
     logo: '/images/ss-web-36.svg',
@@ -55,6 +62,45 @@ const checkboxes = [
     { text: 'Checkbox 6', id: 5, active: true },
     { text: 'Checkbox 7', id: 6, active: false },
     { text: 'Checkbox 8', number: 2, id: 7, active: false }
+];
+
+const inputFields = [
+    {
+        Component: ToggableArrayInput,
+        label: 'Array Input',
+        name: 'array-input',
+        placeholder: 'Write something',
+        required: true
+    },
+    {
+        addOption: (newOption) => console.log(newOption),
+        Component: ToggableAutocomplete,
+        label: 'Autocomplete Input',
+        name: 'autocomplete-input',
+        options: [{ title: 'First Option' }, { title: 'Second Option' }],
+        placeholder: 'Add more options',
+        required: true,
+        requiredLength: 1,
+        type: 'chip',
+        value: [{ title: 'First Option' }]
+    },
+    {
+        Component: ToggableInput,
+        label: 'Text Input',
+        multiline: true,
+        name: 'text-input',
+        placeholder: 'Write something'
+    },
+    {
+        Component: ToggablePicker,
+        label: 'Picker',
+        name: 'picker'
+    },
+    {
+        Component: ToggableSelect,
+        label: 'Select',
+        name: 'select'
+    }
 ];
 
 const Home = () => {
@@ -191,6 +237,17 @@ const Home = () => {
             <Grid spacing={2} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={10} md={6}>
                     <AuthCard form="login" />
+                </Grid>
+                <Grid item xs={10} md={6}>
+                    <FormCard title="Form" inputFields={inputFields} />
+                </Grid>
+            </Grid>
+
+            <Grid spacing={2} container style={{ marginTop: '60px' }} justifyContent="center">
+                <Grid item xs={10} md={6}>
+                    <ContentCard title="Card with text content">
+                        <p>Something</p>
+                    </ContentCard>
                 </Grid>
                 <Grid item xs={10} md={6}></Grid>
             </Grid>

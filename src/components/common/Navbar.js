@@ -78,15 +78,15 @@ export default function Navbar({ appTitle = '', menuItems = [] }) {
         return (
             <>
                 {menuItems?.map((item, index) => (
-                    <>
+                    <div key={`${item.path}${index}`}>
                         {item.dropdown ? (
                             <MenuButton items={item.dropdown}>{item.title}</MenuButton>
                         ) : (
-                            <Link className={classes.mainNavigationListItem} to={item.path} key={index}>
+                            <Link className={classes.mainNavigationListItem} to={item.path}>
                                 <Button variant="text">{item.title}</Button>
                             </Link>
                         )}
-                    </>
+                    </div>
                 ))}
             </>
         );
@@ -100,19 +100,20 @@ export default function Navbar({ appTitle = '', menuItems = [] }) {
             <Divider />
             <List className={classes.drawerList}>
                 {menuItems?.map((item, index) => (
-                    <>
-                        <ListItem className={classes.listItem} button key={index} onClick={() => setNavOpen(false)}>
+                    <div key={`${item.path}${index}`}>
+                        <ListItem className={classes.listItem} button onClick={() => setNavOpen(false)}>
                             <Link to={item.path}>
                                 <ListItemText primary={item.title} />
                             </Link>
                         </ListItem>
                         {item.dropdown && (
-                            <List button>
+                            <List>
                                 {item.dropdown.map((ditem, index2) => {
                                     return (
                                         <ListItem
+                                            button
                                             className={classes.listItem}
-                                            key={index2}
+                                            key={`${ditem.path}${index2}`}
                                             onClick={() => setNavOpen(false)}
                                         >
                                             <Link to={ditem.path}>{ditem.title}</Link>
@@ -121,7 +122,7 @@ export default function Navbar({ appTitle = '', menuItems = [] }) {
                                 })}
                             </List>
                         )}
-                    </>
+                    </div>
                 ))}
             </List>
         </div>

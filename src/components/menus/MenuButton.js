@@ -30,7 +30,7 @@ function MenuButton({ children: title, items }) {
 
     const open = Boolean(anchorEl);
     const listItems = items?.map((link) => (
-        <Link className={classes.link} to={link.path}>
+        <Link key={link.path} className={classes.link} to={link.path}>
             <MenuItem onClick={handleClose}>{link.title}</MenuItem>
         </Link>
     ));

@@ -1,48 +1,41 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { parsePath } from './helpers';
+import { Redirect } from 'react-router-dom';
 import LayoutDefault from 'layouts/LayoutDefault';
 import NoLayout from 'layouts/NoLayout';
-import { mantainancePath } from 'utils/helpers';
 
 const AppRoute = ({
-    path,
     component: Component,
-    layout = true,
     footer = true,
-    scrollBtn,
-    noLayoutFooter,
-    noLayoutBtn,
+    layout = true,
+    noLayoutFooter = false,
+    noLayoutBtn = false,
     privateRoute = false,
-    redirectRoute = parsePath(),
-    ...rest
+    redirectRoute = '/register',
+    scrollBtn = false
 }) => {
-    const authenticated = useSelector(({ auth }) => auth.authenticated);
-    const mantainanceMode = useSelector(({ ui }) => ui.mantainanceMode);
+    const authenticated = useSelector(({ auth }) => auth.user.authenticated);
 
-    if (mantainanceMode && path !== parsePath(mantainancePath)) return <Redirect to={parsePath(mantainancePath)} />;
-    if (!mantainanceMode && path === parsePath(mantainancePath)) return <Redirect to={parsePath('/error')} />;
-    if (privateRoute && !authenticated) return <Redirect to={parsePath(redirectRoute)} />;
+    if (!Component) return null;
 
     return (
-        <Route
-            path={path}
-            {...rest}
-            render={(props) => (
+        <>
+            {privateRoute && !authenticated ? (
+                <Redirect to={redirectRoute} />
+            ) : (
                 <>
                     {layout ? (
                         <LayoutDefault footer={footer} scrollBtn={scrollBtn}>
-                            <Component {...props} />
+                            <Component />
                         </LayoutDefault>
                     ) : (
                         <NoLayout footer={noLayoutFooter} scrollBtn={noLayoutBtn}>
-                            <Component {...props} />
+                            <Component />
                         </NoLayout>
                     )}
                 </>
             )}
-        />
+        </>
     );
 };
 
