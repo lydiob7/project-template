@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const ToggableArrayInput = ({
     control = () => {},
     handleSubmit = () => {},
+    InputLabelProps,
     label,
     multiline,
     name,
@@ -114,6 +115,7 @@ const ToggableArrayInput = ({
                                 render={({ field }) => (
                                     <TextField
                                         {...field}
+                                        InputLabelProps={InputLabelProps}
                                         style={{ width: '100%' }}
                                         placeholder={placeholder}
                                         multiline={multiline}

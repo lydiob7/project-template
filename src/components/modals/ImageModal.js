@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'rgba(0, 0, 0, 0.8)'
     },
     closeFile: {
+        color: '#FFFFFF',
         width: '50px',
         height: '50px',
         padding: '10px',

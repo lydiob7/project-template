@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormCard = ({
-    inputFields = [],
     className,
     defaultValues = {},
     formMode = 'onChange',
+    inputFields = [],
     onSubmit = () => {},
     schema: defaultSchema = {},
     style,

@@ -1,6 +1,6 @@
 # Smart Studios UI
 
-Current version: v0.3.0
+Current version: v0.4.0
 
 ## About
 
@@ -151,12 +151,11 @@ This is a widget that shows a list of checkboxes with a label and some aditional
 
 ### ConfirmationModal
 
-<!-- TODO -->
-
-Description
+Modal component for any kind of confirmation
 
 ```
 <ConfirmationModal
+    actionButtonText="Remove"
     confirmationType="deletion",
     message="Do you want to delete this?",
     open={false},
@@ -165,19 +164,18 @@ Description
 />
 ```
 
-| **Name**         | **Type** | **Default**                                              | **Description**                                                           |
-| ---------------- | -------- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
-| confirmationType | string   | 'deletion'                                               | This string will be shown on the modal title 'Confirm {confirmationType}' |
-| message          | string   | 'Are you sure you want to delete permanently this item?' | Write a small question type text to show as content in the modal          |
-| open             | boolean  | false                                                    | -                                                                         |
-| onClose          | function | -                                                        | Handle the modal closure from here.                                       |
-| onSubmit         | function | -                                                        | Indicate what you want to do after confirmation.                          |
+| **Name**         | **Type**              | **Default**                                              | **Description**                                                           |
+| ---------------- | --------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
+| actionButtonText | string                | 'Delete'                                                 | This is the text that will be rendered inside the confirmation button.    |
+| confirmationType | 'delete' \| 'confirm' | 'delete'                                                 | This string will be shown on the modal title 'Confirm {confirmationType}' |
+| message          | string                | 'Are you sure you want to delete permanently this item?' | Write a small question type text to show as content in the modal          |
+| open             | boolean               | false                                                    | -                                                                         |
+| onClose          | function              | -                                                        | Handle the modal closure from here.                                       |
+| onSubmit         | function              | -                                                        | Indicate what you want to do after confirmation.                          |
 
 ### ContentCard
 
-<!-- TODO -->
-
-Description
+This is a simple wrapper component with a header and a title.
 
 ```
 <ContentCard
@@ -189,9 +187,12 @@ Description
 </ContentCard>
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
+| **Name**  | **Type**                      | **Default** | **Description**                                          |
+| --------- | ----------------------------- | ----------- | -------------------------------------------------------- |
+| className | string                        | -           | Class name to be passed down to wrapper element          |
+| children  | ReactComponent \| HTMLElement | -           | Components to be rendered inside the card                |
+| style     | object                        | -           | Valid style object to be passed down to wrapper element. |
+| title     | string                        | -           | Title for the card                                       |
 
 ### Copyright
 
@@ -239,20 +240,67 @@ This component holds the menu for the footer. It's a simple list with links.
 | path     | uri      | -           | Menu item internal path |
 | title    | string   | -           | Menu item title         |
 
+### FormCard
+
+This is a wrapper component for any Form. It uses react-hook-forms and yup validation and directly controls the toggable form components.
+
+```
+<FormCard
+    className="card"
+    defaultValues={{firstName: 'John', lastName: 'Doe'}}
+    formMode="onSubmit"
+    inputFields={[
+        {
+            Component: ToggableInput,
+            label: 'input'
+            name: 'input'
+            required: true,
+        }
+    ]}
+    onSubmit={handleSubmit}
+    schema={{firstName: yup.string().required(), lastName: yup.string()}}
+    style={{margin: '0 auto'}}
+    title="Card title"
+/>
+```
+
+| **Name**       | **Type**                                             | **Default** | **Description**                                                                                                                                                                                  |
+| -------------- | ---------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| className      | string                                               | -           | Class name to be passed down to wrapper element                                                                                                                                                  |
+| defaultValues  | object                                               | -           | Object with default values for the form                                                                                                                                                          |
+| formMode       | string (react-hook-forms valid property for useForm) | 'onChange'  | This option allows you to configure the validation strategy before user submit the form (onSubmit event). Read more on [react-hook-forms documentation](https://react-hook-form.com/api/useform) |
+| inputFields \* | FormInput[]                                          | -           | Array of objects with the form Component and their props.                                                                                                                                        |
+| onSubmit       | function                                             | -           | Function to trigger on submit                                                                                                                                                                    |
+| schema         | object                                               | -           | Object with the shape for Yup validation                                                                                                                                                         |
+| style          | object                                               | -           | Valid style object to be passed down to wrapper element.                                                                                                                                         |
+| title          | string                                               | -           | Title for the card                                                                                                                                                                               |
+
+**FormInput**
+
+| **Name**  | **Type**     | **Default** | **Description**                         |
+| --------- | ------------ | ----------- | --------------------------------------- |
+| Component | ReactElement | -           | Use any of the toggable form Components |
+
+_(The rest of properties are the same as the React Component used except for control, onSubmit and handleSubmit that are passed down by default from the FormCard Component)_
+
 ### ImageModal
 
-<!-- TODO -->
-
-Description
+This is a Modal to display an Image or a PDF file.
 
 ```
-<ImageModal />
+<ImageModal
+    imageUrl="https://someimage.jpg/
+    onClose={() => setIsModalVisible(false)}
+    open={isModalVisible}
+/>
 
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
+| **Name** | **Type** | **Default** | **Description**                            |
+| -------- | -------- | ----------- | ------------------------------------------ |
+| imageUrl | 'string' | -           | Url string for the image or pdf to display |
+| onClose  | function | -           | Function to call on modal close            |
+| open     | boolean  | false       | Visibility state for the modal component.  |
 
 ### ItemCard
 
@@ -630,25 +678,49 @@ This is a simple component for a title underline decoration
 
 ### ToggableArrayInput
 
-<!-- TODO -->
-
-This is a form component
+This is a form component that accepts a comma separated string value and display all the separate values on different ways (type property). It has an edit mode that turns the component into a TextField.
+It is meant to be used inside a react-hook-form context.
 
 ```
 <ToggableArrayInput
-
+    control={control}
+    handleSubmit={handleSubmit}
+    InputLabelProps={{color: 'primary'}}
+    label="Label"
+    multiline={true}
+    name="input"
+    onSubmit ={onSubmit}
+    placeholder="Placeholder"
+    required={true}
+    requiredLength={3}
+    style={{margin: '0 auto'}}
+    type="chip"
+    value="this, this, and that"
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
+| **Name**        | **Type**             | **Default** | **Description**                                                                                                                         |
+| --------------- | -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| control         | object               | -           | react-hook-form control from useForm                                                                                                    |
+| handleSubmit    | function             | -           | react-hook-form function from useForm                                                                                                   |
+| InputLabelProps | object               | -           | Props applied to the InputLabel element. Read more on [MUI documentation](https://v4.mui.com/api/input-label/)                          |
+| label           | string               | -           | Label to be rendered on top of the TextField or value.                                                                                  |
+| multiline       | boolean              | false       | You can choose if the TextField is going to be multiline or not                                                                         |
+| name            | string               | -           | Name to control the field                                                                                                               |
+| onSubmit        | function             | -           | You can customize the function that will be triggered on submit.                                                                        |
+| placeholder     | string               | -           | Placeholder to be rendered inside the TextField component                                                                               |
+| required        | boolean              | false       | If you wish to indicate this field as required it will show a red asterisk next to the label and a red border if no value               |
+| requiredLength  | number               | 1           | If required you can indicate the minimum length of the array.                                                                           |
+| style           | object               | -           | Any valid style object to be passed down to wrapper element                                                                             |
+| type            | 'chip' \| 'location' | -           | This is how the values are going to be displayed, as chips, locations, etc. If you leave this empty it will be a regular list component |
+| value           | string               | -           | Pass down the controlled value for the input.                                                                                           |
 
 ### ToggableAutocomplete
 
-<!-- TODO -->
+This is a form component that accepts an array value and display it on different ways (type property). It has an edit mode that turns the component into a Autocomplete component.
+It is meant to be used inside a react-hook-form context.
 
-This is a form component
+<!-- !TODO -->
 
 ```
 <ToggableAutocomplete
@@ -662,19 +734,42 @@ This is a form component
 
 ### ToggableInput
 
-<!-- TODO -->
-
-This is a form component
+This is a form component that accepts a string value and display it on different ways (type property). It has an edit mode that turns the component into a TextField.
+It is meant to be used inside a react-hook-form context.
 
 ```
 <ToggableInput
-
+    adornment="$"
+    control={control}
+    handleSubmit={handleSubmit}
+    InputLabelProps={{ color: 'primary'}}
+    label="Label"
+    multiline={true}
+    name="Input"
+    onSubmit={onSubmit}
+    placeholder="Placeholder"
+    required={true}
+    style={{margin: '0 auto'}}
+    type="link"
+    value="Something"
 />
 ```
 
-| **Name** | **Type** | **Default** | **Description** |
-| -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
+| **Name**        | **Type**                                           | **Default** | **Description**                                                                                                                             |
+| --------------- | -------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| adornment       | string                                             | -           | You can add an adorment to be rendered at the start of the input                                                                            |
+| control         | object                                             | -           | react-hook-form control from useForm                                                                                                        |
+| handleSubmit    | function                                           | -           | react-hook-form function from useForm                                                                                                       |
+| InputLabelProps | object                                             | -           | Props applied to the InputLabel element. Read more on [MUI documentation](https://v4.mui.com/api/input-label/)                              |
+| label           | string                                             | -           | Label to be rendered on top of the TextField or value.                                                                                      |
+| multiline       | boolean                                            | false       | You can choose if the TextField is going to be multiline or not                                                                             |
+| name            | string                                             | -           | Name to control the field                                                                                                                   |
+| onSubmit        | function                                           | -           | You can customize the function that will be triggered on submit.                                                                            |
+| placeholder     | string                                             | -           | Placeholder to be rendered inside the TextField component                                                                                   |
+| required        | boolean                                            | false       | If you wish to indicate this field as required it will show a red asterisk next to the label and a red border if no value                   |
+| style           | object                                             | -           | Any valid style object to be passed down to wrapper element                                                                                 |
+| type            | 'email' \| 'date' \| 'link' \| 'location' \| 'tel' | -           | This is how the value is going to be displayed, as a link, location, etc. If you leave this empty it will be a regular Typography component |
+| value           | string                                             | -           | Pass down the controlled value for the input.                                                                                               |
 
 ### ToggablePicker
 
@@ -696,7 +791,8 @@ This is a form component
 
 <!-- TODO -->
 
-This is a form component
+In construction
+It is meant to be used inside a react-hook-form context.
 
 ```
 <ToggableSelect

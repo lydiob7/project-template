@@ -15,6 +15,7 @@ import CheckboxWidget from 'components/widgets/CheckboxWidget';
 import ConfirmationModal from 'components/modals/ConfirmationModal';
 import ContentCard from 'components/cards/ContentCard';
 import FormCard from 'components/cards/FormCard';
+import ImageModal from 'components/modals/ImageModal';
 import ItemCard from 'components/cards/ItemCard';
 import ItemHorizontal from 'components/cards/ItemHorizontal';
 import Loader from 'components/common/Loader';
@@ -46,13 +47,6 @@ const cardItem = {
     btnText: 'Go go go'
 };
 
-const tags = [
-    { url: 'https://www.something.com/', text: 'Tag1' },
-    { url: 'https://www.something.com/', text: 'Tag2' },
-    { url: 'https://www.something.com/', text: 'Tag3' },
-    { url: 'https://www.something.com/', text: 'Tag4' }
-];
-
 const checkboxes = [
     { text: 'Checkbox 1', number: 2, id: 0, active: false },
     { text: 'Checkbox 2', number: 1, id: 1, active: false },
@@ -63,6 +57,8 @@ const checkboxes = [
     { text: 'Checkbox 7', id: 6, active: false },
     { text: 'Checkbox 8', number: 2, id: 7, active: false }
 ];
+
+const imageToOpen = 'http://smartstudios.io/wp-content/uploads/2021/01/ss-web-36.svg';
 
 const inputFields = [
     {
@@ -103,12 +99,20 @@ const inputFields = [
     }
 ];
 
+const tags = [
+    { url: 'https://www.something.com/', text: 'Tag1' },
+    { url: 'https://www.something.com/', text: 'Tag2' },
+    { url: 'https://www.something.com/', text: 'Tag3' },
+    { url: 'https://www.something.com/', text: 'Tag4' }
+];
+
 const Home = () => {
     const dispatch = useDispatch();
     const currentTheme = useSelector(({ ui }) => ui.theme);
 
-    const [reportModalOpen, setReportModalOpen] = useState(false);
-    const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
+    const [IsImageModalOpen, setIsImageModalOpen] = useState(false);
+    const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     const toggleTheme = () => {
         if (currentTheme === 'light') return dispatch(themeDark());
@@ -178,13 +182,21 @@ const Home = () => {
                 <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="h4">A Section Title</Typography>
                     <TitleDecoration style={{ marginBottom: '20px' }} />
-                    <Button onClick={() => setReportModalOpen(true)} fullWidth>
+                    <Button onClick={() => setIsReportModalOpen(true)} fullWidth>
                         Report Modal
                     </Button>
                     <Button
                         style={{ margin: '2rem 0' }}
+                        color="secondary"
+                        onClick={() => setIsImageModalOpen(true)}
+                        fullWidth
+                    >
+                        Image Modal
+                    </Button>
+                    <Button
+                        style={{ marginBottom: '2rem' }}
                         color="danger"
-                        onClick={() => setConfirmationModalOpen(true)}
+                        onClick={() => setIsConfirmationModalOpen(true)}
                         fullWidth
                     >
                         Confirmation Modal
@@ -203,9 +215,11 @@ const Home = () => {
                 </Grid>
             </Grid>
 
-            <ReportItemModal open={reportModalOpen} onClose={() => setReportModalOpen(false)} />
+            <ReportItemModal open={isReportModalOpen} onClose={() => setIsReportModalOpen(false)} />
 
-            <ConfirmationModal open={confirmationModalOpen} onClose={() => setConfirmationModalOpen(false)} />
+            <ConfirmationModal open={isConfirmationModalOpen} onClose={() => setIsConfirmationModalOpen(false)} />
+
+            <ImageModal imageUrl={imageToOpen} open={IsImageModalOpen} onClose={() => setIsImageModalOpen(false)} />
 
             <Grid spacing={4} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={12}>
