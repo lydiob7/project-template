@@ -43,6 +43,7 @@ const ToggableSelect = ({
     addOption = () => {},
     label,
     multiple = true,
+    name,
     options = [],
     onSubmit = () => {},
     placeholder = '',
@@ -78,7 +79,7 @@ const ToggableSelect = ({
         skillsToAdd.forEach((skill) => {
             if (skill) addOption(skill);
         });
-        onSubmit(editedValues);
+        onSubmit({ [name]: editedValues });
         setEdit(false);
     };
 

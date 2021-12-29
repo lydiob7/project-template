@@ -111,7 +111,7 @@ const ToggablePicker = ({
                             <Button
                                 className={classes.seeResumeButton}
                                 variant="outlined"
-                                color="secondary"
+                                color="primary"
                                 onClick={() => setResumeOpen(true)}
                             >
                                 See file

@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // Layouts
 import Footer from 'components/common/footer/Footer';
 import ScrollTopBtn from 'components/common/ScrollTopBtn';
+import ToastMessage from 'components/common/ToastMessage';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +23,7 @@ const NoLayout = ({ children, footer, scrollBtn }) => {
             {children}
             {showBtn && <ScrollTopBtn />}
             {showFooter && <Footer />}
+            <ToastMessage />
         </div>
     );
 };

@@ -60,17 +60,21 @@ const useStyles = makeStyles((theme) => ({
 const SimpleCard = ({ title, btnText, icon, href }) => {
     const classes = useStyles();
 
+    let Wrapper = ({ children }) => <div>{children}</div>;
+
+    if (href) Wrapper = Link;
+
     return (
         <figure className={classes.root}>
             <figcaption>
-                <Link to={href}>
+                <Wrapper to={href}>
                     <div className={classes.icon}>{icon}</div>
 
                     <Typography className={classes.title} variant="body1">
                         {title}
                     </Typography>
                     {btnText && <div className={classes.btn}>{btnText}</div>}
-                </Link>
+                </Wrapper>
             </figcaption>
         </figure>
     );

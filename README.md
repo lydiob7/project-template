@@ -1,6 +1,6 @@
 # Smart Studios UI
 
-Current version: v0.4.0
+Current version: v0.5.0
 
 ## About
 
@@ -30,7 +30,7 @@ The file _src/config/navigationConfig.js_ contains an object with the names and 
 
 ### Theme
 
-The theme provider is in _src/components/theme.js_. It wraps all the App and applies the default theme for Material UI + the customization made on _src/components/theme/theme.js_. By default the theme color scheme is light but it can be toggled to dark on the ui slice of the redux store.
+The theme provider is in _src/components/theme.js_. It wraps all the App and applies the default theme for Material UI + the customization made on _src/components/theme/theme.js_. By default the theme color scheme is the same as the user preferred color scheme but it can be toggled on the ui slice of the redux store. If you want to remove the user scheme check it can be done on _src/components/themeProvider.js_.
 
 # UI Components
 
@@ -56,13 +56,13 @@ This component is built over a Route component from react-router-dom, it adds a 
 | **Name**       | **Type**       | **Default** | **Description**                                                                                                                                                                                             |
 | -------------- | -------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | component\*    | ReactComponent | -           | A React Component to be rendered when the location match the path (see react-router-dom documentation)                                                                                                      |
-| layout         | boolean        | true        | You can manage the default layout on _src/layouts/LayoutDefault.js_ and the simplest layout on _src/layouts/NoLayout.js_. By default the _NoLayout.js_ file contains the footer and the ScrollTopBtn anyway |
-| privateRoute   | boolean        | false       | If you want to make this route private turn this property to true, it will check the authentication from the auth slice of the store                                                                        |
-| redirectRoute  | uri            | '/'         | Pass down a custom page path to redirect on a private route                                                                                                                                                 |
 | footer         | boolean        | -           | You can disable the footer for the main layout here for each individual route                                                                                                                               |
-| scrollBtn      | boolean        | -           | You can disable the scroll to top button for the main layout here for each individual route                                                                                                                 |
+| layout         | boolean        | true        | You can manage the default layout on _src/layouts/LayoutDefault.js_ and the simplest layout on _src/layouts/NoLayout.js_. By default the _NoLayout.js_ file contains the footer and the ScrollTopBtn anyway |
 | noLayoutFooter | boolean        | -           | You can enable the footer for the simple layout here (when layout=false) for each individual route                                                                                                          |
 | noLayoutBtn    | boolean        | -           | You can enable the scroll to top button for the simple layout here (when layout=false) for each individual route                                                                                            |
+| privateRoute   | boolean        | false       | If you want to make this route private turn this property to true, it will check the authentication from the auth slice of the store                                                                        |
+| redirectRoute  | uri            | '/'         | Pass down a custom page path to redirect on a private route                                                                                                                                                 |
+| scrollBtn      | boolean        | -           | You can disable the scroll to top button for the main layout here for each individual route                                                                                                                 |
 
 ### AuthCard
 
@@ -106,8 +106,6 @@ This is a component that takes de user information from the user slice of the re
 
 ### AuthUserSmallCard
 
-<!-- TODO -->
-
 This is a component that takes de user information from the user slice of the redux store and displays the profile picture, name and email in a compact fashion. You can choose an action to trigger on click (thought to be used as a dropdown menu button)
 
 ```
@@ -128,9 +126,9 @@ This component shows the title of the page with an icon on top, a description an
 <Breadcrumb
     currentPgIcon={<Icon />}
     currentPgTitle="Current page title"
-    parentPgTitle="Parent page"
-    parentPgLink="/parent-page"
     divider="/"
+    parentPgLink="/parent-page"
+    parentPgTitle="Parent page"
 >
     <div>
         Some children
@@ -140,12 +138,12 @@ This component shows the title of the page with an icon on top, a description an
 
 | **Name**       | **Type**                      | **Default** | **Description**                                            |
 | -------------- | ----------------------------- | ----------- | ---------------------------------------------------------- |
+| children       | ReactComponent \| HTMLElement | -           | React components or HTML Element to show after the heading |
 | currentPgIcon  | svgIcon                       | -           | An icon to show at the top of the header                   |
 | currentPgTitle | string                        | -           | Name of the current page                                   |
-| parentPgTitle  | string                        | -           | Name of the parent section                                 |
-| parentPgLink   | url                           | -           | Link to the parent section                                 |
 | divider        | string                        | '-'         | Symbol to use to separate breadcrumb elements              |
-| children       | ReactComponent \| HTMLElement | -           | React components or HTML Element to show after the heading |
+| parentPgLink   | url                           | -           | Link to the parent section                                 |
+| parentPgTitle  | string                        | -           | Name of the parent section                                 |
 
 ### Button
 
@@ -167,29 +165,29 @@ This is a widget that shows a list of checkboxes with a label and some aditional
 
 ```
 <CheckboxWidget
-    title="Widget 1"
     items={[
         {text: 'checkbox1', active: true, number: 3},
         {text: 'checkbox2', active: false, number: 1},
         {text: 'checkbox3', active: false}
     ]}
     onChange={(ev) => console.log(ev.target.value)}
+    title="Widget 1"
 />
 ```
 
 | **Name** | **Type**       | **Default** | **Description**                                  |
 | -------- | -------------- | ----------- | ------------------------------------------------ |
 | items    | CheckboxItem[] | -           | Main array of items to show as checkbox          |
-| title    | string         | -           | Main title of the widget                         |
 | onChange | function       | -           | Pass down the function to run on checkbox change |
+| title    | string         | -           | Main title of the widget                         |
 
 **CheckboxItem**
 
 | **Name** | **Type** | **Default** | **Description**                                                   |
 | -------- | -------- | ----------- | ----------------------------------------------------------------- |
-| text     | string   | -           | Label to show next to the checkbox                                |
-| number   | number   | -           | You can show a small round label on the right to show quantities. |
 | active   | boolean  | false       | Wether the checkbox is active or not by default.                  |
+| number   | number   | -           | You can show a small round label on the right to show quantities. |
+| text     | string   | -           | Label to show next to the checkbox                                |
 
 ### ConfirmationModal
 
@@ -200,9 +198,9 @@ Modal component for any kind of confirmation
     actionButtonText="Remove"
     confirmationType="deletion",
     message="Do you want to delete this?",
-    open={false},
     onClose={() => setModal(false)},
     onSubmit={() => console.log('done')},
+    open={false},
 />
 ```
 
@@ -211,9 +209,9 @@ Modal component for any kind of confirmation
 | actionButtonText | string                | 'Delete'                                                 | This is the text that will be rendered inside the confirmation button.    |
 | confirmationType | 'delete' \| 'confirm' | 'delete'                                                 | This string will be shown on the modal title 'Confirm {confirmationType}' |
 | message          | string                | 'Are you sure you want to delete permanently this item?' | Write a small question type text to show as content in the modal          |
-| open             | boolean               | false                                                    | -                                                                         |
 | onClose          | function              | -                                                        | Handle the modal closure from here.                                       |
 | onSubmit         | function              | -                                                        | Indicate what you want to do after confirmation.                          |
+| open             | boolean               | false                                                    | -                                                                         |
 
 ### ContentCard
 
@@ -244,8 +242,8 @@ This is the copyright claim, it contains a copyright symbol, the name of the rig
 <Copyright
     rightsOwner="Smart Studios"
     rightsOwnerWebsite="https://smartstudios.io/"
-    year="2021"
     versin="1.0.0"
+    year="2021"
 />
 ```
 
@@ -253,8 +251,8 @@ This is the copyright claim, it contains a copyright symbol, the name of the rig
 | ------------------ | ---------------- | -------------- | --------------------------------- |
 | rightsOwner        | string           | -              | App Owner's name                  |
 | rightsOwnerWebsite | url              | -              | Url for the App Owner's website   |
-| year               | string \| number | (Current year) | Last year of the copyrights claim |
 | version            | string           | -              | App version                       |
+| year               | string \| number | (Current year) | Last year of the copyrights claim |
 
 ### CopyrightMenu
 
@@ -351,14 +349,14 @@ This component displays a rectangle card with an image on top, a title, descript
 ```
 <ItemCard
     item={{
+        abstract: "This is a description"
         id: 1
-        logo: 'images/logo.svg'
         categories: [{
             logo: <Icon />
             title: "Category 1"
         }]
+        logo: 'images/logo.svg'
         title: "Item 1"
-        abstract: "This is a description"
         url: "https://some-address.com/"
     }}
 />
@@ -372,11 +370,11 @@ This component displays a rectangle card with an image on top, a title, descript
 
 | **Name**   | **Type**         | **Default** | **Description**                                |
 | ---------- | ---------------- | ----------- | ---------------------------------------------- |
+| abstract   | string           | -           | Small description for the item                 |
+| categories | Category[]       | -           | List of categories to show on top of the title |
 | id         | string \| number | -           | Object id to recreate path                     |
 | logo       | imgUrl           | -           | Image to display on the header of the card     |
-| categories | Category[]       | -           | List of categories to show on top of the title |
 | title      | string           | -           | Main title of the item                         |
-| abstract   | string           | -           | Small description for the item                 |
 | url        | url              | -           | External url to link in the bottom button      |
 
 **Category**
@@ -393,14 +391,14 @@ This component displays a horizontal rectangle with an image on the left, a titl
 ```
 <ItemHorizontal
     item={{
+        abstract: "This is a description"
         id: 1
-        logo: 'images/logo.svg'
         categories: [{
             logo: <Icon />
             title: "Category 1"
         }]
+        logo: 'images/logo.svg'
         title: "Item 1"
-        abstract: "This is a description"
         url: "https://some-address.com/"
     }}
 />
@@ -414,11 +412,11 @@ This component displays a horizontal rectangle with an image on the left, a titl
 
 | **Name**   | **Type**         | **Default** | **Description**                                |
 | ---------- | ---------------- | ----------- | ---------------------------------------------- |
+| abstract   | string           | -           | Small description for the item                 |
+| categories | Category[]       | -           | List of categories to show on top of the title |
 | id         | string \| number | -           | Object id to recreate path                     |
 | logo       | imgUrl           | -           | Image to display on the header of the card     |
-| categories | Category[]       | -           | List of categories to show on top of the title |
 | title      | string           | -           | Main title of the item                         |
-| abstract   | string           | -           | Small description for the item                 |
 | url        | url              | -           | External url to link in the bottom button      |
 
 **Category**
@@ -488,31 +486,31 @@ This is a page header with title, description, a category and two buttons
 
 ```
 <PageHeader
+    abstract="Small description"
    categories={[
        {
            title: 'Category 1'
        }
    ]}
-    title="Page 1"
-    abstract="Small description"
-    websiteURL="https://some-url.com/"
     primaryBtn={false}
     primaryBtnText='Primary button'
     secondaryBtn={false}
     secondaryBtnText='Secondary button'
+    title="Page 1"
+    websiteURL="https://some-url.com/"
 />
 ```
 
 | **Name**         | **Type**   | **Default**     | **Description**                            |
 | ---------------- | ---------- | --------------- | ------------------------------------------ |
-| categories       | Category[] | -               | List of categories to show above the title |
-| title            | string     | -               | Page title                                 |
 | abstract         | string     | -               | Small description to show below the title  |
-| websiteURL       | string     | -               | Main external link for the primary button  |
+| categories       | Category[] | -               | List of categories to show above the title |
 | primaryBtn       | boolean    | true            | Indicate false to hide primary button      |
 | primaryBtnText   | string     | 'Visit Website' | Primary button text                        |
 | secondaryBtn     | boolean    | true            | Indicate false to hide secondary button    |
 | secondaryBtnText | string     | 'Report'        | Secondary button text                      |
+| title            | string     | -               | Page title                                 |
+| websiteURL       | string     | -               | Main external link for the primary button  |
 
 **Category**
 
@@ -526,23 +524,23 @@ This component is a horizontal bar to be displayed on top of a results list. It 
 
 ```
 <ResultsHeader
+    onGridViewClick={function}
+    onListViewClick={function}
     pagination={{
         firstIndex: number,
         lastIndex: number,
         totalResults: number
     }}
     viewMode={viewMode: 'list' | 'grid'}
-    onGridViewClick={function}
-    onListViewClick={function}
 />
 ```
 
 | **Name**        | **Type**         | **Default** | **Description**                                    |
 | --------------- | ---------------- | ----------- | -------------------------------------------------- |
-| pagination      | Pagination       | -           | Number of items, first and last index being shown  |
-| viewMode        | 'list' \| 'grid' | 'list'      | Current view mode                                  |
 | onGridViewClick | function         | -           | Method to handle the 'on click' of the grid button |
 | onListViewClick | function         | -           | Method to handle the 'on click' of the list button |
+| pagination      | Pagination       | -           | Number of items, first and last index being shown  |
+| viewMode        | 'list' \| 'grid' | 'list'      | Current view mode                                  |
 
 **Pagination**
 
@@ -566,23 +564,23 @@ This component is a custom search bar.
 
 ```
 <SearchInput
-    placeholder="What are you looking for?"
     onChange={() => doSomething()}
     onSubmit={() => doSomethingElse()}
-    searchIcon={false}
+    placeholder="What are you looking for?"
     searchBtn={true}
     searchBtnText="Submit"
+    searchIcon={false}
 />
 ```
 
 | **Name**      | **Type**          | **Default** | **Description**                                                                                              |
 | ------------- | ----------------- | ----------- | ------------------------------------------------------------------------------------------------------------ |
-| placeholder   | string \| boolean | 'Search...' | Text to be displayed inside the search input. You can also disable the placeholder by passing down a _false_ |
 | onChange      | function          | -           | Method to apply on input change                                                                              |
 | onSubmit      | function          | -           | Method to apply on form submit                                                                               |
-| searchIcon    | boolean           | true        | Indicate false to disable the Looking glass icon inside the input area                                       |
+| placeholder   | string \| boolean | 'Search...' | Text to be displayed inside the search input. You can also disable the placeholder by passing down a _false_ |
 | searchBtn     | boolean           | true        | Indicate false to hide the submit button (it can still be submitted on enter)                                |
 | searchBtnText | string            | 'Search'    | Text to show on the submit button                                                                            |
+| searchIcon    | boolean           | true        | Indicate false to disable the Looking glass icon inside the input area                                       |
 
 ### SignupForm
 
@@ -604,21 +602,21 @@ This is a simple square card that displays an icon, a title and a button. The wh
 
 ```
 <SimpleCard
-    title="Item"
     btnText="Learn more"
-    img="/images/background.jpg"
-    icon={<Icon />}
     href="/some-path"
+    icon={<Icon />}
+    img="/images/background.jpg"
+    title="Item"
 />
 ```
 
 | **Name** | **Type** | **Default** | **Description**                             |
 | -------- | -------- | ----------- | ------------------------------------------- |
-| title    | string   | -           | Title for the card                          |
 | btnText  | string   | -           | Text to be displayed inside the card button |
-| img      | imgUrl   | -           | Path to the img on the background           |
-| icon     | svgIcon  | -           | Icon to be displayed on top of the name     |
 | href     | uri      | -           | Path to some internal page                  |
+| icon     | svgIcon  | -           | Icon to be displayed on top of the name     |
+| img      | imgUrl   | -           | Path to the img on the background           |
+| title    | string   | -           | Title for the card                          |
 
 ### SmallCard
 
@@ -627,9 +625,9 @@ This is a small card only showing an icon and a title.
 ```
 <SmallCard
     item={{
-        url: "/some-path"
         icon: <Icon />
         title: "Item"
+        url: "/some-path"
     }}
 />
 ```
@@ -642,9 +640,9 @@ This is a small card only showing an icon and a title.
 
 | **Name** | **Type** | **Default** | **Description**                         |
 | -------- | -------- | ----------- | --------------------------------------- |
-| url      | uri      | -           | Path to some internal page              |
 | icon     | svgIcon  | -           | Icon to be displayed on top of the name |
 | title    | string   | -           | Title for the card                      |
+| url      | uri      | -           | Path to some internal page              |
 
 ### SocialProfile
 
@@ -678,25 +676,25 @@ This is a simple Widget that renders a tag cloud.
 
 ```
 <TagsWidget
-    title="Widget title"
     tagList=[
         { url: 'https://www.something.com/', text: 'Tag1' },
         { url: 'https://www.something.com/', text: 'Tag2' }
     ]
+    title="Widget title"
 />
 ```
 
 | **Name** | **Type** | **Default** | **Description**                     |
 | -------- | -------- | ----------- | ----------------------------------- |
-| title    | string   | -           | Title to be displayed on the Widget |
 | tagList  | Tag[]    | -           | List of tags to be displayed        |
+| title    | string   | -           | Title to be displayed on the Widget |
 
 **Tag**
 
 | **Name** | **Type** | **Default** | **Description**                   |
 | -------- | -------- | ----------- | --------------------------------- |
-| url      | string   | -           | Url to be redirected on tag click |
 | text     | string   | -           | Tag text content                  |
+| url      | string   | -           | Url to be redirected on tag click |
 
 ### Title
 
@@ -705,22 +703,22 @@ This is a simple component with a title and subtitle for any page or section hea
 ```
 <Title
     className="title"
-    title={string}
     size="small"
     style={{margin: '0 auto'}}
     subtitle={string}
     subtitleSize="large"
+    title={string}
 />
 ```
 
 | **Name**     | **Type**           | **Default** | **Description**                                           |
 | ------------ | ------------------ | ----------- | --------------------------------------------------------- |
 | className    | string             | -           | Class name to be passed down to external div              |
-| title        | string             | -           | Section/Page title                                        |
 | size         | 'small' \| 'large' | 'large'     | Size for title typography component                       |
 | style        | object             | -           | Any compatible style object to be applied to external div |
 | subtitle     | string             | -           | Section/Page description                                  |
 | subtitleSize | 'large' \| 'small' | 'small'     | Size for subtitle typography component                    |
+| title        | string             | -           | Section/Page title                                        |
 
 ### TitleDecoration
 
@@ -735,6 +733,17 @@ This is a simple component for a title underline decoration
 | **Name**  | **Type** | **Default** | **Description**                                 |
 | --------- | -------- | ----------- | ----------------------------------------------- |
 | className | string   | -           | This will be passed down to the wrapper element |
+
+### ToastMessage
+
+This component is mounted by default on the LayoutDefault and NoLayout Components and displays a message passed down from the messageSlice of the redux store. To trigger a message dispatch a _showMessage()_ action and give it as payload an object with a _message_ and a _variant (optional)_ properties. Eg: _dispatch(showMessage({message: 'My message', variant: 'info'}))_
+
+```
+<ToastMessage />
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
 
 ### ToggableArrayInput
 
@@ -783,6 +792,7 @@ This is a form component that accepts an array value and display it on different
 <ToggableAutocomplete
     addOption={(value) => pushToDatabase(value)}
     label="Label"
+    name="autocomplete-input"
     options=[
         { title: 'First Option' },
         { title: 'Second Option' }
@@ -801,7 +811,7 @@ This is a form component that accepts an array value and display it on different
 | -------------- | -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | addOption      | function             | -           | Function to trigger for adding new options.                                                                                             |
 | label          | string               | -           | Label to be rendered on top of the TextField or value.                                                                                  |
-| name           | string               | -           | Name to control the field                                                                                                               |
+| name \*        | string               | -           | Name to control the field                                                                                                               |
 | options        | Option[]             | -           | Array of options to show in the select.                                                                                                 |
 | onSubmit       | function             | -           | You can customize the function that will be triggered on submit.                                                                        |
 | placeholder    | string               | -           | Placeholder to be rendered inside the Autocomplete component                                                                            |
@@ -995,29 +1005,29 @@ Contains a navigation bar and the Logo (name and logo are supplied by the store 
 
 ```
 <ItemsList
-    viewMode='grid'
     items={[
         {
-            id: 1
-            logo: 'images/logo.svg'
+            abstract: "This is a description"
             categories: [{
                 logo: <Icon />
                 title: "Category 1"
             }]
+            id: 1
+            logo: 'images/logo.svg'
             title: "Item 1"
-            abstract: "This is a description"
             url: "https://some-address.com/"
         }
     ]}
+    viewMode='grid'
 />
 ```
 
 | **Name** | **Type**         | **Default** | **Description**               |
 | -------- | ---------------- | ----------- | ----------------------------- |
-| viewMode | 'list' \| 'grid' | 'list'      | Current view mode             |
 | items    | string           | -           | List of items to be displayed |
+| viewMode | 'list' \| 'grid' | 'list'      | Current view mode             |
 
-Item (see Item params on ItemHorizontal above)
+**Item** (see Item params on ItemHorizontal above)
 
 ### LayoutDefault
 
@@ -1061,14 +1071,14 @@ Contains a collapsable menu with the App title (content is supplied from the mai
     appTitle="Smart Studios UI"
     menuItems={[
         {
-            title: 'Section 1'
-            path: '/section1'
             dropdown: [
                 {
                     title: 'Sub Section 1',
                     path: '/section1/subsection1'
                 }
-            ]
+            ],
+            path: '/section1',
+            title: 'Section 1'
         }
     ]}
 />
@@ -1083,16 +1093,16 @@ Contains a collapsable menu with the App title (content is supplied from the mai
 
 | **Name** | **Type**  | **Default** | **Description**            |
 | -------- | --------- | ----------- | -------------------------- |
-| title    | string    | -           | Link name                  |
-| path     | uri       | -           | Path to some internal page |
 | dropdown | Submenu[] | -           | List of submenus           |
+| path     | uri       | -           | Path to some internal page |
+| title    | string    | -           | Link name                  |
 
 **Submenu**
 
 | **Name** | **Type** | **Default** | **Description**            |
 | -------- | -------- | ----------- | -------------------------- |
-| title    | string   | -           | Link name                  |
 | path     | uri      | -           | Path to some internal page |
+| title    | string   | -           | Link name                  |
 
 ### NoLayout
 
@@ -1142,6 +1152,10 @@ This is the reducer slice responsible for injecting all the text in the app. It 
 
 This reducer manages the authentication status and user data.
 
+### Messages Reducer
+
+This reducer manages the status messages and their content. To trigger a message dispatch a _showMessage()_ action and give it as payload an object with a _message_ and a _variant (optional)_ properties. Eg: _dispatch(showMessage({message: 'My message', variant: 'info'}))_
+
 ### Custom Reducers
 
 On the entities file you can add as many reducers as you need. There is a _customReducer.js_ file as an example.
@@ -1157,12 +1171,12 @@ Example:
 dispatch(
     apiCallBegan({
         apiId: 'main' | 'secondary' | 'default',
-        url: string,
-        method: 'post' | 'get' | 'put' | 'patch' | 'delete',
         data: any,
+        method: 'post' | 'get' | 'put' | 'patch' | 'delete',
+        onError: reduxAction,
         onStart: reduxAction,
         onSuccess: reduxAction,
-        onError: reduxAction
+        url: string
     })
 );
 ```

@@ -101,10 +101,20 @@ export default function Navbar({ appTitle = '', menuItems = [] }) {
             <List className={classes.drawerList}>
                 {menuItems?.map((item, index) => (
                     <div key={`${item.path}${index}`}>
-                        <ListItem className={classes.listItem} button onClick={() => setNavOpen(false)}>
-                            <Link to={item.path}>
-                                <ListItemText primary={item.title} />
-                            </Link>
+                        <ListItem
+                            className={classes.listItem}
+                            button
+                            onClick={() => (item.path ? setNavOpen(false) : null)}
+                        >
+                            {item.path ? (
+                                <Link to={item.path}>
+                                    <ListItemText primary={item.title} />
+                                </Link>
+                            ) : (
+                                <div>
+                                    <ListItemText primary={item.title} />
+                                </div>
+                            )}
                         </ListItem>
                         {item.dropdown && (
                             <List>

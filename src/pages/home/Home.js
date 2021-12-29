@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { themeDark, themeLight, mantainanceModeEnabled, mantainanceModeDisabled } from 'store/ui';
+import { showMessage } from 'store/messageSlice';
 
 import { AccessAlarm } from '@material-ui/icons';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Switch from '@material-ui/core/Switch';
 
 import AuthCard from 'components/cards/AuthCard';
 import AuthUserCard from 'components/cards/AuthUserCard';
@@ -28,6 +29,7 @@ import SearchInput from 'components/forms/SearchInput';
 import SignupForm from 'components/forms/SignupForm';
 import SimpleCard from 'components/cards/SimpleCard';
 import SmallCard from 'components/cards/SmallCard';
+import Switch from 'components/common/Switch';
 import TagsWidget from 'components/widgets/TagsWidget';
 import Title from 'components/headings/Title';
 import TitleDecoration from 'components/headings/TitleDecoration';
@@ -79,8 +81,7 @@ const inputFields = (setFormValues) => [
         placeholder: 'Add more options',
         required: true,
         requiredLength: 1,
-        type: 'chip',
-        value: [{ title: 'First Option' }]
+        type: 'chip'
     },
     {
         Component: ToggableInput,
@@ -142,6 +143,22 @@ const Home = () => {
         'multiple-select': []
     });
 
+    useEffect(() => {
+        dispatch(showMessage({ message: 'Normal Message' }));
+        setTimeout(() => {
+            dispatch(showMessage({ message: 'Success Message', variant: 'success' }));
+        }, 2200);
+        setTimeout(() => {
+            dispatch(showMessage({ message: 'Info Message', variant: 'info' }));
+        }, 4200);
+        setTimeout(() => {
+            dispatch(showMessage({ message: 'Warning Message', variant: 'warning' }));
+        }, 6200);
+        setTimeout(() => {
+            dispatch(showMessage({ message: 'Error Message', variant: 'error' }));
+        }, 8200);
+    }, [dispatch]);
+
     const toggleTheme = () => {
         if (currentTheme === 'light') return dispatch(themeDark());
         dispatch(themeLight());
@@ -161,13 +178,19 @@ const Home = () => {
                 subtitle="These are all the components available on this library."
                 subtitleSize="large"
             />
+            <Typography variant="body1" style={{ textAlign: 'center', margin: '1rem 0' }}>
+                For documentation go to{' '}
+                <a href="https://bitbucket.org/smartstudios/smartstudiosui/src/main/" target="_blank" rel="noreferrer">
+                    https://bitbucket.org/smartstudios/smartstudiosui/src/main/
+                </a>
+            </Typography>
             <Title
                 title="Smaller title"
                 size="small"
                 subtitle="This is a slightly smaller description than the one before."
             />
-            <Typography variant="body1">Theme mode (work in progress)</Typography>
-            <Switch defaultChecked={currentTheme === 'dark'} onClick={toggleTheme} />
+            <Typography variant="body1">Dark mode</Typography>
+            <Switch checked={currentTheme === 'dark'} onClick={toggleTheme} />
             <Typography variant="body1">
                 Mantainance mode (this will be automatically turned off after 5 seconds, it can be turned on/off from a
                 backend)
@@ -280,8 +303,10 @@ const Home = () => {
                 </Grid>
                 <Grid item xs={10} md={4}>
                     <LoginForm />
-                    <AuthUserCard items={[{ title: 'Profile', path: '/' }]} />
-                    <AuthUserSmallCard onClick={() => setIsImageModalOpen(true)} />
+                    <Paper style={{ padding: '1rem 2rem', marginTop: '2rem' }}>
+                        <AuthUserCard items={[{ title: 'Profile', path: '/' }]} />
+                        <AuthUserSmallCard onClick={() => setIsImageModalOpen(true)} />
+                    </Paper>
                 </Grid>
                 <Grid item xs={10} md={4}>
                     <SignupForm />
