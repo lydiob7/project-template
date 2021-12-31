@@ -17,6 +17,7 @@ import Button from 'components/common/Button';
 import CheckboxWidget from 'components/widgets/CheckboxWidget';
 import ConfirmationModal from 'components/modals/ConfirmationModal';
 import ContentCard from 'components/cards/ContentCard';
+import Form from 'components/forms/Form';
 import FormCard from 'components/cards/FormCard';
 import ImageModal from 'components/modals/ImageModal';
 import ItemCard from 'components/cards/ItemCard';
@@ -334,7 +335,9 @@ const Home = () => {
             </Grid>
 
             <Grid spacing={2} container style={{ marginTop: '60px' }} justifyContent="center">
-                <Grid item xs={10} md={6}></Grid>
+                <Grid item xs={10} md={6}>
+                    <Form values={{}} />
+                </Grid>
                 <Grid item xs={10} md={6}></Grid>
             </Grid>
         </Container>

@@ -5,14 +5,14 @@ import FormControl from '@material-ui/core/FormControl';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     field: (props) => ({
         marginBottom: '16px',
-        paddingLeft: '16px',
+        padding: '0 16px',
         border: props.value ? 'none' : `1px solid ${theme.palette.error.main}`
     }),
     flexBetween: {
@@ -30,11 +30,6 @@ const useStyles = makeStyles((theme) => ({
     },
     requiredSymbol: {
         color: theme.palette.error.main
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 200
     }
 }));
 
@@ -106,7 +101,7 @@ const ToggableInput = ({
     };
 
     return (
-        <div style={style} className={classes.field}>
+        <div style={style} className={classes.field} onClick={() => setEdit(true)}>
             <form
                 onSubmit={handleSubmit((values) => {
                     onSubmit(values);
@@ -121,10 +116,15 @@ const ToggableInput = ({
                     <div>
                         {edit && (
                             <IconButton type="submit">
-                                <SaveAltIcon style={{ fontSize: '1rem', margin: '0 4px' }} color="action" />
+                                <SaveOutlinedIcon style={{ fontSize: '1.3rem', margin: '0 4px' }} color="primary" />
                             </IconButton>
                         )}
-                        <IconButton onClick={() => setEdit(!edit)}>
+                        <IconButton
+                            onClick={(ev) => {
+                                ev.stopPropagation();
+                                setEdit(!edit);
+                            }}
+                        >
                             <Icon style={{ fontSize: '1rem', margin: '0 4px' }} color="action">
                                 {edit ? 'close' : 'edit'}
                             </Icon>
@@ -139,12 +139,11 @@ const ToggableInput = ({
                             render={({ field }) => (
                                 <TextField
                                     {...field}
+                                    autoFocus
                                     type={type === 'date' ? 'date' : 'text'}
-                                    className={classes.textField}
                                     InputLabelProps={InputLabelProps}
                                     multiline={multiline}
                                     placeholder={placeholder}
-                                    style={{ width: '100%' }}
                                     InputProps={{
                                         startAdornment: adornment ? (
                                             <InputAdornment position="start">{adornment}</InputAdornment>

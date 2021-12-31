@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import ImageModal from 'components/modals/ImageModal';
+import ConfirmationModal from 'components/modals/ConfirmationModal';
 
 const useStyles = makeStyles((theme) => ({
     actionButtonsWrapper: {
@@ -80,6 +81,7 @@ const ToggablePicker = ({
         // eslint-disable-next-line
         value: required && !value ? false : true
     });
+    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resumeOpen, setResumeOpen] = useState(false);
 
@@ -119,7 +121,7 @@ const ToggablePicker = ({
                         )}
 
                         {onRemoveFile && value && !loading && (
-                            <IconButton onClick={onRemoveFile}>
+                            <IconButton onClick={() => setIsConfirmationModalOpen(true)}>
                                 <Icon className={classes.deleteResumeButton}>delete_outline</Icon>
                             </IconButton>
                         )}
@@ -141,6 +143,12 @@ const ToggablePicker = ({
             </div>
 
             <ImageModal imageUrl={value} open={resumeOpen} onClose={() => setResumeOpen(false)} />
+
+            <ConfirmationModal
+                open={isConfirmationModalOpen}
+                onClose={() => setIsConfirmationModalOpen(false)}
+                onSubmit={onRemoveFile}
+            />
         </div>
     );
 };

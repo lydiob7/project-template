@@ -4,7 +4,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Chip from '@material-ui/core/Chip';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
-import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
     field: (props) => ({
         marginBottom: '16px',
-        paddingLeft: '16px',
+        padding: '0 16px',
         border: props.value ? 'none' : `1px solid ${theme.palette.error.main}`
     }),
     flexBetween: {
@@ -113,7 +113,7 @@ const ToggableSelect = ({
     };
 
     return (
-        <div style={style} className={classes.field}>
+        <div style={style} className={classes.field} onClick={() => setEdit(true)}>
             <form onSubmit={handleSubmit}>
                 <div className={classes.flexBetween}>
                     <Typography className={classes.label}>
@@ -123,10 +123,15 @@ const ToggableSelect = ({
                     <div>
                         {edit && (
                             <IconButton type="submit">
-                                <SaveAltIcon style={{ fontSize: '1rem', margin: '0 4px' }} color="action" />
+                                <SaveOutlinedIcon style={{ fontSize: '1.3rem', margin: '0 4px' }} color="primary" />
                             </IconButton>
                         )}
-                        <IconButton onClick={() => setEdit(!edit)}>
+                        <IconButton
+                            onClick={(ev) => {
+                                ev.stopPropagation();
+                                setEdit(!edit);
+                            }}
+                        >
                             <Icon style={{ fontSize: '1rem', margin: '0 4px' }} color="action">
                                 {edit ? 'close' : 'edit'}
                             </Icon>
@@ -148,7 +153,10 @@ const ToggableSelect = ({
                                 <Chip variant="outlined" label={option?.title} {...getTagProps({ index })} />
                             ))
                         }
-                        renderInput={(params) => <TextField {...params} variant="standard" placeholder={placeholder} />}
+                        renderInput={(params) => (
+                            <TextField {...params} autoFocus variant="standard" placeholder={placeholder} />
+                        )}
+                        style={{ margin: '8px 0 16px 0' }}
                         value={editedValues}
                     />
                 ) : Array.isArray(editedValues) ? (
