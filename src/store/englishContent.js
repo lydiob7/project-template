@@ -5,7 +5,20 @@ const englishContent = {
         creator: 'Smart Studios',
         creatorWebsite: 'https://smartstudios.io/'
     },
-    content: {},
+    content: {
+        authPage: {
+            title: 'Auth page',
+            description: 'This is the Auth page'
+        },
+        privacyPolicy: {
+            title: 'Privacy Policy',
+            content: 'This is where the privacy policy will be displayed'
+        },
+        termsAndConditions: {
+            title: 'Terms and conditions',
+            content: 'This is where the terms and conditions will be displayed'
+        }
+    },
     footerdata: {
         sociallinks: [
             {

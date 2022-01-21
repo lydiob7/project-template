@@ -75,10 +75,10 @@ This components wraps the Login or Signup form. It shows the app title and logo 
 />
 ```
 
-| **Name** | **Type**            | **Default** | **Description**                                            |
-| -------- | ------------------- | ----------- | ---------------------------------------------------------- |
-| form     | 'login' \| 'signup' | 'login'     | You can choose wheter to show the login or the signup form |
-| onSubmit | function            | -           | Function that will be triggered on submit                  |
+| **Name** | **Type**                            | **Default** | **Description**                                                             |
+| -------- | ----------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| form     | 'login' \| 'signup' \| 'forgot-pwd' | 'login'     | You can choose wheter to show the login, signup or the forgot password form |
+| onSubmit | function                            | -           | Function that will be triggered on submit                                   |
 
 ### AuthUserCard
 

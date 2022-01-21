@@ -7,6 +7,7 @@ import NoLayout from 'layouts/NoLayout';
 const AppRoute = ({
     component: Component,
     footer = true,
+    form,
     layout = true,
     noLayoutFooter = false,
     noLayoutBtn = false,
@@ -26,11 +27,11 @@ const AppRoute = ({
                 <>
                     {layout ? (
                         <LayoutDefault footer={footer} scrollBtn={scrollBtn}>
-                            <Component />
+                            <Component form={form} />
                         </LayoutDefault>
                     ) : (
                         <NoLayout footer={noLayoutFooter} scrollBtn={noLayoutBtn}>
-                            <Component />
+                            <Component form={form} />
                         </NoLayout>
                     )}
                 </>
