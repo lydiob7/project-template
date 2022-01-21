@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ConfirmationModal = ({
-    actionButtonText = 'Delete',
-    confirmationType = 'delete',
+    actionText = 'Delete',
+    confirmationType = 'deletion',
     message = 'Are you sure you want to delete permanently this item?',
     open,
     onClose,
@@ -88,20 +88,15 @@ const ConfirmationModal = ({
                             <Typography variant="body1">{message}</Typography>
                         </Grid>
                         <Grid container item xs={12} spacing={1}>
-                            <Grid item xs={0} sm={6}></Grid>
+                            <Grid item xs={false} sm={6}></Grid>
                             <Grid item xs={12} sm={3}>
                                 <Button fullWidth variant="outlined" className={classes.button} onClick={onClose}>
                                     Cancel
                                 </Button>
                             </Grid>
                             <Grid item xs={12} sm={3}>
-                                <Button
-                                    fullWidth
-                                    color={confirmationType === 'delete' ? 'danger' : 'primary'}
-                                    className={classes.button}
-                                    onClick={handleSubmit}
-                                >
-                                    {actionButtonText}
+                                <Button fullWidth color="danger" className={classes.button} onClick={handleSubmit}>
+                                    {actionText}
                                 </Button>
                             </Grid>
                         </Grid>
