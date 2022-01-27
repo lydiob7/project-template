@@ -4,7 +4,7 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 import AppRoute from 'utils/AppRoute';
 
 // Pages
-import Mantainance from 'pages/others/Mantainance';
+import MantainancePage from 'pages/others/MantainancePage';
 import { routes } from 'config/routesConfig';
 
 const RoutesSwitch = () => {
@@ -13,7 +13,7 @@ const RoutesSwitch = () => {
     return (
         <Switch>
             {mantainanceMode ? (
-                <Route component={Mantainance} />
+                <Route component={MantainancePage} />
             ) : (
                 routes.map(({ component, exact, path, privateRoute, redirectTo, ...rest }, index) => {
                     if (redirectTo)

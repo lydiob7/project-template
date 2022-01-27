@@ -17,7 +17,7 @@ import Button from 'components/common/Button';
 import CheckboxWidget from 'components/widgets/CheckboxWidget';
 import ConfirmationModal from 'components/modals/ConfirmationModal';
 import ContentCard from 'components/cards/ContentCard';
-import Form from 'components/forms/Form';
+// import Form from 'components/forms/Form';
 import FormCard from 'components/cards/FormCard';
 import ImageModal from 'components/modals/ImageModal';
 import ItemCard from 'components/cards/ItemCard';
@@ -35,8 +35,8 @@ import TagsWidget from 'components/widgets/TagsWidget';
 import Title from 'components/headings/Title';
 import TitleDecoration from 'components/headings/TitleDecoration';
 import ToggableArrayInput from 'components/forms/ToggableArrayInput';
-import ToggableInput from 'components/forms/ToggableInput';
 import ToggableAutocomplete from 'components/forms/ToggableAutocomplete';
+import ToggableInput from 'components/forms/ToggableInput';
 import ToggablePicker from 'components/forms/ToggablePicker';
 import ToggableSelect from 'components/forms/ToggableSelect';
 import WidgetWrapper from 'components/widgets/WidgetWrapper';
@@ -127,7 +127,7 @@ const tags = [
     { url: 'https://www.something.com/', text: 'Tag4' }
 ];
 
-const Home = () => {
+const HomePage = () => {
     const dispatch = useDispatch();
     const currentTheme = useSelector(({ ui }) => ui.theme);
 
@@ -201,10 +201,16 @@ const Home = () => {
             <SearchInput />
             <ResultsHeader style={{ margin: '20px 0' }} />
             <ResultsHeader
+                changePage={(page) => alert(`You are moving to page: ${page}`)}
                 style={{ margin: '20px 0' }}
                 pagination={{
+                    currentPage: 1,
                     firstIndex: 1,
+                    firstPage: 1,
                     lastIndex: 2,
+                    lastPage: 1,
+                    nextPage: 0,
+                    previousPage: 0,
                     totalResults: 2
                 }}
                 viewMode="list"
@@ -336,7 +342,7 @@ const Home = () => {
 
             <Grid spacing={2} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={10} md={6}>
-                    <Form values={{}} />
+                    {/* <Form values={{}} /> */}
                 </Grid>
                 <Grid item xs={10} md={6}></Grid>
             </Grid>
@@ -344,4 +350,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;

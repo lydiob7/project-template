@@ -35,7 +35,8 @@ export const theme = (color) =>
                         '&::-webkit-scrollbar-thumb': {
                             backgroundColor: 'rgba(0, 0, 0, 0.4)',
                             outline: 'none'
-                        }
+                        },
+                        scrollbarWidth: 'thin'
                     },
                     body: {
                         fontFamily: "'Barlow', sans-serif",

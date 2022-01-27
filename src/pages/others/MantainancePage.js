@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { parsePath } from 'utils/helpers';
 import { makeStyles } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Button from 'components/common/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         textAlign: 'center',
         paddingTop: '60px',
-        minHeight: '70vh',
+        minHeight: '100vh',
         '& img': {
             width: '100%'
         }
@@ -32,8 +32,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Error({ errorimg = '/images/404.svg' }) {
+function MantainancePage({ mantainanceimg = '/images/mantainance.svg' }) {
     const classes = useStyles();
+
+    const appInformation = useSelector(({ ui }) => ui.appInformation);
 
     return (
         <main className={classes.root}>
@@ -41,17 +43,17 @@ function Error({ errorimg = '/images/404.svg' }) {
                 <Grid container justifyContent="center">
                     <Grid container spacing={4} justifyContent="center" item xs={12} sm={6}>
                         <Grid item xs={12}>
-                            <img src={parsePath(errorimg)} alt="error" />
+                            <img src={parsePath(mantainanceimg)} alt="Mantainance" />
                         </Grid>
                         <Grid item xs={12}>
                             <Typography className={classes.title} variant="h3" color="textPrimary">
-                                Oops! Page not found.
+                                This site is under mantainance.
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography className={classes.content} variant="body1">
-                                The page you are looking for might have been removed, had its name changed, or is
-                                temporarily unavailable.
+                                We are making some updates to bring you the best experience. Sorry for the
+                                inconvenience, we'll be back very soon!
                                 {/* You can check out our{' '}
                                     <Link to="/faq" className="color-text">
                                         Help Center
@@ -59,9 +61,7 @@ function Error({ errorimg = '/images/404.svg' }) {
                             </Typography>
                         </Grid>
                         <Grid container justifyContent="center" item xs={12}>
-                            <Link to={parsePath()}>
-                                <Button>Back to Home</Button>
-                            </Link>
+                            <Button href={appInformation?.creatorWebsite}>Visit our Website</Button>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -70,4 +70,4 @@ function Error({ errorimg = '/images/404.svg' }) {
     );
 }
 
-export default Error;
+export default MantainancePage;

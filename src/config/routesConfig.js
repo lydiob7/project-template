@@ -1,10 +1,10 @@
 //* Import components here 👇👇
-import Mantainance from 'pages/others/Mantainance';
-import Error from 'pages/others/Error';
-import Home from 'pages/home/Home';
+import MantainancePage from 'pages/others/MantainancePage';
+import ErrorPage from 'pages/others/ErrorPage';
+import HomePage from 'pages/home/HomePage';
 import LandingPage from 'pages/others/LandingPage';
-import Profile from 'pages/account/Profile';
-import Settings from 'pages/account/Settings';
+import ProfilePage from 'pages/account/ProfilePage';
+import SettingsPage from 'pages/account/SettingsPage';
 import TermsAndConditions from 'pages/others/TermsAndConditions';
 import PrivacyPolicy from 'pages/others/PrivacyPolicy';
 
@@ -15,7 +15,7 @@ const PrivateComponent = () => <p>Private</p>;
 export const routes = [
     {
         path: parsePath('/'),
-        component: Home,
+        component: HomePage,
         exact: true
     },
     {
@@ -49,12 +49,12 @@ export const routes = [
     },
     {
         path: parsePath('/profile'),
-        component: Profile,
+        component: ProfilePage,
         exact: true
     },
     {
         path: parsePath('/settings'),
-        component: Settings,
+        component: SettingsPage,
         exact: true
     },
     {
@@ -78,11 +78,11 @@ export const routes = [
     },
     {
         path: parsePath(mantainancePath),
-        component: Mantainance,
+        component: MantainancePage,
         layout: false
     },
     {
-        component: Error,
+        component: ErrorPage,
         layout: false,
         noLayoutFooter: true,
         noLayoutBtn: true

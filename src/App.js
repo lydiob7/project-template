@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'store/configureStore';
 import { ThemeProvider } from 'components/theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { Auth } from './auth';
 
 // Routes
 import RoutesSwitch from 'utils/RoutesSwitch';
@@ -15,7 +16,9 @@ const App = () => {
             <Provider store={store}>
                 <ThemeProvider>
                     <CssBaseline>
-                        <RoutesSwitch />
+                        <Auth>
+                            <RoutesSwitch />
+                        </Auth>
                     </CssBaseline>
                 </ThemeProvider>
             </Provider>

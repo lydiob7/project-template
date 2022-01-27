@@ -14,19 +14,27 @@ import config from './firebaseServiceConfig';
 
 export class FirebaseService {
     init(success) {
-        if (Object.entries(config).length === 0 && config.constructor === Object) {
-            if (process.env.NODE_ENV === 'development') {
-                console.warn('Missing Firebase Configuration at src/services/firebaseService/firebaseServiceConfig.js');
+        try {
+            if (Object.entries(config).length === 0 && config.constructor === Object) {
+                if (process.env.NODE_ENV === 'development') {
+                    console.warn(
+                        'Missing Firebase Configuration at src/services/firebaseService/firebaseServiceConfig.js'
+                    );
+                }
+                success(false);
+                return;
             }
+
+            const app = initializeApp(config);
+            this.auth = getAuth();
+            this.db = getFirestore(app);
+            this.storage = getStorage(app);
+            success(true);
+        } catch (error) {
+            console.error(error);
             success(false);
             return;
         }
-
-        const app = initializeApp(config);
-        this.auth = getAuth();
-        this.db = getFirestore(app);
-        this.storage = getStorage(app);
-        success(true);
     }
 
     //* ==========================
