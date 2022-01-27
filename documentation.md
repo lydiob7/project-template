@@ -15,24 +15,32 @@
 - [UI Components](#ui-components)
   - [General Components](#general-components)
     - [AppRoute](#approute)
+    - [Auth](#auth)
     - [AuthCard](#authcard)
     - [AuthUserCard](#authusercard)
     - [AuthUserSmallCard](#authusersmallcard)
     - [Breadcrumb](#breadcrumb)
     - [Button](#button)
+    - [ChangePasswordTab](#changepasswordtab)
     - [CheckboxWidget](#checkboxwidget)
     - [ConfirmationModal](#confirmationmodal)
     - [ContentCard](#contentcard)
     - [Copyright](#copyright)
     - [CopyrightMenu](#copyrightmenu)
+    - [DeleteAccountTab](#deleteaccounttab)
+    - [ForgotPassword](#forgotpassword)
     - [FormCard](#formcard)
+    - [GeneralSettingsTab](#generalsettingstab)
     - [ImageModal](#imagemodal)
     - [ItemCard](#itemcard)
     - [ItemHorizontal](#itemhorizontal)
+    - [KeyInfoTab](#keyinfotab)
     - [Loader](#loader)
     - [LoginForm](#loginform)
     - [Logo](#logo)
+    - [MailConfirmPage](#mailconfirmpage)
     - [MenuButton](#menubutton)
+    - [OtherGeneralTab](#othergeneraltab)
     - [PageHeader](#pageheader)
     - [ReportItemModal](#reportitemmodal)
     - [ResultsHeader](#resultsheader)
@@ -68,6 +76,7 @@
     - [PrivacyPolicy](#privacypolicy)
     - [ProfilePage](#profilepage)
     - [SettingsPage](#settingspage)
+    - [SplashScreen](#splashscreen)
     - [TermsAndConditions](#termsandconditions)
 - [Redux Store](#redux-store)
   - [Configuration](#configuration)
@@ -135,9 +144,25 @@ import AppRoute from 'utils/AppRoute';
 | redirectRoute  | uri            | '/'         | Pass down a custom page path to redirect on a private route                                                                                                                                                 |
 | scrollBtn      | boolean        | -           | You can disable the scroll to top button for the main layout here for each individual route                                                                                                                 |
 
+### Auth
+
+This components wraps the the whole application. It provides an authentication check and displays a [Splash Screen](#splashscreen) while it's doing it.
+
+```
+import { Auth } from './auth';
+
+<Auth>
+    <RoutesSwitch />
+</Auth>
+```
+
+| **Name** | **Type**                 | **Default** | **Description**                               |
+| -------- | ------------------------ | ----------- | --------------------------------------------- |
+| children | ReactNode \| HTMLElement | -           | Pass all the routes inside of this component. |
+
 ### AuthCard
 
-This components wraps the Login or Signup form. It shows the app title and logo (from the ui slice of the store) and some text with a link to toggle within login/signup pages.
+This components wraps the Login or Signup form. It shows the app title and logo (from the ui slice of the store) and some text with a link to toggle within [login](#loginform)/[signup](#signupform)/[forgot-password](#forgotpassword) pages.
 
 ```
 import AuthCard from 'components/cards/AuthCard';
@@ -239,6 +264,22 @@ import Button from 'components/common/Button';
 | **Name** | **Type**                              | **Default** | **Description** |
 | -------- | ------------------------------------- | ----------- | --------------- |
 | color    | (All the MuiButton props) \| 'danger' | 'primary'   | -               |
+
+### ChangePasswordTab
+
+This is a component that displays two password fields to renew the user credentials.
+
+```
+import ChangePasswordTab from 'components/profile/ChangePasswordTab';
+
+<ChangePasswordTab
+    onSubmit={(password) => changePassword(password)}
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description**                           |
+| -------- | -------- | ----------- | ----------------------------------------- |
+| onSubmit | function | -           | Function that will be triggered on submit |
 
 ### CheckboxWidget
 
@@ -371,6 +412,38 @@ import CopyrightMenu from 'components/common/footer/CopyrightMenu';
 | path     | uri      | -           | Menu item internal path |
 | title    | string   | -           | Menu item title         |
 
+### DeleteAccountTab
+
+This is a component that displays a text field to delete the user account. By default you have to type "delete" to trigger the submit button.
+
+```
+import DeleteAccountTab from 'components/profile/DeleteAccountTab';
+
+<DeleteAccountTab
+    onSubmit={() => deleteUserAccount(userId)}
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description**                           |
+| -------- | -------- | ----------- | ----------------------------------------- |
+| onSubmit | function | -           | Function that will be triggered on submit |
+
+### ForgotPassword
+
+This is a component that shows a Forgot Password form with an email field and a submit button.
+
+```
+import ForgotPassword from 'pages/account/ForgotPassword';
+
+<ForgotPassword
+    onSubmit={(email) => sendResetLink(email)}
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description**                           |
+| -------- | -------- | ----------- | ----------------------------------------- |
+| onSubmit | function | -           | Function that will be triggered on submit |
+
 ### FormCard
 
 This is a wrapper component for any Form. It uses react-hook-forms and yup validation and directly controls the toggable form components.
@@ -415,6 +488,19 @@ import FormCard from 'components/cards/FormCard';
 | Component | ReactElement | -           | Use any of the toggable form Components |
 
 _(The rest of properties are the same as the React Component used except for control, onSubmit and handleSubmit that are passed down by default from the FormCard Component)_
+
+### GeneralSettingsTab
+
+This is a component that displays a menu on the left to change between the change password and delete account components that will be displayed on the right side. Also it has a link to the Profile Page.
+
+```
+import GeneralSettingsTab from 'components/profile/GeneralSettingsTab';
+
+<GeneralSettingsTab />
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
 
 ### ImageModal
 
@@ -525,6 +611,22 @@ import ItemHorizontal from 'components/cards/ItemHorizontal';
 | logo     | svgIcon  | -           | Category icon   |
 | title    | string   | -           | Category title  |
 
+### KeyInfoTab
+
+This is a component that displays the main user information. It has a "general", "contact" and "Work" cards with text fields.
+
+```
+import KeyInfoTab from 'components/profile/KeyInfoTab';
+
+<KeyInfoTab
+    setIsDataChanged={() => setIsDataChanged(true)}
+/>
+```
+
+| **Name**         | **Type** | **Default** | **Description**                                                   |
+| ---------------- | -------- | ----------- | ----------------------------------------------------------------- |
+| setIsDataChanged | function | -           | Function to be called when the data on any of the fields changes. |
+
 ### Loader
 
 This is a component that displays a spinner.
@@ -575,6 +677,22 @@ import Logo from 'components/common/Logo';
 | imageSrc | imgUrl   | -           | Url for the brand logo |
 | title    | string   | -           | Brand title            |
 
+### MailConfirmPage
+
+This is the mail confirmation tab for the "forgot password" flow. You can indicate a function to re send the e-mail.
+
+```
+import MailConfirmPage from 'pages/account/MailConfirmPage';
+
+<MailConfirmPage
+    onSubmit={() => {console.log('Mail sent!')}}
+/>
+```
+
+| **Name** | **Type** | **Default** | **Description**                                           |
+| -------- | -------- | ----------- | --------------------------------------------------------- |
+| onSumbit | function | -           | You can pass down a function to call to resend the e-mail |
+
 ### MenuButton
 
 This is a component that takes a title and a list of navigation items and displays them as a dropdown menu.
@@ -600,6 +718,22 @@ import MenuButton from 'components/menus/MenuButton';
 | -------- | ---------- | ----------- | -------------------------------------- |
 | path     | url \| uri | -           | Url to be redirected on click.         |
 | title    | string     | -           | Text to be displayed on the menu item. |
+
+### OtherGeneralTab
+
+This is a component that displays a some more information for the user. It has a "general", "contact" and "Other" cards with text fields.
+
+```
+import OtherGeneralTab from 'components/profile/OtherGeneralTab';
+
+<OtherGeneralTab
+    setIsDataChanged={() => setIsDataChanged(true)}
+/>
+```
+
+| **Name**         | **Type** | **Default** | **Description**                                                   |
+| ---------------- | -------- | ----------- | ----------------------------------------------------------------- |
+| setIsDataChanged | function | -           | Function to be called when the data on any of the fields changes. |
 
 ### PageHeader
 
@@ -1371,7 +1505,6 @@ import PrivacyPolicy from 'pages/others/PrivacyPolicy';
 
 | **Name** | **Type** | **Default** | **Description** |
 | -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
 
 ### ProfilePage
 
@@ -1385,7 +1518,6 @@ import ProfilePage from 'pages/account/ProfilePage';
 
 | **Name** | **Type** | **Default** | **Description** |
 | -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
 
 ### SettingsPage
 
@@ -1399,7 +1531,19 @@ import SettingsPage from 'pages/account/SettingsPage';
 
 | **Name** | **Type** | **Default** | **Description** |
 | -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
+
+### SplashScreen
+
+This is a Screen component which is displayed while the Auth component checks for the service connection and authentication.
+
+```
+import SplashScreen from 'components/common/SplashScreen';
+
+<SplashScreen />
+```
+
+| **Name** | **Type** | **Default** | **Description** |
+| -------- | -------- | ----------- | --------------- |
 
 ### TermsAndConditions
 
@@ -1413,7 +1557,6 @@ import TermsAndConditions from 'pages/others/TermsAndConditions';
 
 | **Name** | **Type** | **Default** | **Description** |
 | -------- | -------- | ----------- | --------------- |
-| -        | -        | -           | -               |
 
 # Redux Store
 
