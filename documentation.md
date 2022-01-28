@@ -93,7 +93,7 @@
 
 ### Routing
 
-The routes are manages on _src/config/routesConfig.js_. You can use the same properties that the custom AppRoute component accepts (see below) and also a _redirectTo_ property that accepts a uri string for the internal route to redirect to.
+The routes are manages on _src/config/routesConfig.js_. You can use the same properties that the custom [AppRoute](#approute) component accepts and also a _redirectTo_ property that accepts a uri string for the internal route to redirect to.
 
 ### Navigation menus and submenus
 
@@ -117,7 +117,8 @@ While it does all this it renders a [Splash Screen](#splashscreen) with a spinne
 
 ### AppRoute
 
-This component is built over a Route component from react-router-dom, it adds a layout that can be disabled if needed and parse the path to have the PUBLIC*URL before the URI. You can also indicate a private route and it will check the user state from the auth slice on the redux store. If the mantainanceMode on the ui slice of the redux store is \_true* then all the routes will redirect to the mantainance page.
+This component is built over a Route component from react-router-dom, it adds a layout that can be disabled if needed and parse the path to have the PUBLIC URL before the URI. You can also indicate a private route and it will check the user state from the auth slice on the redux store. If the mantainanceMode on the ui slice of the redux store is _true_ then all the routes will redirect to the mantainance page.
+Apart from all the Component properties you can add all the properties you need and they will be passed down to the Page Component itself.
 
 ```
 import AppRoute from 'utils/AppRoute';
@@ -125,6 +126,7 @@ import AppRoute from 'utils/AppRoute';
 <AppRoute
     component={Home}
     footer={false}
+    form="signup"
     layout={false}
     noLayoutBtn={true}
     noLayoutFooter={true}

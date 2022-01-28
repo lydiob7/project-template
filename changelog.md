@@ -1,3 +1,7 @@
+### v0.6.2
+
+-   Bugfix: Pass down any other props to component on AppRoute.
+
 ### v0.6.1
 
 -   Feature: Add Splash Screen on index.html

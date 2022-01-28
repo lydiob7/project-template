@@ -7,13 +7,13 @@ import NoLayout from 'layouts/NoLayout';
 const AppRoute = ({
     component: Component,
     footer = true,
-    form,
     layout = true,
     noLayoutFooter = false,
     noLayoutBtn = false,
     privateRoute = false,
     redirectRoute = '/register',
-    scrollBtn = false
+    scrollBtn = false,
+    ...componentProps
 }) => {
     const authenticated = useSelector(({ auth }) => auth.user.authenticated);
 
@@ -27,11 +27,11 @@ const AppRoute = ({
                 <>
                     {layout ? (
                         <LayoutDefault footer={footer} scrollBtn={scrollBtn}>
-                            <Component form={form} />
+                            <Component {...componentProps} />
                         </LayoutDefault>
                     ) : (
                         <NoLayout footer={noLayoutFooter} scrollBtn={noLayoutBtn}>
-                            <Component form={form} />
+                            <Component {...componentProps} />
                         </NoLayout>
                     )}
                 </>
