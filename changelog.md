@@ -1,3 +1,7 @@
+### v0.6.1
+
+-   Feature: Add Splash Screen on index.html
+
 ### v0.6.0
 
 -   Feature: Add Login page.
