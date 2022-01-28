@@ -1,11 +1,10 @@
 # Smart Studios UI - Documentation
 
-### [Project description](/README.md)
+[Project description](/README.md)
 
 ## Table of Contents
 
 - [Smart Studios UI - Documentation](#smart-studios-ui---documentation)
-    - [Project description](#project-description)
   - [Table of Contents](#table-of-contents)
   - [Config files](#config-files)
     - [Routing](#routing)
@@ -109,6 +108,8 @@ The theme provider is in _src/components/theme.js_. It wraps all the App and app
 The auth module contains a file with all the roles supported and a main file (_auth/Auth.js_) which wrapps the entire app.
 
 This Auth component is in charge to initialize firebase (or any other service implemented), check if the user is logged in and update the auth store if the user is authenticated.
+
+While it does all this it renders a [Splash Screen](#splashscreen) with a spinner. To make the loading of this initial page faster there is a copy of the same Splash Screen inside the _index.html_ file. If you want to customize it remember to update both the html file as the React Component.
 
 # UI Components
 
@@ -372,7 +373,7 @@ import Copyright from 'components/common/footer/Copyright';
 <Copyright
     rightsOwner="Smart Studios"
     rightsOwnerWebsite="https://smartstudios.io/"
-    versin="1.0.0"
+    version="1.0.0"
     year="2021"
 />
 ```
@@ -613,7 +614,7 @@ import ItemHorizontal from 'components/cards/ItemHorizontal';
 
 ### KeyInfoTab
 
-This is a component that displays the main user information. It has a "general", "contact" and "Work" cards with text fields.
+This is a component that displays the main user information. It has a "Key information" and "Work" cards with text fields.
 
 ```
 import KeyInfoTab from 'components/profile/KeyInfoTab';
@@ -721,7 +722,7 @@ import MenuButton from 'components/menus/MenuButton';
 
 ### OtherGeneralTab
 
-This is a component that displays a some more information for the user. It has a "general", "contact" and "Other" cards with text fields.
+This is a component that displays a some more information for the user. It has a "General" and "Media" cards with text fields.
 
 ```
 import OtherGeneralTab from 'components/profile/OtherGeneralTab';
@@ -1290,7 +1291,7 @@ import WidgetWrapper from 'components/widgets/WidgetWrapper';
 
 ### Footer
 
-Contains a Copyright claim, a social media menu and a footer menu (everything is supplied by the store and can be configured from the main text content file, the menu from the navigationConfig file)
+Contains a Copyright claim, a social media menu and a footer menu (everything is supplied by the store and can be configured from the main text content file, the menu from the navigationConfig file). It also renders the version of the App from the _.env_ file (you should create your own environmental variables, check _.env.example_ for the default variables).
 
 ```
 import Footer from 'components/common/footer/Footer';
@@ -1508,7 +1509,7 @@ import PrivacyPolicy from 'pages/others/PrivacyPolicy';
 
 ### ProfilePage
 
-This is the default profile page.
+This is the default profile page. It renders the User image, name, email or occupation, a default background image (found on _assets/images/_) and two tabs with basic information.
 
 ```
 import ProfilePage from 'pages/account/ProfilePage';
@@ -1521,7 +1522,7 @@ import ProfilePage from 'pages/account/ProfilePage';
 
 ### SettingsPage
 
-This is the default account settings page. It has a link to the profile and two tabs, one for changing the password and one to delete the account.
+This is the default account settings page. It renders the User image, name, email or occupation, a default background image (found on _assets/images/_), a link to the profile and two tabs, one for changing the password and one to delete the account.
 
 ```
 import SettingsPage from 'pages/account/SettingsPage';
