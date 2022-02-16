@@ -11,7 +11,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
-import Icon from '@material-ui/core/Icon';
 import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -40,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[1]
     },
     cardHeader: {
-        backgroundColor: theme.palette.type === 'light' ? '#DADADA' : '#121212',
-        color: theme.palette.type === 'light' ? '#333333' : '#DADADA',
+        backgroundColor: theme.palette.type === 'light' ? theme.palette.secondary.main : '#121212',
+        color: theme.palette.type === 'light' ? theme.palette.secondary.contrastText : '#DADADA',
         '& .MuiToolbar-root': {
             display: 'flex',
             justifyContent: 'space-between'
@@ -66,9 +65,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 500,
         marginBottom: '4px'
     },
-    link: {
-        color: theme.palette.type === 'light' ? theme.palette.primary.dark : theme.palette.primary.main
-    },
+    link: {},
     requiredSymbol: {
         color: theme.palette.error.main
     },
@@ -84,28 +81,24 @@ const defaultValues = {
         email: '',
         tel: ''
     },
-    general: {
-        locations: ''
-    },
-    work: {
-        availability: '',
-        hourlyRate: '',
-        occupation: ''
+    general: {},
+    insurance: {
+        insuredPersonType: '',
+        healthInsuranceFund: '',
+        healthInsuranceNumber: ''
     }
 };
 
 const schema = yup.object().shape({});
 
 function KeyInfoTab({ setIsDataChanged, user }) {
-
-    const textProvider = useSelector(({ui})=>ui.textContent.profilePage)
-
     const dispatch = useDispatch();
     const classes = useStyles();
 
     const [edit, setEdit] = useState(false);
 
     const { data } = useSelector(({ auth }) => auth.user);
+    const text = useSelector(({ ui }) => ui.textContent?.profilePage);
 
     const { handleSubmit, reset, control } = useForm({
         mode: 'onChange',
@@ -126,16 +119,17 @@ function KeyInfoTab({ setIsDataChanged, user }) {
             lastName: data.lastName || '',
             contact: {
                 ...data.contact,
-                email: data.contact?.email || '',
-                tel: data.contact?.tel || ''
+                email: data.email || '',
+                tel: data.phoneNumber || ''
             },
             general: {
-                ...data.general,
-                locations: data.general?.locations || ''
+                ...data.general
             },
-            work: {
-                ...data.work,
-                occupation: data.work?.occupation || ''
+            insurance: {
+                ...data.insurance,
+                insuredPersonType: data.insuredPersonType || '',
+                healthInsuranceFund: data.healthInsuranceFund || '',
+                healthInsuranceNumber: data.healthInsuranceNumber || ''
             }
         });
     }, [data, reset]);
@@ -147,8 +141,6 @@ function KeyInfoTab({ setIsDataChanged, user }) {
     if (!data) {
         return null;
     }
-
-    const { general, contact, work } = data;
 
     const onSubmit = async (values) => {
         dispatch(updateUserInformation({ ...values, displayName: `${values.firstName} ${values.lastName}` }));
@@ -175,16 +167,16 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                             setIsDataChanged(false);
                         }}
                     >
-                        {textProvider.cancelBtn}
+                        {text?.cancelBtn}
                     </Button>
                     <Button className={classes.button} type="submit">
-                        {textProvider.saveBtn}
+                        {text?.saveBtn}
                     </Button>
                 </div>
             ) : (
                 <div className={classes.btnWrapper}>
                     <Button className={classes.button} variant="outlined" onClick={() => setEdit(true)}>
-                        {textProvider.editBtn}
+                        {text?.editBtn}
                     </Button>
                 </div>
             )}
@@ -194,14 +186,16 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                     <AppBar className={classes.cardHeader} position="static" elevation={0}>
                         <Toolbar>
                             <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
-                                {textProvider.generalTab.keyInformation.title}
+                                {text?.generalTab?.keyInformation?.title}
                             </Typography>
                         </Toolbar>
                     </AppBar>
 
                     <CardContent>
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.firstNameLabel}</Typography>
+                            <Typography className={classes.label}>
+                                {text?.generalTab?.keyInformation?.firstNameLabel}
+                            </Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
@@ -213,8 +207,10 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                                 {...field}
                                                 autoFocus
                                                 type="text"
+                                                variant="outlined"
+                                                size="small"
                                                 className={classes.textField}
-                                                placeholder={textProvider.generalTab.keyInformation.firstNamePlaceholder}
+                                                placeholder={text?.generalTab?.keyInformation?.firstNamePlaceholder}
                                             />
                                         )}
                                     />
@@ -225,7 +221,9 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                         </div>
 
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.lastNameLabel}</Typography>
+                            <Typography className={classes.label}>
+                                {text?.generalTab?.keyInformation?.lastNameLabel}
+                            </Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
@@ -236,8 +234,10 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                             <TextField
                                                 {...field}
                                                 type="text"
+                                                variant="outlined"
+                                                size="small"
                                                 className={classes.textField}
-                                                placeholder={textProvider.generalTab.keyInformation.lastNamePlaceholder}
+                                                placeholder={text?.generalTab?.keyInformation?.lastNamePlaceholder}
                                             />
                                         )}
                                     />
@@ -248,9 +248,11 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                         </div>
 
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.emailLabel}</Typography>
+                            <Typography className={classes.label}>
+                                {text?.generalTab?.keyInformation?.emailLabel}
+                            </Typography>
 
-                            {edit ? (
+                            {edit && false ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
                                     <Controller
                                         name="contact.email"
@@ -259,8 +261,10 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                             <TextField
                                                 {...field}
                                                 type="text"
+                                                variant="outlined"
+                                                size="small"
                                                 className={classes.textField}
-                                                placeholder={textProvider.generalTab.keyInformation.emailPlaceholder}
+                                                placeholder={text?.generalTab?.keyInformation?.emailPlaceholder}
                                             />
                                         )}
                                     />
@@ -270,15 +274,17 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                     className={classes.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    href={`mailto:${contact?.email || user?.email}`}
+                                    href={`mailto:${user?.email}`}
                                 >
-                                    <Typography>{contact?.email || user?.email}</Typography>
+                                    <Typography>{user?.email}</Typography>
                                 </a>
                             )}
                         </div>
 
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.phoneLabel}</Typography>
+                            <Typography className={classes.label}>
+                                {text?.generalTab?.keyInformation?.phoneLabel}
+                            </Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} fullWidth>
@@ -289,8 +295,10 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                             <TextField
                                                 {...field}
                                                 type="text"
+                                                variant="outlined"
+                                                size="small"
                                                 className={classes.textField}
-                                                placeholder={textProvider.generalTab.keyInformation.phonePlaceholder}
+                                                placeholder={text?.generalTab?.keyInformation?.phonePlaceholder}
                                             />
                                         )}
                                     />
@@ -300,40 +308,10 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                     className={classes.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    href={`tel:${contact?.tel}`}
+                                    href={`tel:${user?.phoneNumber}`}
                                 >
-                                    <Typography>{contact?.tel}</Typography>
+                                    <Typography>{user?.phoneNumber}</Typography>
                                 </a>
-                            )}
-                        </div>
-
-                        <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.countryLabel}</Typography>
-
-                            {edit ? (
-                                <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
-                                    <Controller
-                                        name="general.locations"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <TextField
-                                                {...field}
-                                                type="text"
-                                                className={classes.textField}
-                                                placeholder={textProvider.generalTab.keyInformation.countryPlaceholder}
-                                            />
-                                        )}
-                                    />
-                                </FormControl>
-                            ) : (
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <Typography>{general?.locations}</Typography>
-                                    {general?.locations && (
-                                        <Icon style={{ fontSize: '1rem', margin: '0 4px' }} color="action">
-                                            location_on
-                                        </Icon>
-                                    )}
-                                </div>
                             )}
                         </div>
                     </CardContent>
@@ -345,33 +323,36 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                     <AppBar className={classes.cardHeader} position="static" elevation={0}>
                         <Toolbar>
                             <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
-                            {textProvider.workTab.title}
+                                {text?.generalTab?.otherInformation?.title}
                             </Typography>
                         </Toolbar>
                     </AppBar>
 
                     <CardContent>
-                        {' '}
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>{textProvider.workTab.workInformation.workLabel}</Typography>
+                            <Typography className={classes.label}>
+                                {text?.generalTab?.otherInformation?.professionLabel}
+                            </Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
                                     <Controller
-                                        name="work.occupation"
+                                        name="profession"
                                         control={control}
                                         render={({ field }) => (
                                             <TextField
                                                 {...field}
                                                 type="text"
+                                                variant="outlined"
+                                                size="small"
                                                 className={classes.textField}
-                                                placeholder={textProvider.workTab.workInformation.workPlaceholder}
+                                                placeholder={text?.generalTab?.otherInformation?.professionPlaceholder}
                                             />
                                         )}
                                     />
                                 </FormControl>
                             ) : (
-                                <Typography>{work?.occupation}</Typography>
+                                <Typography>{user?.profession}</Typography>
                             )}
                         </div>
                     </CardContent>

@@ -20,7 +20,7 @@ import AuthUserCard from 'components/cards/AuthUserCard';
 import AuthUserSmallCard from 'components/cards/AuthUserSmallCard';
 import Logo from 'components/common/Logo';
 import { logoutUser } from 'auth/store/userSlice';
-import { themeDark, themeLight } from 'store/ui';
+import { themeDark, themeLight } from 'store/uiSlice';
 import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({

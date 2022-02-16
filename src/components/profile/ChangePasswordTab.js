@@ -49,21 +49,14 @@ const defaultValues = {
 };
 
 function ChangePasswordTab({ history, onSubmit: onHandleSubmit = () => {} }) {
-
-    const textProvider = useSelector(({ui})=>ui.textContent.settingsPage.changePasswordCard)
-
-    /**
-    * Form Validation Schema
-    */
-    const schema = yup.object().shape({
-        newPassword: yup
-           .string()
-           .required(textProvider.newPasswordRequired)
-           .min(8, textProvider.validPassword),
-       passwordConfirm: yup.string().oneOf([yup.ref('newPassword'), null], textProvider.passwordMatch)
-    });
-
     const classes = useStyles();
+
+    const textProvider = useSelector(({ ui }) => ui.textContent.settingsPage.changePasswordCard);
+
+    const schema = yup.object().shape({
+        newPassword: yup.string().required(textProvider.newPasswordRequired).min(8, textProvider.validPassword),
+        passwordConfirm: yup.string().oneOf([yup.ref('newPassword'), null], textProvider.passwordMatch)
+    });
 
     const { control, formState, handleSubmit } = useForm({
         mode: 'onChange',

@@ -7,7 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import * as yup from 'yup';
 import { useSelector } from 'react-redux';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -21,19 +20,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
 const defaultValues = {
     email: ''
 };
 
 function ForgotPasswordPage({ history, onSubmit: onHandleSubmit = () => {} }) {
     const classes = useStyles();
-    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard.forgotPwdForm)
 
-    
-    /**
-    * Form Validation Schema
-    */
+    const textProvider = useSelector(({ ui }) => ui.textContent.landingPage.authCard.forgotPwdForm);
+
     const schema = yup.object().shape({
         email: yup.string().email(textProvider.validEmail).required(textProvider.emailRequired)
     });

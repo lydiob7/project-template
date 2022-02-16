@@ -1,10 +1,10 @@
-# Smart Studios UI - Documentation
+# Project Template UI - Documentation
 
 [Project description](/README.md)
 
 ## Table of Contents
 
-- [Smart Studios UI - Documentation](#smart-studios-ui---documentation)
+- [Project Template UI - Documentation](#project-template-ui---documentation)
   - [Table of Contents](#table-of-contents)
   - [Config files](#config-files)
     - [Routing](#routing)
@@ -373,8 +373,8 @@ This is the copyright claim, it contains a copyright symbol, the name of the rig
 import Copyright from 'components/common/footer/Copyright';
 
 <Copyright
-    rightsOwner="Smart Studios"
-    rightsOwnerWebsite="https://smartstudios.io/"
+    rightsOwner="Project Template"
+    rightsOwnerWebsite="https://tomiscattini.com/"
     version="1.0.0"
     year="2021"
 />
@@ -671,7 +671,7 @@ import Logo from 'components/common/Logo';
 
 <Logo
     imageSrc="/images/logo.svg"
-    title="Smart Studios UI"
+    title="Project Template UI"
 />
 ```
 
@@ -1376,7 +1376,7 @@ Contains a collapsable menu with the App title (content is supplied from the mai
 import Navbar from 'components/common/Navbar'
 
 <Navbar
-    appTitle="Smart Studios UI"
+    appTitle="Project Template UI"
     menuItems={[
         {
             dropdown: [
@@ -1618,7 +1618,7 @@ dispatch(
 
 ## Firebase
 
-The Smart Studios UI is set up to use firebase by default. You need to provide the firebase project details (set up firestore on firebase console) on your own _.env_ file (there is an example of what variables you need on _.env.example_).
+The Project Template UI is set up to use firebase by default. You need to provide the firebase project details (set up firestore on firebase console) on your own _.env_ file (there is an example of what variables you need on _.env.example_).
 
 On _/services/firebaseService/firebaseService.js_ you will find the main Class with all the methods to call firebase. It is all set up with basic user data methods (get, update and delete user) plus changing and reseting password, file and image upload (you need to set up firebase storage) and a logout method.
 

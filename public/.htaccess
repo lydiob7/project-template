@@ -5,5 +5,5 @@
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-d
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-l
-  RewriteRule ^ /smartstudiosui/index.html [L]
+  RewriteRule ^ /index.html [L]
 </IfModule>

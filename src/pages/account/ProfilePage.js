@@ -25,8 +25,7 @@ import fallBackProfileImage from 'assets/images/profile.jpg';
 import { parsePath } from 'utils/helpers';
 
 function ProfilePage() {
-
-    const textProvider = useSelector(({ui})=>ui.textContent.profilePage)
+    const dispatch = useDispatch();
 
     const [isDataChanged, setIsDataChanged] = useState(false);
     const [isPromtOpen, setIsPromtOpen] = useState(false);
@@ -34,7 +33,7 @@ function ProfilePage() {
     const [selectedTab, setSelectedTab] = useState(0);
     const [tabToMove, setTabToMove] = useState(0);
 
-    const dispatch = useDispatch();
+    const textProvider = useSelector(({ ui }) => ui.textContent.profilePage);
     const user = useSelector(({ auth }) => auth?.user?.data);
 
     const useStyles = makeStyles((theme) => ({
@@ -179,7 +178,6 @@ function ProfilePage() {
     }
 
     async function handleFileChange(e, type) {
-
         try {
             if (e.target.files[0]) {
                 setLoading(type);

@@ -32,15 +32,14 @@ const defaultValues = {
 };
 
 function LoginForm({ onSubmit = () => {} }) {
+    const classes = useStyles();
 
-    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard.loginForm)
+    const textProvider = useSelector(({ ui }) => ui.textContent.landingPage.authCard.loginForm);
 
     const schema = yup.object().shape({
         email: yup.string().email(textProvider.validEmail).required(textProvider.emailRequired),
         password: yup.string().required(textProvider.passwordRequired)
     });
-
-    const classes = useStyles();
 
     const { control, formState, handleSubmit } = useForm({
         mode: 'onChange',

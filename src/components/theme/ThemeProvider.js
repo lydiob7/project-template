@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from './theme';
-import { themeDark } from 'store/ui';
+import { themeDark } from 'store/uiSlice';
 
 export default function ThemeProvider({ children }) {
     const dispatch = useDispatch();

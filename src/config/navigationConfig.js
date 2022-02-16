@@ -1,69 +1,69 @@
 import { parsePath } from 'utils/helpers';
 
-const navigationConfig = {
+const navigationConfig = (language) => ({
     headermenu: [
         {
-            title: 'Home',
+            title: language?.navigationMenu?.home,
             icon: 'home_outlined',
             path: parsePath()
         },
         {
-            title: 'Auth',
+            title: language?.navigationMenu?.auth,
             dropdown: [
                 {
-                    title: 'Login',
+                    title: language?.navigationMenu?.login,
                     icon: 'lock_open_outlined',
                     path: parsePath('/login')
                 },
                 {
-                    title: 'Register',
+                    title: language?.navigationMenu?.register,
                     icon: 'person_outlined',
                     path: parsePath('/register')
                 },
                 {
-                    title: 'Forgot password',
+                    title: language?.navigationMenu?.forgotPassword,
                     icon: 'vpn_key_outlined',
                     path: parsePath('/forgot-password')
                 },
                 {
-                    title: 'Mail confirmation',
+                    title: language?.navigationMenu?.mailConfirmation,
                     icon: 'mail_outlined',
                     path: parsePath('/reset-confirmation')
                 }
             ]
         },
         {
-            title: 'Account',
+            title: language?.navigationMenu?.account,
             dropdown: [
                 {
-                    title: 'Profile',
+                    title: language?.navigationMenu?.profile,
                     icon: 'person_outlined',
                     path: parsePath('/profile')
                 },
                 {
-                    title: 'Account Settings',
+                    title: language?.navigationMenu?.settings,
                     icon: 'settings_outlined',
                     path: parsePath('/settings')
                 }
             ]
         },
         {
-            title: 'Other pages',
+            title: language?.navigationMenu?.otherPages,
             dropdown: [
                 {
-                    title: 'Error page',
+                    title: language?.navigationMenu?.error,
                     icon: 'error_outlined',
                     path: parsePath('/error')
                 },
                 {
                     path: parsePath('/terms&conditions'),
                     icon: 'gavel_outlined',
-                    title: 'Terms & Conditions'
+                    title: language?.footer?.menuItems?.terms
                 },
                 {
                     path: parsePath('/privacy-policy'),
                     icon: 'gavel_outlined',
-                    title: 'Privacy Policy'
+                    title: language?.footer?.menuItems?.privacyPolicy
                 }
             ]
         }
@@ -71,13 +71,13 @@ const navigationConfig = {
     footermenu: [
         {
             path: parsePath('/terms&conditions'),
-            title: 'Terms & Conditions'
+            title: language?.footer?.menuItems?.terms
         },
         {
             path: parsePath('/privacy-policy'),
-            title: 'Privacy Policy'
+            title: language?.footer?.menuItems?.privacyPolicy
         }
     ]
-};
+});
 
 export default navigationConfig;

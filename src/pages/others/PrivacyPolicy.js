@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const PrivacyPolicy = () => {
     const classes = useStyles();
 
-    const privacyPolicy = useSelector(({ ui }) => ui.textContent.privacyPolicy);
+    const textProvider = useSelector(({ ui }) => ui.textContent.privacyPolicy);
 
     return (
         <main className={classes.root}>
@@ -32,11 +32,11 @@ const PrivacyPolicy = () => {
                 <Grid container justifyContent="center">
                     <Grid container spacing={4} justifyContent="center" item xs={12} sm={6}>
                         <Grid item xs={12}>
-                            <Title title={privacyPolicy?.title} subtitle={privacyPolicy.content} variant="h4" />
+                            <Title title={textProvider?.title} subtitle={textProvider.content} variant="h4" />
                         </Grid>
                         <Grid container justifyContent="center" item xs={12}>
                             <Link to={parsePath()}>
-                                <Button>Home</Button>
+                                <Button>{textProvider?.actionButton}</Button>
                             </Link>
                         </Grid>
                     </Grid>

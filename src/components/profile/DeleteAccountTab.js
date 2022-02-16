@@ -55,12 +55,10 @@ const defaultValues = {
 };
 
 function DeleteAccountTab({ onSubmit: onHandleSubmit = () => {}, logoutUser = () => {} }) {
+    const classes = useStyles();
 
-    const textProvider = useSelector(({ui})=>ui.textContent.settingsPage.deleteAccountCard)
+    const textProvider = useSelector(({ ui }) => ui.textContent.settingsPage.deleteAccountCard);
 
-    /**
-    * Form Validation Schema
-    */
     const schema = yup.object().shape({
         confirm: yup
             .string()
@@ -69,8 +67,6 @@ function DeleteAccountTab({ onSubmit: onHandleSubmit = () => {}, logoutUser = ()
                 return word.toLowerCase() === textProvider.confirmationWord;
             })
     });
-
-    const classes = useStyles();
 
     const { control, formState, handleSubmit } = useForm({
         mode: 'onChange',

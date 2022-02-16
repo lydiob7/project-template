@@ -36,12 +36,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
-
-    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard)
-
     const classes = useStyles();
 
     const appInformation = useSelector(({ ui }) => ui.appInformation);
+    const textProvider = useSelector(({ ui }) => ui.textContent.landingPage.authCard);
 
     return (
         <Paper className={classes.root}>
@@ -68,7 +66,8 @@ const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
                 <>
                     <SignupForm onSubmit={onSubmit} />
                     <Typography className={classes.linkText} variant="body1">
-                        {textProvider.alreadyHaveAccountText}&nbsp;&nbsp;&nbsp;<Link to={parsePath('/login')}>{textProvider.alreadyHaveAccountLink}</Link>
+                        {textProvider.alreadyHaveAccountText}&nbsp;&nbsp;&nbsp;
+                        <Link to={parsePath('/login')}>{textProvider.alreadyHaveAccountLink}</Link>
                     </Typography>
                 </>
             )}
@@ -82,7 +81,8 @@ const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
                         </Typography>
                     </div>
                     <Typography className={classes.linkText} variant="body1">
-                        {textProvider.dontHaveAccountText}&nbsp;&nbsp;&nbsp;<Link to={parsePath('/register')}>{textProvider.dontHaveAccountLink}</Link>
+                        {textProvider.dontHaveAccountText}&nbsp;&nbsp;&nbsp;
+                        <Link to={parsePath('/register')}>{textProvider.dontHaveAccountLink}</Link>
                     </Typography>
                 </>
             )}

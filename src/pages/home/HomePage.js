@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { themeDark, themeLight, mantainanceModeEnabled, mantainanceModeDisabled } from 'store/ui';
+import { themeDark, themeLight, mantainanceModeEnabled, mantainanceModeDisabled } from 'store/uiSlice';
 import { showMessage } from 'store/messageSlice';
 
 import { AccessAlarm } from '@material-ui/icons';
@@ -41,16 +41,7 @@ import ToggablePicker from 'components/forms/ToggablePicker';
 import ToggableSelect from 'components/forms/ToggableSelect';
 import WidgetWrapper from 'components/widgets/WidgetWrapper';
 
-const cardItem = {
-    logo: '/images/ss-web-36.svg',
-    internalURI: '/some-path',
-    category: { title: 'Category', icon: <AccessAlarm /> },
-    title: 'Card',
-    abstract:
-        'Some description for the card. Cras ultricies ligula sed magna dictum porta. Quisque velit nisi, pretium ut lacinia in, elementum id enim.',
-    url: 'https://externallink.com/',
-    btnText: 'Go go go'
-};
+import { parsePath } from 'utils/helpers';
 
 const checkboxes = [
     { text: 'Checkbox 1', number: 2, id: 0, active: false },
@@ -62,8 +53,6 @@ const checkboxes = [
     { text: 'Checkbox 7', id: 6, active: false },
     { text: 'Checkbox 8', number: 2, id: 7, active: false }
 ];
-
-const imageToOpen = 'http://smartstudios.io/wp-content/uploads/2021/01/ss-web-36.svg';
 
 const inputFields = (setFormValues) => [
     {
@@ -130,6 +119,7 @@ const tags = [
 const HomePage = () => {
     const dispatch = useDispatch();
     const currentTheme = useSelector(({ ui }) => ui.theme);
+    const appInformation = useSelector(({ ui }) => ui.appInformation);
 
     const [IsImageModalOpen, setIsImageModalOpen] = useState(false);
     const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -143,6 +133,17 @@ const HomePage = () => {
         select: '',
         'multiple-select': []
     });
+
+    const cardItem = {
+        logo: parsePath(appInformation?.appLogo),
+        internalURI: '/some-path',
+        category: { title: 'Category', icon: <AccessAlarm /> },
+        title: 'Card',
+        abstract:
+            'Some description for the card. Cras ultricies ligula sed magna dictum porta. Quisque velit nisi, pretium ut lacinia in, elementum id enim.',
+        url: 'https://externallink.com/',
+        btnText: 'Go go go'
+    };
 
     useEffect(() => {
         dispatch(showMessage({ message: 'Normal Message' }));
@@ -175,14 +176,14 @@ const HomePage = () => {
     return (
         <Container maxWidth="md" style={{ minHeight: '100vh' }}>
             <Title
-                title= 'Title'
+                title="Title"
                 subtitle="These are all the components available on this library."
                 subtitleSize="large"
             />
             <Typography variant="body1" style={{ textAlign: 'center', margin: '1rem 0' }}>
                 For documentation go to{' '}
-                <a href="https://bitbucket.org/smartstudios/smartstudiosui/src/main/" target="_blank" rel="noreferrer">
-                    https://bitbucket.org/smartstudios/smartstudiosui/src/main/
+                <a href={appInformation?.repositoryUrl} target="_blank" rel="noreferrer">
+                    {appInformation?.repositoryUrl}
                 </a>
             </Typography>
             <Title
@@ -287,7 +288,11 @@ const HomePage = () => {
 
             <ConfirmationModal open={isConfirmationModalOpen} onClose={() => setIsConfirmationModalOpen(false)} />
 
-            <ImageModal imageUrl={imageToOpen} open={IsImageModalOpen} onClose={() => setIsImageModalOpen(false)} />
+            <ImageModal
+                imageUrl={parsePath(appInformation?.appLogo)}
+                open={IsImageModalOpen}
+                onClose={() => setIsImageModalOpen(false)}
+            />
 
             <Grid spacing={4} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={12}>

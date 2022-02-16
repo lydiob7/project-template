@@ -33,20 +33,17 @@ const defaultValues = {
 };
 
 function SignupForm({ onSubmit }) {
+    const classes = useStyles();
 
-    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard.registerForm)
+    const textProvider = useSelector(({ ui }) => ui.textContent.landingPage.authCard.registerForm);
 
     const schema = yup.object().shape({
         displayName: yup.string().required(textProvider.nameRequired),
         email: yup.string().email(textProvider.validEmail).required(textProvider.emailRequired),
-        password: yup
-            .string()
-            .required(textProvider.passwordRequired)
-            .min(8, textProvider.validPassword),
+        password: yup.string().required(textProvider.passwordRequired).min(8, textProvider.validPassword),
         passwordConfirm: yup.string().oneOf([yup.ref('password'), null], textProvider.passwordMatch)
     });
 
-    const classes = useStyles();
     // const dispatch = useDispatch();
 
     const { control, formState, handleSubmit } = useForm({

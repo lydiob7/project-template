@@ -1,3 +1,9 @@
+### v0.7.0 (In progress)
+
+-   Feature: Move all text to englishContent.js file.
+-   Feature: Move socialLinks and general app information to different files.
+-   Feature: Move text content to different folder.
+
 ### v0.6.2
 
 -   Bugfix: Pass down any other props to component on AppRoute.

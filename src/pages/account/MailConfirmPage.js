@@ -45,9 +45,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MailConfirmPage({ history, onSubmit: handleSubmit = () => {} }) {
-    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard.mailConfirmationMessage)
     const classes = useStyles();
     const dispatch = useDispatch();
+
+    const textProvider = useSelector(({ ui }) => ui.textContent.landingPage.authCard.mailConfirmationMessage);
 
     async function onSubmit() {
         const response = await handleSubmit({
@@ -57,7 +58,7 @@ function MailConfirmPage({ history, onSubmit: handleSubmit = () => {} }) {
             dispatch(showMessage({ message: textProvider.mailResentMessage, variant: 'success' }));
     }
 
-    const yourEmailDefault = textProvider.yourEmailDefault
+    const yourEmailDefault = textProvider.yourEmailDefault;
 
     return (
         <div className={clsx(classes.root)}>
@@ -83,7 +84,8 @@ function MailConfirmPage({ history, onSubmit: handleSubmit = () => {} }) {
                     </Typography>
 
                     <Typography className={classes.linkText} variant="body1">
-                        {textProvider.didntReceiveEmailText}&nbsp;&nbsp;&nbsp;<span onClick={onSubmit}>{textProvider.didntReceiveEmailLink}</span>
+                        {textProvider.didntReceiveEmailText}&nbsp;&nbsp;&nbsp;
+                        <span onClick={onSubmit}>{textProvider.didntReceiveEmailLink}</span>
                     </Typography>
 
                     <Typography className={classes.linkText} variant="body1">

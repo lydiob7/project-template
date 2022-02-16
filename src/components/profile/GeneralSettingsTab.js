@@ -35,11 +35,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GeneralSettingsTab() {
-
-    const textProvider = useSelector(({ui})=>ui.textContent.settingsPage)
-
     const classes = useStyles();
+
     const [tab, setTab] = useState(1);
+    const textProvider = useSelector(({ ui }) => ui.textContent.settingsPage);
 
     const container = {
         show: {
