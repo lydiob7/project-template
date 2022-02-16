@@ -25,6 +25,9 @@ import fallBackProfileImage from 'assets/images/profile.jpg';
 import { parsePath } from 'utils/helpers';
 
 function ProfilePage() {
+
+    const textProvider = useSelector(({ui})=>ui.textContent.profilePage)
+
     const [isDataChanged, setIsDataChanged] = useState(false);
     const [isPromtOpen, setIsPromtOpen] = useState(false);
     const [loading, setLoading] = useState(null);
@@ -176,6 +179,7 @@ function ProfilePage() {
     }
 
     async function handleFileChange(e, type) {
+
         try {
             if (e.target.files[0]) {
                 setLoading(type);
@@ -202,10 +206,10 @@ function ProfilePage() {
 
     return (
         <div>
-            <Prompt when={isDataChanged} message={() => 'There are Some Unsaved Changes. Do you want to go Away?'} />
+            <Prompt when={isDataChanged} message={() => textProvider.unsavedChangesMessage} />
 
             <ConfirmationModal
-                actionText="Leave"
+                actionText={textProvider.unsavedChangesActionBtn}
                 confirmationType=""
                 open={isPromtOpen}
                 onClose={() => setIsPromtOpen(false)}
@@ -214,7 +218,7 @@ function ProfilePage() {
                     setIsDataChanged(false);
                     handleTabChange('force', tabToMove);
                 }}
-                message="There are Some Unsaved Changes. Do you want to go Away?"
+                message={textProvider.unsavedChangesMessage}
             />
 
             <form className={classes.topBg}>
@@ -290,8 +294,8 @@ function ProfilePage() {
                         children: <Divider className={classes.tabsDivider} />
                     }}
                 >
-                    <Tab className={classes.tab} disableRipple label="General" />
-                    <Tab className={classes.tab} disableRipple label="Other" />
+                    <Tab className={classes.tab} disableRipple label={textProvider.otherTab.generalInformation.title} />
+                    <Tab className={classes.tab} disableRipple label={textProvider.otherTab.title} />
                 </Tabs>
                 <Suspense fallback={<loading />}>
                     <div>{selectedTab === 0 && <KeyInfoTab setIsDataChanged={setIsDataChanged} user={user} />}</div>

@@ -1,5 +1,5 @@
 import { Link, withRouter } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { showMessage } from 'store/messageSlice';
 
@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MailConfirmPage({ history, onSubmit: handleSubmit = () => {} }) {
+    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard.mailConfirmationMessage)
     const classes = useStyles();
     const dispatch = useDispatch();
 
@@ -53,8 +54,10 @@ function MailConfirmPage({ history, onSubmit: handleSubmit = () => {} }) {
             email: history?.location?.state ? history?.location?.state[0]?.email : ''
         });
         if (response?.status === 'done')
-            dispatch(showMessage({ message: 'The E-mail has been re-sent', variant: 'success' }));
+            dispatch(showMessage({ message: textProvider.mailResentMessage, variant: 'success' }));
     }
+
+    const yourEmailDefault = textProvider.yourEmailDefault
 
     return (
         <div className={clsx(classes.root)}>
@@ -67,24 +70,24 @@ function MailConfirmPage({ history, onSubmit: handleSubmit = () => {} }) {
                     </div>
 
                     <Typography variant="h5" className={clsx(classes.typography, classes.bold)}>
-                        We sent you an E-mail!
+                        {textProvider.title}
                     </Typography>
 
                     <Typography className={clsx(classes.typography)} color="textSecondary">
-                        We have sent a link to{' '}
-                        <b>{(history?.location?.state && history?.location?.state[0]?.email) || 'your E-mail'}</b>.
+                        {textProvider.sentLinkTo}{' '}
+                        <b>{(history?.location?.state && history?.location?.state[0]?.email) || yourEmailDefault}</b>.
                     </Typography>
 
                     <Typography className={clsx(classes.typography)} color="textSecondary">
-                        Check your inbox and click on the "Reset password" link to update your credentials.
+                        {textProvider.checkInbox}
                     </Typography>
 
                     <Typography className={classes.linkText} variant="body1">
-                        Didn't receive the E-mail?&nbsp;&nbsp;&nbsp;<span onClick={onSubmit}>Re-send</span>
+                        {textProvider.didntReceiveEmailText}&nbsp;&nbsp;&nbsp;<span onClick={onSubmit}>{textProvider.didntReceiveEmailLink}</span>
                     </Typography>
 
                     <Typography className={classes.linkText} variant="body1">
-                        <Link to={parsePath('/login')}>Go back to Login</Link>
+                        <Link to={parsePath('/login')}>{textProvider.goBackToLoginLink}</Link>
                     </Typography>
                 </CardContent>
             </Card>

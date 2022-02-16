@@ -10,6 +10,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,16 +25,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const schema = yup.object().shape({
-    displayName: yup.string().required('You must enter display name'),
-    email: yup.string().email('You must enter a valid email').required('You must enter a email'),
-    password: yup
-        .string()
-        .required('Please enter your password.')
-        .min(8, 'Password is too short - should be 8 chars minimum.'),
-    passwordConfirm: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
-});
-
 const defaultValues = {
     displayName: '',
     email: '',
@@ -42,6 +33,19 @@ const defaultValues = {
 };
 
 function SignupForm({ onSubmit }) {
+
+    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard.registerForm)
+
+    const schema = yup.object().shape({
+        displayName: yup.string().required(textProvider.nameRequired),
+        email: yup.string().email(textProvider.validEmail).required(textProvider.emailRequired),
+        password: yup
+            .string()
+            .required(textProvider.passwordRequired)
+            .min(8, textProvider.validPassword),
+        passwordConfirm: yup.string().oneOf([yup.ref('password'), null], textProvider.passwordMatch)
+    });
+
     const classes = useStyles();
     // const dispatch = useDispatch();
 
@@ -64,7 +68,7 @@ function SignupForm({ onSubmit }) {
                             {...field}
                             className={classes.input}
                             type="text"
-                            label="Full name"
+                            label={textProvider.fullNameLabel}
                             error={!!errors.displayName}
                             helperText={errors?.displayName?.message}
                             InputProps={{
@@ -90,7 +94,7 @@ function SignupForm({ onSubmit }) {
                             type="text"
                             error={!!errors.email}
                             helperText={errors?.email?.message}
-                            label="Email"
+                            label={textProvider.emailLabel}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -112,7 +116,7 @@ function SignupForm({ onSubmit }) {
                             {...field}
                             className={classes.input}
                             type="password"
-                            label="Password"
+                            label={textProvider.passwordLabel}
                             error={!!errors.password}
                             helperText={errors?.password?.message}
                             InputProps={{
@@ -136,7 +140,7 @@ function SignupForm({ onSubmit }) {
                             {...field}
                             className={classes.input}
                             type="password"
-                            label="Confirm Password"
+                            label={textProvider.confirmPwdLabel}
                             error={!!errors.passwordConfirm}
                             helperText={errors?.passwordConfirm?.message}
                             InputProps={{
@@ -153,7 +157,7 @@ function SignupForm({ onSubmit }) {
                 />
 
                 <Button type="submit" aria-label="REGISTER" disabled={!isValid} value="legacy">
-                    Register
+                    {textProvider.submitBtn}
                 </Button>
             </form>
         </div>

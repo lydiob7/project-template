@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
+
+    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard)
+
     const classes = useStyles();
 
     const appInformation = useSelector(({ ui }) => ui.appInformation);
@@ -47,9 +50,9 @@ const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
                     <img src={parsePath(appInformation?.appLogo)} alt={appInformation?.appTitle} />
                 )}
                 <div>
-                    {form === 'forgot-pwd' && <Typography variant="h5">Reset Password</Typography>}
-                    {form === 'login' && <Typography variant="h5">Login</Typography>}
-                    {form === 'signup' && <Typography variant="h5">Register</Typography>}
+                    {form === 'forgot-pwd' && <Typography variant="h5">{textProvider.forgotPwdTitle}</Typography>}
+                    {form === 'login' && <Typography variant="h5">{textProvider.loginTitle}</Typography>}
+                    {form === 'signup' && <Typography variant="h5">{textProvider.registerTitle}</Typography>}
                     <TitleDecoration />
                 </div>
             </div>
@@ -57,7 +60,7 @@ const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
                 <>
                     <ForgotPassword onSubmit={onSubmit} />
                     <Typography className={classes.linkText} variant="body1">
-                        <Link to={parsePath('/login')}>Go back to Login</Link>
+                        <Link to={parsePath('/login')}>{textProvider.goBackToLoginLink}</Link>
                     </Typography>
                 </>
             )}
@@ -65,7 +68,7 @@ const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
                 <>
                     <SignupForm onSubmit={onSubmit} />
                     <Typography className={classes.linkText} variant="body1">
-                        Already have an account?&nbsp;&nbsp;&nbsp;<Link to={parsePath('/login')}>Login</Link>
+                        {textProvider.alreadyHaveAccountText}&nbsp;&nbsp;&nbsp;<Link to={parsePath('/login')}>{textProvider.alreadyHaveAccountLink}</Link>
                     </Typography>
                 </>
             )}
@@ -74,12 +77,12 @@ const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
                     <LoginForm onSubmit={onSubmit} />
                     <div className={classes.linkTextWrapper}>
                         <Typography className={classes.linkText} variant="body1">
-                            Have you forgotten your password?&nbsp;&nbsp;&nbsp;
-                            <Link to={parsePath('/forgot-password')}>Reset Password</Link>
+                            {textProvider.forgotPwdText}&nbsp;&nbsp;&nbsp;
+                            <Link to={parsePath('/forgot-password')}>{textProvider.forgotPwdLink}</Link>
                         </Typography>
                     </div>
                     <Typography className={classes.linkText} variant="body1">
-                        Don't have an account?&nbsp;&nbsp;&nbsp;<Link to={parsePath('/register')}>Register</Link>
+                        {textProvider.dontHaveAccountText}&nbsp;&nbsp;&nbsp;<Link to={parsePath('/register')}>{textProvider.dontHaveAccountLink}</Link>
                     </Typography>
                 </>
             )}
