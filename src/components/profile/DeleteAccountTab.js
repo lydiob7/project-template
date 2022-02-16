@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,23 +50,26 @@ const DangerButton = withStyles({
     }
 })(Button);
 
-/**
- * Form Validation Schema
- */
-const schema = yup.object().shape({
-    confirm: yup
-        .string()
-        .required('Please write exactly the word "Delete".')
-        .test('match', 'Please write exactly the word "Delete".', (word) => {
-            return word.toLowerCase() === 'delete';
-        })
-});
-
 const defaultValues = {
     confirm: ''
 };
 
 function DeleteAccountTab({ onSubmit: onHandleSubmit = () => {}, logoutUser = () => {} }) {
+
+    const textProvider = useSelector(({ui})=>ui.textContent.settingsPage.deleteAccountCard)
+
+    /**
+    * Form Validation Schema
+    */
+    const schema = yup.object().shape({
+        confirm: yup
+            .string()
+            .required(textProvider.confirmRequired)
+            .test('match', textProvider.confirmRequired, (word) => {
+                return word.toLowerCase() === textProvider.confirmationWord;
+            })
+    });
+
     const classes = useStyles();
 
     const { control, formState, handleSubmit } = useForm({
@@ -88,7 +92,7 @@ function DeleteAccountTab({ onSubmit: onHandleSubmit = () => {}, logoutUser = ()
                     <Card>
                         <CardContent className={clsx(classes.card, classes.flexCenter)}>
                             <Typography variant="h6" className={classes.title}>
-                                Delete your account
+                                {textProvider.title}
                             </Typography>
 
                             <form
@@ -104,7 +108,7 @@ function DeleteAccountTab({ onSubmit: onHandleSubmit = () => {}, logoutUser = ()
                                         <TextField
                                             {...field}
                                             className={classes.field}
-                                            label='Write "Delete"'
+                                            label={textProvider.deleteLabel}
                                             error={!!errors.confirm}
                                             helperText={errors?.confirm?.message}
                                             variant="outlined"
@@ -121,7 +125,7 @@ function DeleteAccountTab({ onSubmit: onHandleSubmit = () => {}, logoutUser = ()
                                     disabled={!isValid}
                                     type="submit"
                                 >
-                                    Delete Account
+                                    {textProvider.submitBtn}
                                 </DangerButton>
                             </form>
                         </CardContent>

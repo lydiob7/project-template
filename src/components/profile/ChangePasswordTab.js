@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,23 +43,26 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-/**
- * Form Validation Schema
- */
-const schema = yup.object().shape({
-    newPassword: yup
-        .string()
-        .required('Please enter your new password.')
-        .min(8, 'Password is too short - should be 8 chars minimum.'),
-    passwordConfirm: yup.string().oneOf([yup.ref('newPassword'), null], 'Passwords must match')
-});
-
 const defaultValues = {
     newPassword: '',
     passwordConfirm: ''
 };
 
 function ChangePasswordTab({ history, onSubmit: onHandleSubmit = () => {} }) {
+
+    const textProvider = useSelector(({ui})=>ui.textContent.settingsPage.changePasswordCard)
+
+    /**
+    * Form Validation Schema
+    */
+    const schema = yup.object().shape({
+        newPassword: yup
+           .string()
+           .required(textProvider.newPasswordRequired)
+           .min(8, textProvider.validPassword),
+       passwordConfirm: yup.string().oneOf([yup.ref('newPassword'), null], textProvider.passwordMatch)
+    });
+
     const classes = useStyles();
 
     const { control, formState, handleSubmit } = useForm({
@@ -81,7 +85,7 @@ function ChangePasswordTab({ history, onSubmit: onHandleSubmit = () => {} }) {
                     <Card>
                         <CardContent className={clsx(classes.card, classes.flexCenter)}>
                             <Typography className={classes.title} variant="h6">
-                                Change your password
+                                {textProvider.title}
                             </Typography>
 
                             <form
@@ -97,7 +101,7 @@ function ChangePasswordTab({ history, onSubmit: onHandleSubmit = () => {} }) {
                                         <TextField
                                             {...field}
                                             className={classes.field}
-                                            label="New Password"
+                                            label={textProvider.newPasswordLabel}
                                             type="password"
                                             error={!!errors.newPassword}
                                             helperText={errors?.newPassword?.message}
@@ -115,7 +119,7 @@ function ChangePasswordTab({ history, onSubmit: onHandleSubmit = () => {} }) {
                                         <TextField
                                             {...field}
                                             className={classes.field}
-                                            label="Password (Confirm)"
+                                            label={textProvider.passwordConfirmLabel}
                                             type="password"
                                             error={!!errors.passwordConfirm}
                                             helperText={errors?.passwordConfirm?.message}
@@ -134,7 +138,7 @@ function ChangePasswordTab({ history, onSubmit: onHandleSubmit = () => {} }) {
                                     disabled={!isValid}
                                     type="submit"
                                 >
-                                    Change my password
+                                    {textProvider.submitBtn}
                                 </Button>
                             </form>
                         </CardContent>

@@ -97,6 +97,9 @@ const defaultValues = {
 const schema = yup.object().shape({});
 
 function KeyInfoTab({ setIsDataChanged, user }) {
+
+    const textProvider = useSelector(({ui})=>ui.textContent.profilePage)
+
     const dispatch = useDispatch();
     const classes = useStyles();
 
@@ -172,16 +175,16 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                             setIsDataChanged(false);
                         }}
                     >
-                        Cancel
+                        {textProvider.cancelBtn}
                     </Button>
                     <Button className={classes.button} type="submit">
-                        Save
+                        {textProvider.saveBtn}
                     </Button>
                 </div>
             ) : (
                 <div className={classes.btnWrapper}>
                     <Button className={classes.button} variant="outlined" onClick={() => setEdit(true)}>
-                        Edit
+                        {textProvider.editBtn}
                     </Button>
                 </div>
             )}
@@ -191,14 +194,14 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                     <AppBar className={classes.cardHeader} position="static" elevation={0}>
                         <Toolbar>
                             <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
-                                Key Information
+                                {textProvider.generalTab.keyInformation.title}
                             </Typography>
                         </Toolbar>
                     </AppBar>
 
                     <CardContent>
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>First Name(s)</Typography>
+                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.firstNameLabel}</Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
@@ -211,7 +214,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                                 autoFocus
                                                 type="text"
                                                 className={classes.textField}
-                                                placeholder="Eg: John"
+                                                placeholder={textProvider.generalTab.keyInformation.firstNamePlaceholder}
                                             />
                                         )}
                                     />
@@ -222,7 +225,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                         </div>
 
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>Last Name(s)</Typography>
+                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.lastNameLabel}</Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
@@ -234,7 +237,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                                 {...field}
                                                 type="text"
                                                 className={classes.textField}
-                                                placeholder="Eg: Doe"
+                                                placeholder={textProvider.generalTab.keyInformation.lastNamePlaceholder}
                                             />
                                         )}
                                     />
@@ -245,7 +248,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                         </div>
 
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>Email</Typography>
+                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.emailLabel}</Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
@@ -257,7 +260,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                                 {...field}
                                                 type="text"
                                                 className={classes.textField}
-                                                placeholder="Eg: john@doe.com"
+                                                placeholder={textProvider.generalTab.keyInformation.emailPlaceholder}
                                             />
                                         )}
                                     />
@@ -275,7 +278,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                         </div>
 
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>Phone number</Typography>
+                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.phoneLabel}</Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} fullWidth>
@@ -287,7 +290,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                                 {...field}
                                                 type="text"
                                                 className={classes.textField}
-                                                placeholder="+39 (351) 548 1875"
+                                                placeholder={textProvider.generalTab.keyInformation.phonePlaceholder}
                                             />
                                         )}
                                     />
@@ -305,7 +308,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                         </div>
 
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>Country of residence</Typography>
+                            <Typography className={classes.label}>{textProvider.generalTab.keyInformation.countryLabel}</Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
@@ -317,7 +320,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                                 {...field}
                                                 type="text"
                                                 className={classes.textField}
-                                                placeholder="Eg: Malta"
+                                                placeholder={textProvider.generalTab.keyInformation.countryPlaceholder}
                                             />
                                         )}
                                     />
@@ -342,7 +345,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                     <AppBar className={classes.cardHeader} position="static" elevation={0}>
                         <Toolbar>
                             <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
-                                Work
+                            {textProvider.workTab.title}
                             </Typography>
                         </Toolbar>
                     </AppBar>
@@ -350,7 +353,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                     <CardContent>
                         {' '}
                         <div onClick={() => setEdit(true)} className={classes.field}>
-                            <Typography className={classes.label}>Profession/Role</Typography>
+                            <Typography className={classes.label}>{textProvider.workTab.workInformation.workLabel}</Typography>
 
                             {edit ? (
                                 <FormControl style={{ margin: '8px 0 16px 0' }} required fullWidth>
@@ -362,7 +365,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                                                 {...field}
                                                 type="text"
                                                 className={classes.textField}
-                                                placeholder="Eg: Product Manager"
+                                                placeholder={textProvider.workTab.workInformation.workPlaceholder}
                                             />
                                         )}
                                     />

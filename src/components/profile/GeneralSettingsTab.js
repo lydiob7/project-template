@@ -18,6 +18,7 @@ import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import ChangePasswordTab from './ChangePasswordTab';
 import DeleteAccountTab from './DeleteAccountTab';
 import { parsePath } from 'utils/helpers';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GeneralSettingsTab() {
+
+    const textProvider = useSelector(({ui})=>ui.textContent.settingsPage)
+
     const classes = useStyles();
     const [tab, setTab] = useState(1);
 
@@ -58,7 +62,7 @@ function GeneralSettingsTab() {
                         <AppBar className={classes.cardHeader} position="static" elevation={0}>
                             <Toolbar className="px-8">
                                 <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
-                                    Settings
+                                    {textProvider.menu.title}
                                 </Typography>
                             </Toolbar>
                         </AppBar>
@@ -69,19 +73,19 @@ function GeneralSettingsTab() {
                                     <ListItemIcon>
                                         <AccountCircleOutlinedIcon style={{ fontSize: '2rem' }} />
                                     </ListItemIcon>
-                                    <ListItemText primary="Edit Profile" />
+                                    <ListItemText primary={textProvider.menu.profileLink} />
                                 </ListItem>
                                 <ListItem button onClick={() => setTab(1)}>
                                     <ListItemIcon>
                                         <VpnKeyOutlinedIcon style={{ fontSize: '2rem' }} />
                                     </ListItemIcon>
-                                    <ListItemText primary="Change Password" />
+                                    <ListItemText primary={textProvider.menu.changePwdLink} />
                                 </ListItem>
                                 <ListItem button onClick={() => setTab(2)}>
                                     <ListItemIcon>
                                         <ErrorOutlineOutlinedIcon style={{ fontSize: '2rem' }} />
                                     </ListItemIcon>
-                                    <ListItemText primary="Delete Account" />
+                                    <ListItemText primary={textProvider.menu.deleteAccountLink} />
                                 </ListItem>
                             </List>
                         </CardContent>

@@ -175,7 +175,7 @@ const HomePage = () => {
     return (
         <Container maxWidth="md" style={{ minHeight: '100vh' }}>
             <Title
-                title="Examples"
+                title= 'Title'
                 subtitle="These are all the components available on this library."
                 subtitleSize="large"
             />

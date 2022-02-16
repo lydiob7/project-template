@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import * as yup from 'yup';
+import { useSelector } from 'react-redux';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,12 +21,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-/**
- * Form Validation Schema
- */
-const schema = yup.object().shape({
-    email: yup.string().email('You must enter a valid email').required('You must enter a email')
-});
 
 const defaultValues = {
     email: ''
@@ -32,6 +28,15 @@ const defaultValues = {
 
 function ForgotPasswordPage({ history, onSubmit: onHandleSubmit = () => {} }) {
     const classes = useStyles();
+    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard.forgotPwdForm)
+
+    
+    /**
+    * Form Validation Schema
+    */
+    const schema = yup.object().shape({
+        email: yup.string().email(textProvider.validEmail).required(textProvider.emailRequired)
+    });
 
     const { control, formState, handleSubmit } = useForm({
         mode: 'onChange',
@@ -56,7 +61,7 @@ function ForgotPasswordPage({ history, onSubmit: onHandleSubmit = () => {} }) {
                         <TextField
                             {...field}
                             className={classes.input}
-                            label="Email"
+                            label={textProvider.emailLabel}
                             autoFocus
                             type="email"
                             error={!!errors.email}
@@ -68,7 +73,7 @@ function ForgotPasswordPage({ history, onSubmit: onHandleSubmit = () => {} }) {
                 />
 
                 <Button type="submit" aria-label="RESET PASSWORD" disabled={!isValid} value="firebase">
-                    Send reset link
+                    {textProvider.submitBtn}
                 </Button>
             </form>
         </div>

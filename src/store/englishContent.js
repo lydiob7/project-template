@@ -83,12 +83,22 @@ const englishContent = {
                     emailLabel: 'Email',
                     emailPlaceholder: 'Eg: john@doe.com',
                     phoneLabel: 'Phone number',
-                    phonePlaceholder: '+39 (351) 548 1875'
+                    phonePlaceholder: '+39 (351) 548 1875',
+                    countryLabel: 'Country of residence',
+                    countryPlaceholder: 'Eg: Malta'
                 },
                 otherInformation: {
                     title: 'Other'
                 }
             },
+            workTab: {
+                title: 'Work',
+                workInformation:{
+                    workLabel: 'Profession/Role',
+                    workPlaceholder: 'Eg: Product Manager'
+                }
+            }
+            ,
             otherTab: {
                 title: 'Other',
                 generalInformation: {

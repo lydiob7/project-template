@@ -11,6 +11,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,17 +26,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const schema = yup.object().shape({
-    email: yup.string().email('You must enter a valid email').required('You must enter a email'),
-    password: yup.string().required('Please enter your password.')
-});
-
 const defaultValues = {
     email: '',
     password: ''
 };
 
 function LoginForm({ onSubmit = () => {} }) {
+
+    const textProvider = useSelector(({ui})=>ui.textContent.landingPage.authCard.loginForm)
+
+    const schema = yup.object().shape({
+        email: yup.string().email(textProvider.validEmail).required(textProvider.emailRequired),
+        password: yup.string().required(textProvider.passwordRequired)
+    });
+
     const classes = useStyles();
 
     const { control, formState, handleSubmit } = useForm({
@@ -59,7 +63,7 @@ function LoginForm({ onSubmit = () => {} }) {
                             {...field}
                             className={classes.input}
                             type="text"
-                            label="Email"
+                            label={textProvider.emailLabel}
                             error={!!errors.email}
                             helperText={errors?.email?.message}
                             InputProps={{
@@ -83,7 +87,7 @@ function LoginForm({ onSubmit = () => {} }) {
                             {...field}
                             className={classes.input}
                             type="password"
-                            label="Password"
+                            label={textProvider.passwordLabel}
                             error={!!errors.password}
                             helperText={errors?.password?.message}
                             InputProps={{
@@ -104,7 +108,7 @@ function LoginForm({ onSubmit = () => {} }) {
                 />
 
                 <Button type="submit" aria-label="LOG IN" disabled={!isValid} value="firebase">
-                    Log in
+                    {textProvider.submitBtn}
                 </Button>
             </form>
         </div>
