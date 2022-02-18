@@ -56,7 +56,7 @@ const LandingPage = ({ history, form = 'signup', onSubmit = () => {} }) => {
     const content = useSelector(({ ui }) => ui.textContent.authPage);
 
     useEffect(() => {
-        if (authenticated) history.push(defaultRedirects[data?.role] || '/');
+        if (authenticated) history.push(defaultRedirects[data?.role] || defaultRedirects.default);
     }, [history, authenticated]);
 
     return (

@@ -12,6 +12,7 @@
 -   Feature: Add default redirect routes in routes config.
 -   Feature: Update auth roles and use them on user slice and internal pages.
 -   Feature: Push to correct default page depending on role after login/register on landing page.
+-   Feature: Create MainRouteRedirect on utils file.
 
 ### v0.6.2
 

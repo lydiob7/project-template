@@ -10,6 +10,7 @@ import PrivacyPolicy from 'pages/others/PrivacyPolicy';
 
 import { mantainancePath, parsePath } from 'utils/helpers';
 import authRoles from 'auth/authRoles';
+import MainRouteRedirect from 'utils/MainRouteRedirect';
 
 const PrivateComponent = () => <p>Private</p>;
 
@@ -24,12 +25,12 @@ export const defaultRedirects = {
 export const routes = [
     {
         path: parsePath('/'),
-        component: HomePage,
+        component: MainRouteRedirect,
         exact: true
     },
     {
         path: parsePath('/home'),
-        redirectTo: '/',
+        component: HomePage,
         exact: true
     },
     {
