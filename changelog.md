@@ -14,6 +14,7 @@
 -   Feature: Push to correct default page depending on role after login/register on landing page.
 -   Feature: Create MainRouteRedirect on utils file.
 -   Feature: Add Call Module.
+-   Feature: Add Feedback Module.
 
 ### v0.6.2
 
