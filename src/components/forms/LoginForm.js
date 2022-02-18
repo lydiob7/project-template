@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+// import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
-import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,14 +34,15 @@ const defaultValues = {
 function LoginForm({ onSubmit = () => {} }) {
     const classes = useStyles();
 
-    const textProvider = useSelector(({ ui }) => ui.textContent.landingPage.authCard.loginForm);
+    const login = useSelector(({ auth }) => auth.login);
+    const text = useSelector(({ ui }) => ui.textContent?.landingPage?.authCard?.loginForm);
 
     const schema = yup.object().shape({
-        email: yup.string().email(textProvider.validEmail).required(textProvider.emailRequired),
-        password: yup.string().required(textProvider.passwordRequired)
+        email: yup.string().email(text?.validEmail).required(text?.emailRequired),
+        password: yup.string().required(text?.passwordRequired)
     });
 
-    const { control, formState, handleSubmit } = useForm({
+    const { control, formState, handleSubmit, setError } = useForm({
         mode: 'onChange',
         defaultValues,
         resolver: yupResolver(schema)
@@ -50,6 +51,15 @@ function LoginForm({ onSubmit = () => {} }) {
     const { isValid, errors } = formState;
 
     const [showPassword, setShowPassword] = useState(false);
+
+    useEffect(() => {
+        login?.errors?.forEach((error) => {
+            setError(error.type, {
+                type: 'manual',
+                message: error.message
+            });
+        });
+    }, [login.errors, setError]);
 
     return (
         <div>
@@ -62,16 +72,16 @@ function LoginForm({ onSubmit = () => {} }) {
                             {...field}
                             className={classes.input}
                             type="text"
-                            label={textProvider.emailLabel}
+                            label={text?.emailLabel}
                             error={!!errors.email}
                             helperText={errors?.email?.message}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <MailOutlineIcon />
-                                    </InputAdornment>
-                                )
-                            }}
+                            // InputProps={{
+                            //     endAdornment: (
+                            //         <InputAdornment position="end">
+                            //             <MailOutlineIcon />
+                            //         </InputAdornment>
+                            //     )
+                            // }}
                             variant="outlined"
                             required
                         />
@@ -86,7 +96,7 @@ function LoginForm({ onSubmit = () => {} }) {
                             {...field}
                             className={classes.input}
                             type="password"
-                            label={textProvider.passwordLabel}
+                            label={text?.passwordLabel}
                             error={!!errors.password}
                             helperText={errors?.password?.message}
                             InputProps={{
@@ -107,7 +117,7 @@ function LoginForm({ onSubmit = () => {} }) {
                 />
 
                 <Button type="submit" aria-label="LOG IN" disabled={!isValid} value="firebase">
-                    {textProvider.submitBtn}
+                    {text?.submitBtn}
                 </Button>
             </form>
         </div>

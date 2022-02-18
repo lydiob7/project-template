@@ -7,6 +7,8 @@
 -   Feature: Add conditional rendering of theme Switch on Navbar for isThemeToggable.
 -   Feature: Add check on themeProvider for isPreferredThemeCheckTriggered.
 -   Feature: Add redux actions to change language and add it on copyright symbol and copyright year on footer.
+-   Bugfix: Add default value for onSubmit on SignupForm.
+-   Feature: Add terms checkbox on SignupForm.
 
 ### v0.6.2
 

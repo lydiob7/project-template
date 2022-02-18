@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
+import Checkbox from '@material-ui/core/Checkbox';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import TextField from '@material-ui/core/TextField';
-import { useSelector } from 'react-redux';
+import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +24,14 @@ const useStyles = makeStyles((theme) => ({
     input: {
         width: '100%',
         marginBottom: '32px'
+    },
+    termsCheckbox: {
+        marginRight: '.2rem'
+    },
+    termsWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        marginBottom: '1rem'
     }
 }));
 
@@ -32,9 +42,10 @@ const defaultValues = {
     passwordConfirm: ''
 };
 
-function SignupForm({ onSubmit }) {
+function SignupForm({ onSubmit = () => {} }) {
     const classes = useStyles();
 
+    const authRegister = useSelector(({ auth }) => auth.register);
     const textProvider = useSelector(({ ui }) => ui.textContent.landingPage.authCard.registerForm);
 
     const schema = yup.object().shape({
@@ -46,13 +57,22 @@ function SignupForm({ onSubmit }) {
 
     // const dispatch = useDispatch();
 
-    const { control, formState, handleSubmit } = useForm({
+    const { control, formState, handleSubmit, setError } = useForm({
         mode: 'onChange',
         defaultValues,
         resolver: yupResolver(schema)
     });
 
     const { isValid, errors } = formState;
+
+    useEffect(() => {
+        authRegister?.errors?.forEach((error) => {
+            setError(error.type, {
+                type: 'manual',
+                message: error.message
+            });
+        });
+    }, [authRegister.errors, setError]);
 
     return (
         <div>
@@ -152,6 +172,27 @@ function SignupForm({ onSubmit }) {
                         />
                     )}
                 />
+
+                <div className={classes.termsWrapper}>
+                    <Controller
+                        name="terms"
+                        control={control}
+                        render={({ field }) => (
+                            <Checkbox
+                                {...field}
+                                id="terms"
+                                color="primary"
+                                className={classes.termsCheckbox}
+                                error={!!errors.terms}
+                                helperText={errors?.terms?.message}
+                                required
+                            />
+                        )}
+                    />
+                    <label htmlFor="terms">
+                        {textProvider?.termsText} <Link to="/terms&conditions">{textProvider?.termsLink}</Link>
+                    </label>
+                </div>
 
                 <Button type="submit" aria-label="REGISTER" disabled={!isValid} value="legacy">
                     {textProvider.submitBtn}
