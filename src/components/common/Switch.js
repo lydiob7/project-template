@@ -4,8 +4,8 @@ import Switch from '@material-ui/core/Switch';
 
 const AntSwitch = withStyles((theme) => ({
     root: {
-        width: '40px',
-        height: '24px',
+        width: 40,
+        height: 24,
         padding: 0,
         display: 'flex'
     },
@@ -13,7 +13,7 @@ const AntSwitch = withStyles((theme) => ({
         padding: 2,
         color: theme.palette.grey[500],
         '&$checked': {
-            transform: 'translateX(16px)',
+            transform: 'translateX(12px)',
             color: theme.palette.common.white,
             '& + $track': {
                 opacity: 1,
@@ -23,9 +23,8 @@ const AntSwitch = withStyles((theme) => ({
         }
     },
     thumb: {
-        width: '16px',
-        height: '16px',
-        margin: '2px',
+        width: '12px',
+        height: '12px',
         boxShadow: 'none'
     },
     track: {
@@ -38,7 +37,7 @@ const AntSwitch = withStyles((theme) => ({
 }))(Switch);
 
 const CustomSwitch = ({ ...props }) => {
-    return <AntSwitch {...props} />;
+    return <AntSwitch size="small" {...props} />;
 };
 
 export default CustomSwitch;

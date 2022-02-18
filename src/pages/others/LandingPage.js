@@ -57,7 +57,7 @@ const LandingPage = ({ history, form = 'signup', onSubmit = () => {} }) => {
 
     useEffect(() => {
         if (authenticated) history.push(defaultRedirects[data?.role] || defaultRedirects.default);
-    }, [history, authenticated]);
+    }, [history, authenticated, data?.role]);
 
     return (
         <Container maxWidth="lg" style={{ minHeight: '100vh', padding: '5vh 0' }}>

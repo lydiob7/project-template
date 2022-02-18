@@ -15,6 +15,7 @@
 -   Feature: Create MainRouteRedirect on utils file.
 -   Feature: Add Call Module.
 -   Feature: Add Feedback Module.
+-   Feature: Update theme.
 
 ### v0.6.2
 

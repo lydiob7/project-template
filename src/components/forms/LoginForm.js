@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-// import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
@@ -75,13 +75,13 @@ function LoginForm({ onSubmit = () => {} }) {
                             label={text?.emailLabel}
                             error={!!errors.email}
                             helperText={errors?.email?.message}
-                            // InputProps={{
-                            //     endAdornment: (
-                            //         <InputAdornment position="end">
-                            //             <MailOutlineIcon />
-                            //         </InputAdornment>
-                            //     )
-                            // }}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <MailOutlineIcon />
+                                    </InputAdornment>
+                                )
+                            }}
                             variant="outlined"
                             required
                         />

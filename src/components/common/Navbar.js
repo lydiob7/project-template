@@ -136,7 +136,7 @@ export default function Navbar({ menuItems = [] }) {
                         <Icon size="small" className={classes.itemLogo}>
                             {currentTheme === 'dark' ? 'flare' : 'brightness_3'}
                         </Icon>
-                        <Switch size="small" checked={currentTheme === 'dark'} onClick={toggleTheme} />
+                        <Switch checked={currentTheme === 'dark'} onClick={toggleTheme} />
                     </div>
                 )}
                 {userLoggedIn && (

@@ -9,7 +9,7 @@ const MainRouteRedirect = ({ history }) => {
 
     useEffect(() => {
         history.push(parsePath(defaultRedirects[role] || defaultRedirects.default));
-    }, []);
+    }, [history, role]);
 
     return null;
 };
