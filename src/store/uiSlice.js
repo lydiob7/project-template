@@ -3,6 +3,7 @@ import navigationConfig from 'config/navigationConfig';
 
 import appInformation from 'config/appInformation';
 import englishContent from 'config/languages/englishContent';
+import spanishContent from 'config/languages/spanishContent';
 import socialLinks from 'config/socialLinks';
 
 const slice = createSlice({
@@ -16,8 +17,8 @@ const slice = createSlice({
         headerSettings: {
             fixed: true
         },
-        isPreferredThemeCheckTriggered: false,
-        isThemeToggable: false,
+        isPreferredThemeCheckTriggered: true,
+        isThemeToggable: true,
         mantainanceMode: false,
         sidebar: {
             menuItems: navigationConfig(englishContent).headermenu
@@ -62,6 +63,12 @@ const slice = createSlice({
             state.textContent = englishContent;
             state.footerContent.menuItems = navigationConfig(englishContent).footermenu;
             state.sidebar.menuItems = navigationConfig(englishContent).headermenu;
+        },
+
+        setSpanishLanguage: (state, action) => {
+            state.textContent = spanishContent;
+            state.footerContent.menuItems = navigationConfig(spanishContent).footermenu;
+            state.sidebar.menuItems = navigationConfig(spanishContent).headermenu;
         }
     }
 });
@@ -75,7 +82,8 @@ export const {
     setThemeToggableOff,
     mantainanceModeEnabled,
     mantainanceModeDisabled,
-    setEnglishLanguage
+    setEnglishLanguage,
+    setSpanishLanguage
 } = slice.actions;
 
 export default slice.reducer;

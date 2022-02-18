@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { setEnglishLanguage, setSpanishLanguage } from 'store/uiSlice';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,16 +21,20 @@ const useStyles = makeStyles((theme) => ({
 
 function Copyright({ rightsOwner, rightsOwnerWebsite, version, year }) {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const lastYearWithRights = year ? year : new Date().getFullYear();
+
+    const textProvider = useSelector(({ ui }) => ui.textContent.footer);
 
     return (
         <Grid item lg={12} className={classes.root}>
             <Typography variant="body2">
-                &copy; All rights reserved.{' '}
                 <a style={{ color: 'inherit' }} target="_blank" rel="noreferrer" href={rightsOwnerWebsite}>
                     {rightsOwner}
                 </a>{' '}
-                {lastYearWithRights}. {version && `v${version}`}
+                <span onClick={() => dispatch(setEnglishLanguage())}>&copy;</span>{' '}
+                <span onClick={() => dispatch(setSpanishLanguage())}>{lastYearWithRights}.</span>{' '}
+                {textProvider?.copyright}. {version && `v${version}`}
             </Typography>
         </Grid>
     );

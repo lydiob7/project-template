@@ -3,6 +3,10 @@
 -   Feature: Move all text to englishContent.js file.
 -   Feature: Move socialLinks and general app information to different files.
 -   Feature: Move text content to different folder.
+-   Feature: Add isPreferredThemeCheckTriggered & isThemeToggable with reducers to uiSlice.
+-   Feature: Add conditional rendering of theme Switch on Navbar for isThemeToggable.
+-   Feature: Add check on themeProvider for isPreferredThemeCheckTriggered.
+-   Feature: Add redux actions to change language and add it on copyright symbol and copyright year on footer.
 
 ### v0.6.2
 

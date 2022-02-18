@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from './theme';
@@ -7,12 +7,17 @@ import { themeDark } from 'store/uiSlice';
 export default function ThemeProvider({ children }) {
     const dispatch = useDispatch();
     const themeColor = useSelector(({ ui }) => ui.theme);
+    const isPreferredThemeCheckTriggered = useSelector(({ ui }) => ui.isPreferredThemeCheckTriggered);
 
-    useEffect(() => {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    useLayoutEffect(() => {
+        if (
+            isPreferredThemeCheckTriggered &&
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+        ) {
             dispatch(themeDark());
         }
-    }, [dispatch]);
+    }, [dispatch, isPreferredThemeCheckTriggered]);
 
     return <MuiThemeProvider theme={theme(themeColor)}>{children}</MuiThemeProvider>;
 }

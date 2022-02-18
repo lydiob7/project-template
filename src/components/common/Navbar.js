@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     mainNavigationListItem: {
         '& .MuiButton-textPrimary': {
             color: theme.palette.text.primary,
+            // textTransform: 'uppercase',
             fontWeight: '700',
             fontSize: '.8rem',
             '&:focus': {
@@ -76,10 +77,12 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     listItem: {
-        display: 'flex',
-        alignItems: 'center',
-        color: 'inherit',
-        textTransform: 'capitalize'
+        '& a': {
+            display: 'flex',
+            alignItems: 'center',
+            color: 'inherit',
+            textTransform: 'capitalize'
+        }
     },
     itemLogo: {
         opacity: 0.6,
@@ -98,6 +101,7 @@ export default function Navbar({ menuItems = [] }) {
     const [navOpen, setNavOpen] = useState(false);
     const appInformation = useSelector(({ ui }) => ui.appInformation);
     const currentTheme = useSelector(({ ui }) => ui.theme);
+    const isThemeToggable = useSelector(({ ui }) => ui.isThemeToggable);
     const userLoggedIn = useSelector(({ auth }) => auth.user.authenticated);
 
     const toggleTheme = () => {
@@ -127,12 +131,14 @@ export default function Navbar({ menuItems = [] }) {
                     );
                 })}
 
-                <div className={classes.themeButton}>
-                    <Icon size="small" className={classes.itemLogo}>
-                        {currentTheme === 'dark' ? 'flare' : 'brightness_3'}
-                    </Icon>
-                    <Switch checked={currentTheme === 'dark'} onClick={toggleTheme} />
-                </div>
+                {isThemeToggable && (
+                    <div className={classes.themeButton}>
+                        <Icon size="small" className={classes.itemLogo}>
+                            {currentTheme === 'dark' ? 'flare' : 'brightness_3'}
+                        </Icon>
+                        <Switch size="small" checked={currentTheme === 'dark'} onClick={toggleTheme} />
+                    </div>
+                )}
                 {userLoggedIn && (
                     <MenuButton
                         component={AuthUserSmallCard}
@@ -168,36 +174,30 @@ export default function Navbar({ menuItems = [] }) {
 
                         if (item.dropdown) {
                             return (
-                                <div key={index}>
-                                    <ListItem className={classes.listItem}>
-                                        {item.icon && <Icon className={classes.itemLogo}>{item.icon}</Icon>}
-                                        <ListItemText primary={item.title} />
-                                    </ListItem>
-                                    <List>
-                                        {item.dropdown.map((ditem, index2) => {
-                                            return (
-                                                <Link to={ditem.path} key={index2} className={classes.listItem}>
-                                                    <ListItem button onClick={() => setNavOpen(false)}>
-                                                        {ditem.icon && (
-                                                            <Icon className={classes.itemLogo}>{ditem.icon}</Icon>
-                                                        )}
-                                                        <span>{ditem.title}</span>
-                                                    </ListItem>
-                                                </Link>
-                                            );
-                                        })}
-                                    </List>
-                                </div>
+                                <List button>
+                                    {item.dropdown.map((ditem, index2) => {
+                                        return (
+                                            <ListItem
+                                                className={classes.listItem}
+                                                key={index2}
+                                                onClick={() => setNavOpen(false)}
+                                            >
+                                                {ditem.icon && <Icon className={classes.itemLogo}>{ditem.icon}</Icon>}
+                                                <Link to={ditem.path}>{ditem.title}</Link>
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
                             );
                         }
 
                         return (
-                            <Link to={item.path} className={classes.listItem} key={index}>
-                                <ListItem button onClick={() => setNavOpen(false)}>
+                            <ListItem className={classes.listItem} button key={index} onClick={() => setNavOpen(false)}>
+                                <Link to={item.path}>
                                     {item.icon && <Icon className={classes.itemLogo}>{item.icon}</Icon>}
                                     <ListItemText primary={item.title} />
-                                </ListItem>
-                            </Link>
+                                </Link>
+                            </ListItem>
                         );
                     })}
                 </List>
@@ -207,12 +207,14 @@ export default function Navbar({ menuItems = [] }) {
                 <Divider />
 
                 <List className={classes.drawerList}>
-                    <ListItem className={classes.listItem} button>
-                        <Icon size="small" className={classes.itemLogo}>
-                            {currentTheme === 'dark' ? 'flare' : 'brightness_3'}
-                        </Icon>
-                        <Switch checked={currentTheme === 'dark'} onClick={toggleTheme} />
-                    </ListItem>
+                    {isThemeToggable && (
+                        <ListItem className={classes.listItem} button>
+                            <Icon size="small" className={classes.itemLogo}>
+                                {currentTheme === 'dark' ? 'flare' : 'brightness_3'}
+                            </Icon>
+                            <Switch size="small" checked={currentTheme === 'dark'} onClick={toggleTheme} />
+                        </ListItem>
+                    )}
                     {menuItems?.map((item, index) => {
                         if ((item.onlyLoggedOut && userLoggedIn) || (item.onlyLoggedIn && !userLoggedIn)) return null;
                         if (item.type === 'logout') {
