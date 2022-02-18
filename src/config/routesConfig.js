@@ -9,8 +9,17 @@ import TermsAndConditions from 'pages/others/TermsAndConditions';
 import PrivacyPolicy from 'pages/others/PrivacyPolicy';
 
 import { mantainancePath, parsePath } from 'utils/helpers';
+import authRoles from 'auth/authRoles';
 
 const PrivateComponent = () => <p>Private</p>;
+
+export const defaultRedirects = {
+    notAuthenticated: '/login',
+    [authRoles.admin]: '/profile',
+    [authRoles.user]: '/home',
+    [authRoles.onlyGuest]: '/profile',
+    default: '/home'
+};
 
 export const routes = [
     {

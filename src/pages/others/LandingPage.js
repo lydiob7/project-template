@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import AuthCard from 'components/cards/AuthCard';
 import MailConfirmPage from 'pages/account/MailConfirmPage';
 
+import { defaultRedirects } from 'config/routesConfig';
+
 const useStyles = makeStyles((theme) => ({
     description: {},
     pageTitle: {
@@ -50,11 +52,11 @@ const LandingPage = ({ history, form = 'signup', onSubmit = () => {} }) => {
     const classes = useStyles();
 
     const { appInformation } = useSelector(({ ui }) => ui);
-    const authenticated = useSelector(({ auth }) => auth.user.authenticated);
+    const { authenticated, data } = useSelector(({ auth }) => auth.user);
     const content = useSelector(({ ui }) => ui.textContent.authPage);
 
     useEffect(() => {
-        if (authenticated) history.push('/');
+        if (authenticated) history.push(defaultRedirects[data?.role] || '/');
     }, [history, authenticated]);
 
     return (

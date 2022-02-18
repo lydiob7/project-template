@@ -5,31 +5,20 @@ import _ from 'lodash';
 import { showMessage } from 'store/messageSlice';
 import firebaseService from 'services/firebaseService';
 import { parsePath } from 'utils/helpers';
+import authRoles from 'auth/authRoles';
 
 const history = createBrowserHistory();
 
 export const setUserDataFirebase = (user, authUser) => async (dispatch) => {
     if (user) {
         const userData = {
-            bgURL: user.data?.bgURL || user.bgURL || '',
-            contact: user.data?.contact || {},
-            displayName: user.data?.displayName || user.displayName || '',
-            email: user.data?.email || user.email || '',
-            emailVerified: user.data?.emailVerified || user.emailVerified || '',
-            firstName: user.data?.firstName || user.firstName || '',
-            frequency: user.data?.frequency || 0,
+            email: user.email || '',
+            firstName: user.firstName || '',
             from: 'firebase',
-            general: user.data?.general || {},
-            isApproved: user.data?.isApproved || false,
-            lastName: user.data?.lastName || user.lastName || '',
-            phoneNumber: user.data?.phoneNumber || user.phoneNumber || '',
-            photoURL: user.data?.photoURL || user.photoURL || '',
+            lastName: user.lastName || '',
+            photoURL: user.photoURL || '',
             redirectUrl: '/',
-            role: user.data?.role || user.role || '',
-            settings: user.data?.settings || user.settings || {},
-            shortcuts: user.data?.shortcuts || user.shortcuts || [],
-            uid: user.data?.uid || user.uid || '',
-            work: user.data?.work || {}
+            role: user.role || authRoles.onlyGuest
         };
         return dispatch(setUserData(userData));
     }
@@ -43,30 +32,7 @@ export const createUserSettingsFirebase = (authUser) => async (dispatch, getStat
     const guestUser = getState().auth.user;
 
     const user = _.merge({}, guestUser, {
-        data: {
-            bgURL: authUser?.bgURL || '',
-            contact: authUser.contact
-                ? { ...authUser.contact, email: authUser.contact.email || authUser.email }
-                : { email: authUser.email },
-            firstName: authUser.firstName || '',
-            frequency: authUser.frequency || 0,
-            general: authUser.general || {},
-            isApproved: authUser.isApproved || false,
-            lastName: authUser.lastName || '',
-            photoURL: authUser.photoURL || '',
-            settings: authUser.settings || {},
-            shortcuts: authUser.shortcuts || [],
-            work: authUser.work || {}
-        },
-        displayName: authUser.displayName || '',
-        email: authUser.email,
-        emailVerified: authUser.emailVerified || false,
-        firstName: authUser.firstName || '',
-        from: 'firebase',
-        id: authUser.uid,
-        redirectUrl: '/',
-        role: 'user',
-        uid: authUser.uid
+        data: authUser
     });
 
     dispatch(updateUserData(user));
@@ -76,25 +42,11 @@ export const createUserSettingsFirebase = (authUser) => async (dispatch, getStat
 
 export const setUserData = (user) => async (dispatch, getState) => {
     const userData = {
-        bgURL: user.bgURL || '',
-        contact: user.contact ? { ...user.contact, email: user.contact.email || user.email } : { email: user.email },
-        displayName: user.displayName,
         email: user.email,
-        emailVerified: user.emailVerified,
         firstName: user.firstName,
-        frequency: user.frequency || 0,
-        from: 'firebase',
-        general: user.general || {},
-        isApproved: user.isApproved || false,
         lastName: user.lastName,
-        phoneNumber: user.phoneNumber || '',
         photoURL: user.photoURL || '',
-        redirectUrl: '/',
-        role: user.role || 'user',
-        settings: user.settings || {},
-        shortcuts: user.shortcuts || [],
-        uid: user.uid,
-        work: user.work || {}
+        role: user.role || authRoles.onlyGuest
     };
     dispatch(setUser(userData));
 };
