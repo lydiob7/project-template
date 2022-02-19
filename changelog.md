@@ -19,6 +19,7 @@
 -   Feature: Update button to accept more custom colors.
 -   Feature: Export all components from a single file.
 -   Feature: Export everything from a single file within config, layouts and utils folders.
+-   Feature: Update AppRoute to redirect to default page when not authenticated.
 
 ### v0.6.2
 

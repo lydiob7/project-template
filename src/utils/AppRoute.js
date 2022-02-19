@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 
 import { LayoutDefault, NoLayout } from 'layouts';
 
+import { defaultRedirects } from 'config';
+
 const AppRoute = ({
     component: Component,
     footer = true,
@@ -11,7 +13,6 @@ const AppRoute = ({
     noLayoutFooter = false,
     noLayoutBtn = false,
     privateRoute = false,
-    redirectRoute = '/register',
     scrollBtn = false,
     ...componentProps
 }) => {
@@ -22,7 +23,7 @@ const AppRoute = ({
     return (
         <>
             {privateRoute && !authenticated ? (
-                <Redirect to={redirectRoute} />
+                <Redirect to={defaultRedirects.notAuthenticated} />
             ) : (
                 <>
                     {layout ? (
