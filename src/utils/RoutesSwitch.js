@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Switch, Redirect, Route } from 'react-router-dom';
-import AppRoute from 'utils/AppRoute';
+
+import { AppRoute } from 'utils';
 
 // Pages
 import MantainancePage from 'pages/others/MantainancePage';
-import { routes } from 'config/routesConfig';
+import { routes } from 'config';
 
 const RoutesSwitch = () => {
     const mantainanceMode = useSelector(({ ui }) => ui.mantainanceMode);

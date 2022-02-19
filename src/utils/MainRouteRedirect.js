@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import { defaultRedirects } from 'config/routesConfig';
 import { parsePath } from './helpers';
 

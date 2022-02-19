@@ -10,7 +10,7 @@ import PrivacyPolicy from 'pages/others/PrivacyPolicy';
 
 import { mantainancePath, parsePath } from 'utils/helpers';
 import authRoles from 'auth/authRoles';
-import MainRouteRedirect from 'utils/MainRouteRedirect';
+import { MainRouteRedirect } from 'utils';
 
 const PrivateComponent = () => <p>Private</p>;
 

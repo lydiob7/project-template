@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Auth } from './auth';
 
 // Routes
-import RoutesSwitch from 'utils/RoutesSwitch';
+import { RoutesSwitch } from 'utils';
 
 const store = configureStore();
 

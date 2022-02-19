@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import LayoutDefault from 'layouts/LayoutDefault';
-import NoLayout from 'layouts/NoLayout';
+
+import { LayoutDefault, NoLayout } from 'layouts';
 
 const AppRoute = ({
     component: Component,

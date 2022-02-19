@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import navigationConfig from 'config/navigationConfig';
 
-import appInformation from 'config/appInformation';
-import englishContent from 'config/languages/englishContent';
-import spanishContent from 'config/languages/spanishContent';
-import socialLinks from 'config/socialLinks';
+import { appInformation, englishContent, navigationConfig, socialLinks, spanishContent } from 'config';
 
 const slice = createSlice({
     name: 'ui',
