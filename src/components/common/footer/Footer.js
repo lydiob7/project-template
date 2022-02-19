@@ -24,7 +24,9 @@ const useStyles = makeStyles((theme) => ({
 function Footer() {
     const classes = useStyles();
     const appInformation = useSelector(({ ui }) => ui.appInformation);
-    const footerContent = useSelector(({ ui }) => ui.footerContent);
+    const footer = useSelector(({ ui }) => ui.footer);
+
+    if (!footer?.isVisible) return null;
 
     return (
         <footer className={classes.root}>
@@ -37,12 +39,16 @@ function Footer() {
                             version={process.env.REACT_APP_VERSION}
                         />
                     </Grid>
-                    <Grid item sm={12} md={4}>
-                        <CopyrightMenu menus={footerContent?.menuItems} />
-                    </Grid>
-                    <Grid item sm={12} md={3}>
-                        <SocialProfile socials={footerContent?.general?.sociallinks} />
-                    </Grid>
+                    {footer?.isMenuItemsListVisible && (
+                        <Grid item sm={12} md={4}>
+                            <CopyrightMenu menus={footer?.menuItems} />
+                        </Grid>
+                    )}
+                    {footer?.isSocialLinksListVisible && (
+                        <Grid item sm={12} md={3}>
+                            <SocialProfile socials={footer?.socialLinks} />
+                        </Grid>
+                    )}
                 </Grid>
             </Container>
         </footer>

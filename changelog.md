@@ -20,6 +20,7 @@
 -   Feature: Export all components from a single file.
 -   Feature: Export everything from a single file within config, layouts and utils folders.
 -   Feature: Update AppRoute to redirect to default page when not authenticated.
+-   Feature: Update Footer with hide options from uiSlice.
 
 ### v0.6.2
 

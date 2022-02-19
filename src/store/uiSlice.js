@@ -6,9 +6,12 @@ const slice = createSlice({
     name: 'ui',
     initialState: {
         appInformation,
-        footerContent: {
-            socialLinks,
-            menuItems: navigationConfig(englishContent).footermenu
+        footer: {
+            isMenuItemsListVisible: true,
+            isSocialLinksListVisible: true,
+            isVisible: true,
+            menuItems: navigationConfig(englishContent).footermenu,
+            socialLinks
         },
         headerSettings: {
             fixed: true
