@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import TitleDecoration from 'components/headings/TitleDecoration';
+
+import { makeStyles, Typography } from '@material-ui/core';
+
+import { TitleDecoration } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     root: {

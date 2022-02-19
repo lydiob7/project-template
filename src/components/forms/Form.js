@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core';
 
-import Button from 'components/common/Button';
+import { Button } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     root: {}

@@ -5,14 +5,14 @@ import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
-import TextField from '@material-ui/core/TextField';
-import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
+import { Checkbox, InputAdornment, makeStyles, TextField } from '@material-ui/core';
+import {
+    MailOutline as MailOutlineIcon,
+    PersonOutlineOutlined as PersonOutlineOutlinedIcon,
+    VpnKeyOutlined as VpnKeyOutlinedIcon
+} from '@material-ui/icons';
+
+import { Button } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     root: {

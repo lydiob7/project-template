@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+
 import { makeStyles } from '@material-ui/core';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import { ExpandLess as ExpandLessIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -9,37 +9,39 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import AuthCard from 'components/cards/AuthCard';
-import AuthUserCard from 'components/cards/AuthUserCard';
-import AuthUserSmallCard from 'components/cards/AuthUserSmallCard';
-import Breadcrumb from 'components/headings/Breadcrumb';
-import Button from 'components/common/Button';
-import CheckboxWidget from 'components/widgets/CheckboxWidget';
-import ConfirmationModal from 'components/modals/ConfirmationModal';
-import ContentCard from 'components/cards/ContentCard';
-// import Form from 'components/forms/Form';
-import FormCard from 'components/cards/FormCard';
-import ImageModal from 'components/modals/ImageModal';
-import ItemCard from 'components/cards/ItemCard';
-import ItemHorizontal from 'components/cards/ItemHorizontal';
-import Loader from 'components/common/Loader';
-import LoginForm from 'components/forms/LoginForm';
-import ReportItemModal from 'components/modals/ReportItemModal';
-import ResultsHeader from 'components/common/ResultsHeader';
-import SearchInput from 'components/forms/SearchInput';
-import SignupForm from 'components/forms/SignupForm';
-import SimpleCard from 'components/cards/SimpleCard';
-import SmallCard from 'components/cards/SmallCard';
-import Switch from 'components/common/Switch';
-import TagsWidget from 'components/widgets/TagsWidget';
-import Title from 'components/headings/Title';
-import TitleDecoration from 'components/headings/TitleDecoration';
-import ToggableArrayInput from 'components/forms/ToggableArrayInput';
-import ToggableAutocomplete from 'components/forms/ToggableAutocomplete';
-import ToggableInput from 'components/forms/ToggableInput';
-import ToggablePicker from 'components/forms/ToggablePicker';
-import ToggableSelect from 'components/forms/ToggableSelect';
-import WidgetWrapper from 'components/widgets/WidgetWrapper';
+import {
+    AuthCard,
+    AuthUserCard,
+    AuthUserSmallCard,
+    Breadcrumb,
+    Button,
+    CheckboxWidget,
+    ConfirmationModal,
+    ContentCard,
+    // Form,
+    FormCard,
+    ImageModal,
+    ItemCard,
+    ItemHorizontal,
+    Loader,
+    LoginForm,
+    ReportItemModal,
+    ResultsHeader,
+    SearchInput,
+    SignupForm,
+    SimpleCard,
+    SmallCard,
+    Switch,
+    TagsWidget,
+    Title,
+    TitleDecoration,
+    ToggableArrayInput,
+    ToggableAutocomplete,
+    ToggableInput,
+    ToggablePicker,
+    ToggableSelect,
+    WidgetWrapper
+} from 'custom-components';
 
 import { parsePath } from 'utils/helpers';
 

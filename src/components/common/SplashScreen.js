@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
+
 import { parsePath } from 'utils/helpers';
 
 function SplashScreen() {

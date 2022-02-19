@@ -1,20 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUserInformation, editUserSkills } from 'auth/store/userSlice';
+import { updateUserInformation } from 'auth/store/userSlice';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import { useForm } from 'react-hook-form';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import { AppBar, Card, CardContent, Grid, makeStyles, Toolbar, Typography } from '@material-ui/core';
 
-import ToggableInput from 'components/forms/ToggableInput';
-import ToggableAutocomplete from 'components/forms/ToggableAutocomplete';
+import { ToggableInput } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -47,7 +40,6 @@ function AboutTab({ user }) {
     });
 
     const { data } = useSelector(({ auth }) => auth.user);
-    const skills = useSelector(({ entities }) => entities.skills.list);
 
     const { handleSubmit, reset, control } = useForm({
         mode: 'onChange',

@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Controller } from 'react-hook-form';
-import FormControl from '@material-ui/core/FormControl';
-import Chip from '@material-ui/core/Chip';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+
+import { FormControl, Chip, Icon, IconButton, makeStyles, TextField, Typography } from '@material-ui/core';
+import { SaveOutlined as SaveOutlinedIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     field: (props) => ({

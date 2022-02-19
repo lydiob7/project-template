@@ -1,24 +1,29 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import AppBar from '@material-ui/core/AppBar';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
-
-import ChangePasswordTab from './ChangePasswordTab';
-import DeleteAccountTab from './DeleteAccountTab';
-import { parsePath } from 'utils/helpers';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import {
+    AppBar,
+    Card,
+    CardContent,
+    Grid,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    makeStyles,
+    Toolbar,
+    Typography
+} from '@material-ui/core';
+import {
+    AccountCircleOutlined as AccountCircleOutlinedIcon,
+    ErrorOutlineOutlined as ErrorOutlineOutlinedIcon,
+    VpnKeyOutlined as VpnKeyOutlinedIcon
+} from '@material-ui/icons';
+
+import { ChangePasswordTab, DeleteAccountTab } from 'custom-components';
+
+import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
     root: {

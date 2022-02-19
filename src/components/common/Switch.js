@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Switch from '@material-ui/core/Switch';
+
+import { withStyles, Switch } from '@material-ui/core';
 
 const AntSwitch = withStyles((theme) => ({
     root: {

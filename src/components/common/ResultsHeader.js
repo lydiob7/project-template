@@ -1,14 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
-import ListIcon from '@material-ui/icons/List';
-import ViewModuleIcon from '@material-ui/icons/ViewModule';
+
+import {
+    ArrowBackIos as ArrowBackIosIcon,
+    ArrowForwardIos as ArrowForwardIosIcon,
+    FirstPage as FirstPageIcon,
+    LastPage as LastPageIcon,
+    List as ListIcon,
+    ViewModule as ViewModuleIcon
+} from '@material-ui/icons';
+import { Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     controlsContainer: {

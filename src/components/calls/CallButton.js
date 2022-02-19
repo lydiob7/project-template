@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core';
-import PhoneIcon from '@material-ui/icons/Phone';
 
-import Button from 'components/common/Button';
+import { makeStyles } from '@material-ui/core';
+import { Phone as PhoneIcon } from '@material-ui/icons/Phone';
+
+import { Button } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     button: {

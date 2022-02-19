@@ -1,7 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import Icon from '@material-ui/core/Icon';
-import Modal from '@material-ui/core/Modal';
+
+import { Icon, makeStyles, Modal } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {

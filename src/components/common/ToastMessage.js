@@ -1,18 +1,17 @@
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { amber } from '@material-ui/core/colors';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
-import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import IconButton from '@material-ui/core/IconButton';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { hideMessage } from 'store/messageSlice';
+
+import { amber } from '@material-ui/core/colors';
+import { IconButton, makeStyles, Snackbar, SnackbarContent, Typography } from '@material-ui/core';
+import {
+    CheckCircleOutline as CheckCircleOutlineIcon,
+    CloseOutlined as CloseOutlinedIcon,
+    ErrorOutline as ErrorOutlineIcon,
+    InfoOutlined as InfoOutlinedIcon,
+    ReportProblemOutlined as ReportProblemOutlinedIcon
+} from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {},

@@ -1,11 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Copyright from './Copyright';
-import CopyrightMenu from './CopyrightMenu';
-import SocialProfile from 'components/other/account/SocialProfile';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+
+import { Container, Grid, makeStyles } from '@material-ui/core';
+
+import { Copyright, CopyrightMenu, SocialProfile } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     root: {

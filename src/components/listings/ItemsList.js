@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import LinkItemHorizontal from './LinkItemHorizontal';
-import LinkItemCard from './LinkItemCard';
+
+import { Grid, makeStyles } from '@material-ui/core';
+
+import { ItemCard, ItemHorizontal } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     horizontalItems: {},

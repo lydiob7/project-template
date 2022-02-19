@@ -1,7 +1,7 @@
 import { Controller, useForm } from 'react-hook-form';
 import { withRouter } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Button from '@material-ui/core/Button';
+import { Button } from 'custom-components';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import * as yup from 'yup';

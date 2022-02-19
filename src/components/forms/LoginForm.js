@@ -4,14 +4,14 @@ import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
+import { IconButton, InputAdornment, TextField, makeStyles } from '@material-ui/core';
+import {
+    MailOutline as MailOutlineIcon,
+    Visibility as VisibilityIcon,
+    VisibilityOff as VisibilityOffIcon
+} from '@material-ui/icons';
+
+import { Button } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     root: {

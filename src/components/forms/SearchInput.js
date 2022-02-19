@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
+
+import { InputBase, makeStyles, Paper } from '@material-ui/core';
+import { Search as SearchIcon } from '@material-ui/icons';
+
+import { Button } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     search: {

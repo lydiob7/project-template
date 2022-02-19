@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 
-import { makeStyles } from '@material-ui/core/styles';
-import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
+import { makeStyles } from '@material-ui/core';
+import { ChatOutlined as ChatOutlinedIcon } from '@material-ui/icons';
 
-import Button from 'components/common/Button';
-import FeedbackModal from 'components/modals/FeedbackModal';
+import { Button, FeedbackModal } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     icon: {

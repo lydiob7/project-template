@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, alpha } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
+
+import { alpha } from '@material-ui/core/styles';
+import { makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {

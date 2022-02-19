@@ -1,6 +1,8 @@
 import React from 'react';
-import SimpleCard from 'components/cards/SimpleCard';
-import Grid from '@material-ui/core/Grid';
+
+import { Grid } from '@material-ui/core';
+
+import { SimpleCard } from 'custom-components';
 
 function PopularCategories({ catitems }) {
     return (

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { parsePath } from 'utils/helpers';
+
+import { makeStyles, Paper, Typography } from '@material-ui/core';
+
 import ForgotPassword from 'pages/account/ForgotPassword';
-import LoginForm from 'components/forms/LoginForm';
-import SignupForm from 'components/forms/SignupForm';
-import TitleDecoration from 'components/headings/TitleDecoration';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { LoginForm, SignupForm, TitleDecoration } from 'custom-components';
+
+import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
     root: {

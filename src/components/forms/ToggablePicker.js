@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 
-import ImageModal from 'components/modals/ImageModal';
-import ConfirmationModal from 'components/modals/ConfirmationModal';
+import { Icon, IconButton, makeStyles, Typography } from '@material-ui/core';
+
+import { Button, ConfirmationModal, ImageModal } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     actionButtonsWrapper: {

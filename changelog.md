@@ -16,6 +16,8 @@
 -   Feature: Add Call Module.
 -   Feature: Add Feedback Module.
 -   Feature: Update theme.
+-   Feature: Update button to accept more custom colors.
+-   Feature: Export all components from a single file.
 
 ### v0.6.2
 

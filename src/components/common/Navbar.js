@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
-import CloseIcon from '@material-ui/icons/Close';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-
-import Switch from 'components/common/Switch';
-import MenuButton from 'components/menus/MenuButton';
-import AuthUserCard from 'components/cards/AuthUserCard';
-import AuthUserSmallCard from 'components/cards/AuthUserSmallCard';
-import Logo from 'components/common/Logo';
 import { logoutUser } from 'auth/store/userSlice';
 import { themeDark, themeLight } from 'store/uiSlice';
+
+import { Close as CloseIcon, Menu as MenuIcon } from '@material-ui/icons';
+import { Divider, Drawer, Hidden, Icon, IconButton, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
+
+import { AuthUserCard, AuthUserSmallCard, Button, Logo, MenuButton, Switch } from 'custom-components';
+
 import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({

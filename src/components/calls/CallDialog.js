@@ -3,19 +3,14 @@ import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { useTimer } from 'use-timer';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import CallEndIcon from '@material-ui/icons/CallEnd';
-import CallIcon from '@material-ui/icons/Call';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import Fab from '@material-ui/core/Fab';
-import Grid from '@material-ui/core/Grid';
-import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
-import MicOffOutlinedIcon from '@material-ui/icons/MicOffOutlined';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Typography from '@material-ui/core/Typography';
+import { Avatar, Dialog, DialogActions, DialogContent, Fab, Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+    Call as CallIcon,
+    CallEnd as CallEndIcon,
+    MicOffOutlined as MicOffOutlinedIcon,
+    MoreVert as MoreVertIcon,
+    MicNoneOutlined as MicNoneOutlinedIcon
+} from '@material-ui/icons';
 
 import { parsePath, parseSeconds } from 'utils/helpers';
 

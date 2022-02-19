@@ -1,9 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import TwitterIcon from '@material-ui/icons/Twitter';
+
+import { makeStyles } from '@material-ui/core';
+import {
+    Instagram as InstagramIcon,
+    Facebook as FacebookIcon,
+    LinkedIn as LinkedInIcon,
+    Twitter as TwitterIcon
+} from '@material-ui/icons';
 
 const icons = {
     facebook: <FacebookIcon />,

@@ -1,14 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import TitleDecoration from 'components/headings/TitleDecoration';
-import Button from 'components/common/Button';
-import Modal from '@material-ui/core/Modal';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+
+import { Container, Grid, IconButton, makeStyles, Modal, Paper, Typography } from '@material-ui/core';
+import { CloseOutlined as CloseOutlinedIcon } from '@material-ui/icons';
+
+import { Button, TitleDecoration } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     root: {

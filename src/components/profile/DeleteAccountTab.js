@@ -1,16 +1,13 @@
+import { useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Card, CardContent, makeStyles, TextField, Typography, withStyles } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { useSelector } from 'react-redux';
+
+import { Button } from 'custom-components';
 
 const useStyles = makeStyles((theme) => ({
     root: {
