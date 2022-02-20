@@ -53,56 +53,56 @@ const checkboxes = [
     { text: 'Checkbox 8', number: 2, id: 7, active: false }
 ];
 
-const inputFields = (setFormValues) => [
+const inputFields = (setFormValues, textProvider) => [
     {
         Component: ToggableArrayInput,
-        label: 'Array Input',
+        label: textProvider?.arrayInputLabel,
         name: 'array-input',
-        placeholder: 'Write something',
+        placeholder: textProvider?.arrayInputPlaceholder,
         required: true
     },
     {
         addOption: (newOption) => console.log(newOption),
         Component: ToggableAutocomplete,
-        label: 'Autocomplete Input',
+        label: textProvider?.autocompleteLabel,
         name: 'autocomplete-input',
-        options: [{ title: 'First Option' }, { title: 'Second Option' }],
-        placeholder: 'Add more options',
+        options: [{ title: textProvider?.selectOptionOneTitle }, { title: textProvider?.selectOptionTwoTitle }],
+        placeholder: textProvider?.autocompletePlaceholder,
         required: true,
         requiredLength: 1,
         type: 'chip'
     },
     {
         Component: ToggableInput,
-        label: 'Text Input',
+        label: textProvider?.textInputLabel,
         multiline: true,
         name: 'text-input',
-        placeholder: 'Write something'
+        placeholder: textProvider?.textInputPlaceholder
     },
     {
         Component: ToggablePicker,
-        label: 'Picker',
+        label: textProvider?.pickerInputLabel,
         name: 'picker',
         onFileChange: (value) => value,
         onRemoveFile: () => setFormValues((oldValues) => ({ ...oldValues, picker: '' }))
     },
     {
         Component: ToggableSelect,
-        label: 'Select',
+        label: textProvider?.selectInputLabel,
         name: 'select',
         options: [
-            { title: 'First Option', value: 'First Option' },
-            { title: 'Second Option', value: 'Second Option' }
+            { title: textProvider?.selectOptionOneTitle, value: textProvider?.selectOptionOneTitle },
+            { title: textProvider?.selectOptionTwoTitle, value: textProvider?.selectOptionTwoTitle }
         ]
     },
     {
         Component: ToggableSelect,
-        label: 'Select Multiple',
+        label: textProvider?.selectMultipleInputLabel,
         multiple: true,
         name: 'multiple-select',
         options: [
-            { title: 'First Option', value: 'First Option' },
-            { title: 'Second Option', value: 'Second Option' }
+            { title: textProvider?.selectOptionOneTitle, value: textProvider?.selectOptionOneTitle },
+            { title: textProvider?.selectOptionTwoTitle, value: textProvider?.selectOptionTwoTitle }
         ],
         type: 'location'
     }
@@ -117,8 +117,10 @@ const tags = [
 
 const HomePage = () => {
     const dispatch = useDispatch();
+
     const currentTheme = useSelector(({ ui }) => ui.theme);
     const appInformation = useSelector(({ ui }) => ui.appInformation);
+    const textProvider = useSelector(({ ui }) => ui.textContent.homePage);
 
     const [IsImageModalOpen, setIsImageModalOpen] = useState(false);
     const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -127,7 +129,7 @@ const HomePage = () => {
     const [formValues, setFormValues] = useState({
         'text-input': '',
         'array-input': '',
-        'autocomplete-input': [{ title: 'First Option' }],
+        'autocomplete-input': [{ title: textProvider?.selectOptionOneTitle }],
         picker: '',
         select: '',
         'multiple-select': []
@@ -136,27 +138,26 @@ const HomePage = () => {
     const cardItem = {
         logo: parsePath(appInformation?.appLogo),
         internalURI: '/some-path',
-        category: { title: 'Category', icon: <AccessAlarm /> },
-        title: 'Card',
-        abstract:
-            'Some description for the card. Cras ultricies ligula sed magna dictum porta. Quisque velit nisi, pretium ut lacinia in, elementum id enim.',
+        category: { title: textProvider?.cardCategory, icon: <AccessAlarm /> },
+        title: textProvider?.cardTitle,
+        abstract: textProvider?.cardAbstract,
         url: 'https://externallink.com/',
-        btnText: 'Go go go'
+        btnText: textProvider?.cardBtnText
     };
 
     useEffect(() => {
-        dispatch(showMessage({ message: 'Normal Message' }));
+        dispatch(showMessage({ message: textProvider?.normalToastMessage }));
         setTimeout(() => {
-            dispatch(showMessage({ message: 'Success Message', variant: 'success' }));
+            dispatch(showMessage({ message: textProvider?.successToastMessage, variant: 'success' }));
         }, 2200);
         setTimeout(() => {
-            dispatch(showMessage({ message: 'Info Message', variant: 'info' }));
+            dispatch(showMessage({ message: textProvider?.infoToastMessage, variant: 'info' }));
         }, 4200);
         setTimeout(() => {
-            dispatch(showMessage({ message: 'Warning Message', variant: 'warning' }));
+            dispatch(showMessage({ message: textProvider?.warningToastMessage, variant: 'warning' }));
         }, 6200);
         setTimeout(() => {
-            dispatch(showMessage({ message: 'Error Message', variant: 'error' }));
+            dispatch(showMessage({ message: textProvider?.errorToastMessage, variant: 'error' }));
         }, 8200);
     }, [dispatch]);
 
@@ -174,34 +175,23 @@ const HomePage = () => {
 
     return (
         <Container maxWidth="md" style={{ minHeight: '100vh' }}>
-            <Title
-                title="Title"
-                subtitle="These are all the components available on this library."
-                subtitleSize="large"
-            />
+            <Title title={textProvider?.title} subtitle={textProvider?.subtitle} subtitleSize="large" />
             <Typography variant="body1" style={{ textAlign: 'center', margin: '1rem 0' }}>
-                For documentation go to{' '}
+                {textProvider?.documentationInfo}{' '}
                 <a href={appInformation?.repositoryUrl} target="_blank" rel="noreferrer">
                     {appInformation?.repositoryUrl}
                 </a>
             </Typography>
-            <Title
-                title="Smaller title"
-                size="small"
-                subtitle="This is a slightly smaller description than the one before."
-            />
-            <Typography variant="body1">Dark mode</Typography>
+            <Title title={textProvider?.smallTitle} size="small" subtitle={textProvider?.smallSubtitle} />
+            <Typography variant="body1">{textProvider?.darkModeLabel}</Typography>
             <Switch checked={currentTheme === 'dark'} onClick={toggleTheme} />
-            <Typography variant="body1">
-                Mantainance mode (this will be automatically turned off after 5 seconds, it can be turned on/off from a
-                backend)
-            </Typography>
+            <Typography variant="body1">{textProvider?.mantainanceLabel}</Typography>
             <Switch onClick={handleMantainanceMode} />
 
             <SearchInput />
             <ResultsHeader style={{ margin: '20px 0' }} />
             <ResultsHeader
-                changePage={(page) => alert(`You are moving to page: ${page}`)}
+                changePage={(page) => alert(`${textProvider?.changingPageMessage}: ${page}`)}
                 style={{ margin: '20px 0' }}
                 pagination={{
                     currentPage: 1,
@@ -228,21 +218,21 @@ const HomePage = () => {
                         <Loader style={{ height: '150px' }} />
                     </Grid>
                     <Grid item xs={12} sm={8}>
-                        <Button fullWidth>Primary Button</Button>
+                        <Button fullWidth>{textProvider?.primaryButton}</Button>
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <Button color="secondary" fullWidth>
-                            Secondary Button
+                            {textProvider?.secondaryButton}
                         </Button>
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <Button fullWidth variant="outlined">
-                            Outlined Button
+                            {textProvider?.outlinedButton}
                         </Button>
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <Button fullWidth color="danger">
-                            Danger Button
+                            {textProvider?.dangerButton}
                         </Button>
                     </Grid>
                 </Grid>
@@ -251,7 +241,7 @@ const HomePage = () => {
                     <Typography variant="h4">A Section Title</Typography>
                     <TitleDecoration style={{ marginBottom: '20px' }} />
                     <Button onClick={() => setIsReportModalOpen(true)} fullWidth>
-                        Report Modal
+                        {textProvider?.reportModalButton}
                     </Button>
                     <Button
                         style={{ margin: '2rem 0' }}
@@ -259,7 +249,7 @@ const HomePage = () => {
                         onClick={() => setIsImageModalOpen(true)}
                         fullWidth
                     >
-                        Image Modal
+                        {textProvider?.imageModalButton}
                     </Button>
                     <Button
                         style={{ marginBottom: '2rem' }}
@@ -267,19 +257,19 @@ const HomePage = () => {
                         onClick={() => setIsConfirmationModalOpen(true)}
                         fullWidth
                     >
-                        Confirmation Modal
+                        {textProvider?.confirmationModalButton}
                     </Button>
                     <Grid container justifyContent="center" item xs={12} sm={8}>
-                        <SmallCard icon={<AccessAlarm />} title="Small card" url="/some-path" />
+                        <SmallCard icon={<AccessAlarm />} title={textProvider?.smallCardTitle} url="/some-path" />
                     </Grid>
                     <Grid container justifyContent="center" item xs={12} sm={8}>
-                        <SmallCard title="Small card without icon" url="/some-path" />
+                        <SmallCard title={textProvider?.smallCardNoIconTitle} url="/some-path" />
                     </Grid>
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={4}>
-                    <SimpleCard title="Simple Card" icon={<AccessAlarm />} btnText="Button" />
-                    <SimpleCard title="Simple Card without button" icon={<AccessAlarm />} />
+                    <SimpleCard title={textProvider?.simpleCardTitle} icon={<AccessAlarm />} btnText="Button" />
+                    <SimpleCard title={textProvider?.simpleCardNoButtonTitle} icon={<AccessAlarm />} />
                 </Grid>
             </Grid>
 
@@ -296,10 +286,10 @@ const HomePage = () => {
             <Grid spacing={4} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={12}>
                     <Breadcrumb
-                        currentPgTitle="new page"
+                        currentPgTitle={textProvider?.newPageTitle}
                         currentPgIcon={<AccessAlarm />}
                         parentPgLink="#"
-                        parentPgTitle="parent page"
+                        parentPgTitle={textProvider?.newPageParentPage}
                         divider="/"
                     />
                 </Grid>
@@ -308,14 +298,18 @@ const HomePage = () => {
             <Grid spacing={4} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={10} md={4}>
                     <WidgetWrapper>
-                        <TagsWidget title="Tags Widget" tagList={tags} />
-                        <CheckboxWidget title="Checkbox Widget" items={checkboxes} style={{ marginTop: '2rem' }} />
+                        <TagsWidget title={textProvider?.tagsWidgetTitle} tagList={tags} />
+                        <CheckboxWidget
+                            title={textProvider?.checkboxWidgetTitle}
+                            items={checkboxes}
+                            style={{ marginTop: '2rem' }}
+                        />
                     </WidgetWrapper>
                 </Grid>
                 <Grid item xs={10} md={4}>
                     <LoginForm />
                     <Paper style={{ padding: '1rem 2rem', marginTop: '2rem' }}>
-                        <AuthUserCard items={[{ title: 'Profile', path: '/' }]} />
+                        <AuthUserCard items={[{ title: textProvider?.authUserProfileTitle, path: '/' }]} />
                         <AuthUserSmallCard onClick={() => setIsImageModalOpen(true)} />
                     </Paper>
                 </Grid>
@@ -327,7 +321,7 @@ const HomePage = () => {
             <Grid spacing={2} container style={{ marginTop: '60px' }} justifyContent="center">
                 <Grid item xs={10} md={6}>
                     <AuthCard form="login" />
-                    <ContentCard style={{ marginTop: '2rem' }} title="Card with text content">
+                    <ContentCard style={{ marginTop: '2rem' }} title={textProvider?.cardWithTextContentTitle}>
                         <p>
                             Cursus ipsum accumsan urna placerat ac amet sollicitudin accumsan proin eget lorem fusce eu
                             sollicitudin erat magna nunc felis sem quam adipiscing dolor nisl ut.
@@ -336,9 +330,9 @@ const HomePage = () => {
                 </Grid>
                 <Grid item xs={10} md={6}>
                     <FormCard
-                        inputFields={inputFields(setFormValues)}
+                        inputFields={inputFields(setFormValues, textProvider)}
                         onSubmit={(values) => setFormValues((oldValues) => ({ ...oldValues, ...values }))}
-                        title="Form with toggable inputs"
+                        title={textProvider?.formWithToggableInputsTitle}
                         values={formValues}
                     />
                 </Grid>

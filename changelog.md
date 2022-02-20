@@ -22,6 +22,7 @@
 -   Feature: Update AppRoute to redirect to default page when not authenticated.
 -   Feature: Update Footer with hide options from uiSlice.
 -   Update: Clean page components imports.
+-   Feature: Add text provider on home page and translate to spanish.
 
 ### v0.6.2
 
