@@ -146,7 +146,7 @@ const englishContent = {
             deleteLabel: 'Write "Delete"',
             submitBtn: 'Delete Account',
             confirmRequired: 'Please write exactly the word "Delete".',
-            confirmationWord: 'delete'
+            confirmationWord: ['delete']
         }
     },
     termsAndConditions: {

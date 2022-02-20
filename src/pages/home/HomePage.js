@@ -4,10 +4,7 @@ import { themeDark, themeLight, mantainanceModeEnabled, mantainanceModeDisabled 
 import { showMessage } from 'store/messageSlice';
 
 import { AccessAlarm } from '@material-ui/icons';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Container, Grid, Paper, Typography } from '@material-ui/core';
 
 import {
     AuthCard,

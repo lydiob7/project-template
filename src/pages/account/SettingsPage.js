@@ -1,13 +1,11 @@
 import { Suspense } from 'react';
-import clsx from 'clsx';
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
+
 import { green } from '@material-ui/core/colors';
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import Icon from '@material-ui/core/Icon';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import GeneralSettingsTab from 'components/profile/GeneralSettingsTab';
+import { Avatar, Container, Icon, makeStyles, Typography } from '@material-ui/core';
+
+import { GeneralSettingsTab } from 'custom-components';
 
 import defaultBgImage from 'assets/images/header-bg.png';
 import fallBackProfileImage from 'assets/images/profile.jpg';

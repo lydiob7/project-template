@@ -61,7 +61,7 @@ function DeleteAccountTab({ onSubmit: onHandleSubmit = () => {}, logoutUser = ()
             .string()
             .required(textProvider.confirmRequired)
             .test('match', textProvider.confirmRequired, (word) => {
-                return word.toLowerCase() === textProvider.confirmationWord;
+                return textProvider?.confirmationWord.includes(word.toLowerCase());
             })
     });
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Button from 'components/common/Button';
-import Title from 'components/headings/Title';
+
+import { Container, Grid, makeStyles } from '@material-ui/core';
+
+import { Button, Title } from 'custom-components';
+
 import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({

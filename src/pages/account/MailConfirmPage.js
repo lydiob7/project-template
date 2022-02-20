@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { showMessage } from 'store/messageSlice';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Icon from '@material-ui/core/Icon';
-import Typography from '@material-ui/core/Typography';
+import { Card, CardContent, Icon, makeStyles, Typography } from '@material-ui/core';
+
 import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({

@@ -10,7 +10,7 @@ const slice = createSlice({
             isMenuItemsListVisible: true,
             isSocialLinksListVisible: true,
             isVisible: true,
-            menuItems: navigationConfig(englishContent).footermenu,
+            menuItems: navigationConfig(spanishContent).footermenu,
             socialLinks
         },
         headerSettings: {
@@ -20,9 +20,9 @@ const slice = createSlice({
         isThemeToggable: true,
         mantainanceMode: false,
         sidebar: {
-            menuItems: navigationConfig(englishContent).headermenu
+            menuItems: navigationConfig(spanishContent).headermenu
         },
-        textContent: englishContent,
+        textContent: spanishContent,
         theme: 'light'
     },
     reducers: {
@@ -60,13 +60,13 @@ const slice = createSlice({
 
         setEnglishLanguage: (state, action) => {
             state.textContent = englishContent;
-            state.footerContent.menuItems = navigationConfig(englishContent).footermenu;
+            state.footer.menuItems = navigationConfig(englishContent).footermenu;
             state.sidebar.menuItems = navigationConfig(englishContent).headermenu;
         },
 
         setSpanishLanguage: (state, action) => {
             state.textContent = spanishContent;
-            state.footerContent.menuItems = navigationConfig(spanishContent).footermenu;
+            state.footer.menuItems = navigationConfig(spanishContent).footermenu;
             state.sidebar.menuItems = navigationConfig(spanishContent).headermenu;
         }
     }

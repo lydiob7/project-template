@@ -1,24 +1,26 @@
 import { useState, Suspense } from 'react';
 import { Prompt, Link } from 'react-router-dom';
-import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { green } from '@material-ui/core/colors';
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
+import clsx from 'clsx';
 import { updateUserInformation } from 'auth/store/userSlice';
 import firebaseService from 'services/firebaseService';
-import KeyInfoTab from 'components/profile/KeyInfoTab';
-import OtherGeneralTab from 'components/profile/OtherGeneralTab';
-import ConfirmationModal from 'components/modals/ConfirmationModal';
+
+import { green } from '@material-ui/core/colors';
+import { Edit as EditIcon } from '@material-ui/icons';
+import {
+    Avatar,
+    Container,
+    Divider,
+    Fab,
+    Icon,
+    IconButton,
+    makeStyles,
+    Tab,
+    Tabs,
+    Typography
+} from '@material-ui/core';
+
+import { ConfirmationModal, KeyInfoTab, OtherGeneralTab } from 'custom-components';
 
 import defaultBgImage from 'assets/images/header-bg.png';
 import fallBackProfileImage from 'assets/images/profile.jpg';

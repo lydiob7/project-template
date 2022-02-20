@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { parsePath } from 'utils/helpers';
-import { makeStyles } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+
+import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
+
 import { Button } from 'custom-components';
-import Typography from '@material-ui/core/Typography';
+
+import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
     root: {

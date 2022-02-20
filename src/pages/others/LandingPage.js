@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
-import AuthCard from 'components/cards/AuthCard';
+import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
+
+import { AuthCard } from 'custom-components';
 import MailConfirmPage from 'pages/account/MailConfirmPage';
 
 import { defaultRedirects } from 'config/routesConfig';

@@ -30,129 +30,130 @@ const spanishContent = {
             },
             forgotPwdForm: {
                 emailLabel: 'Email',
-                submitBtn: 'Send reset link',
+                submitBtn: 'Enviar link',
                 emailRequired: 'Debes introducir un email',
                 validEmail: 'Debes introducir una dirección válida de email'
             },
             registerForm: {
-                fullNameLabel: 'Full name',
+                fullNameLabel: 'Nombre completo',
                 emailLabel: 'Email',
-                passwordLabel: 'Password',
-                confirmPwdLabel: 'Confirm Password',
-                termsText: 'I Accept the',
-                termsLink: 'Terms & Conditions',
-                submitBtn: 'Register',
-                nameRequired: 'You must enter display name',
-                emailRequired: 'You must enter an email',
-                validEmail: 'You must enter a valid email',
+                passwordLabel: 'Contraseña',
+                confirmPwdLabel: 'Confirmar Contraseña',
+                termsText: 'Acepto los',
+                termsLink: 'Términos y Condiciones',
+                submitBtn: 'Registrarse',
+                nameRequired: 'Debes introducir tu nombre completo',
+                emailRequired: 'Debes introducir un email',
+                validEmail: 'Debes introducir una dirección válida de email',
                 passwordRequired: 'Debes introducir una contraseña',
-                validPassword: 'Password is too short - should be 8 chars minimum.',
-                passwordMatch: 'Passwords must match',
-                termsRequired: 'Please accept our Terms & Conditions'
+                validPassword: 'Contraseña demasiado corta - debe tener mínimo 8 caracteres',
+                passwordMatch: 'Las contraseñas tienen que coincidir',
+                termsRequired: 'Por favor acepta nuestros Términos y Condiciones'
             },
             mailConfirmationMessage: {
-                title: 'We sent you an E-mail!',
-                sentLinkTo: 'We have sent a link to',
-                yourEmailDefault: 'your E-mail.',
-                checkInbox: 'Check your inbox and click on the "Reset password" link to update your credentials.',
-                didntReceiveEmailText: "Didn't receive the E-mail?",
-                didntReceiveEmailLink: 'Re-send',
-                goBackToLoginLink: 'Go back to Login',
-                mailResentMessage: 'The E-mail has been re-sent'
+                title: 'Te enviamos un E-mail!',
+                sentLinkTo: 'Enviamos un link a',
+                yourEmailDefault: 'tu E-mail.',
+                checkInbox:
+                    'Chequea tu casilla de entrada y haz click en el link "Resetear contraseña" link to update your credentials.',
+                didntReceiveEmailText: 'No recibiste el E-mail?',
+                didntReceiveEmailLink: 'Re-enviar',
+                goBackToLoginLink: 'Volver al Inicio de Sesión',
+                mailResentMessage: 'El E-mail ha sido enviado nuevamente'
             }
         }
     },
     navigationMenu: {
-        account: 'Account',
-        auth: 'Auth',
-        error: 'Error Page',
-        forgotPassword: 'Forgot Password',
-        home: 'Home',
-        login: 'Login',
-        logout: 'Logout',
-        mailConfirmation: 'Mail Confirmation',
-        otherPages: 'Other Pages',
-        profile: 'Profile',
-        register: 'Register',
-        settings: 'Account Settings'
+        account: 'Cuenta',
+        auth: 'Autenticación',
+        error: 'Página de Error',
+        forgotPassword: 'Recuperar contraseña',
+        home: 'Inicio',
+        login: 'Inicio de sesión',
+        logout: 'Cerrar sesión',
+        mailConfirmation: 'Confirmación de E-mail',
+        otherPages: 'Otras páginas',
+        profile: 'Perfil',
+        register: 'Registro',
+        settings: 'Configuración'
     },
     privacyPolicy: {
-        title: 'Privacy Policy',
-        content: 'This is where the privacy policy will go',
-        actionButton: 'Home'
+        title: 'Política de Privacidad',
+        content: 'Acá es donde van a ir las políticas de privacidad',
+        actionButton: 'Inicio'
     },
     profilePage: {
-        editBtn: 'Edit',
-        cancelBtn: 'Cancel',
-        saveBtn: 'Save',
-        unsavedChangesMessage: 'There are Some Unsaved Changes. Do you want to go Away?',
-        unsavedChangesActionBtn: 'Leave',
+        editBtn: 'Editar',
+        cancelBtn: 'Cancelar',
+        saveBtn: 'Guardar',
+        unsavedChangesMessage: 'Hay cambios sin guardar. Quieres abandonar la página?',
+        unsavedChangesActionBtn: 'Abandonar',
         generalTab: {
             title: 'General',
             keyInformation: {
-                title: 'Key Information',
-                firstNameLabel: 'First Name(s)',
-                firstNamePlaceholder: 'Eg: John',
-                lastNameLabel: 'Last Name(s)',
-                lastNamePlaceholder: 'Eg: Doe',
+                title: 'Información principal',
+                firstNameLabel: 'Nombre(s)',
+                firstNamePlaceholder: 'Ej: Juan',
+                lastNameLabel: 'Apellido(s)',
+                lastNamePlaceholder: 'Ej: Perez',
                 emailLabel: 'Email',
-                emailPlaceholder: 'Eg: john@doe.com',
-                phoneLabel: 'Phone number',
-                phonePlaceholder: '+39 (351) 548 1875',
-                countryLabel: 'Country of residence',
-                countryPlaceholder: 'Eg: Malta'
+                emailPlaceholder: 'Ej: juan@perez.com',
+                phoneLabel: 'Teléfono',
+                phonePlaceholder: '+54 (221) 485 1875',
+                countryLabel: 'País de residencia',
+                countryPlaceholder: 'Ej: Argentina'
             },
             otherInformation: {
-                title: 'Other',
-                professionLabel: 'Profession/Role',
-                professionPlaceholder: 'Eg: Product Manager'
+                title: 'Otros',
+                professionLabel: 'Profesión/Rol',
+                professionPlaceholder: 'Ej: Productor Musical'
             }
         },
         workTab: {
-            title: 'Work',
+            title: 'Trabajo',
             workInformation: {
-                workLabel: 'Profession/Role',
-                workPlaceholder: 'Eg: Product Manager'
+                workLabel: 'Profesión/Rol',
+                workPlaceholder: 'Ej: Productor Musical'
             }
         },
         otherTab: {
-            title: 'Other',
+            title: 'Otros',
             generalInformation: {
                 title: 'General'
             },
             moreInformation: {
-                title: 'More'
+                title: 'Más'
             }
         }
     },
     settingsPage: {
         menu: {
-            title: 'Settings',
-            profileLink: 'Edit Profile',
-            changePwdLink: 'Change Password',
-            deleteAccountLink: 'Delete Account'
+            title: 'Configuración',
+            profileLink: 'Editar Perfil',
+            changePwdLink: 'Cambiar contraseña',
+            deleteAccountLink: 'Eliminar cuenta'
         },
         changePasswordCard: {
-            title: 'Change your password',
-            newPasswordLabel: 'New Password',
-            passwordConfirmLabel: 'Password (Confirm)',
-            submitBtn: 'Change my password',
-            newPasswordRequired: 'Please enter your new password.',
-            validPassword: 'Password is too short - should be 8 chars minimum.',
-            passwordMatch: 'Passwords must match.'
+            title: 'Cambiar tu contraseña',
+            newPasswordLabel: 'Nueva contraseña',
+            passwordConfirmLabel: 'Contraseña (Confirmar)',
+            submitBtn: 'Cambiar mi contraseña',
+            newPasswordRequired: 'Debes introducir una nueva contraseña',
+            validPassword: 'Contraseña demasiado corta - debe tener mínimo 8 caracteres',
+            passwordMatch: 'Las contraseñas tienen que coincidir'
         },
         deleteAccountCard: {
-            title: 'Delete your account',
-            deleteLabel: 'Write "Delete"',
-            submitBtn: 'Delete Account',
-            confirmRequired: 'Please write exactly the word "Delete".',
-            confirmationWord: 'delete'
+            title: 'Eliminar tu cuenta',
+            deleteLabel: 'Escribí "Eliminar"',
+            submitBtn: 'Eliminar cuenta',
+            confirmRequired: 'Por favor escribí exactamente la palabra "Eliminar"',
+            confirmationWord: ['eliminar']
         }
     },
     termsAndConditions: {
-        title: 'Terms & Conditions',
-        content: 'This is where the terms and conditions will go',
-        actionButton: 'Home'
+        title: 'Términos y Condiciones',
+        content: 'Acá es dónde van a ir los términos y condiciones',
+        actionButton: 'Inicio'
     }
 };
 
