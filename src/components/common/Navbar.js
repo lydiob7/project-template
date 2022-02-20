@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from 'auth/store/userSlice';
-import { themeDark, themeLight } from 'store/uiSlice';
+import { themeDark, themeLight, languageChanged } from 'store/uiSlice';
 
 import { Close as CloseIcon, Menu as MenuIcon } from '@material-ui/icons';
-import { Divider, Drawer, Hidden, Icon, IconButton, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
+import {
+    Divider,
+    Drawer,
+    Hidden,
+    Icon,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    makeStyles,
+    MenuItem,
+    Select
+} from '@material-ui/core';
 
 import { AuthUserCard, AuthUserSmallCard, Button, Logo, MenuButton, Switch } from 'custom-components';
 
@@ -88,13 +100,21 @@ export default function Navbar({ menuItems = [] }) {
 
     const [navOpen, setNavOpen] = useState(false);
     const appInformation = useSelector(({ ui }) => ui.appInformation);
-    const currentTheme = useSelector(({ ui }) => ui.theme);
-    const isThemeToggable = useSelector(({ ui }) => ui.isThemeToggable);
+    const currentLanguage = useSelector(({ ui }) => ui.appSettings.currentLanguage);
+    const currentTheme = useSelector(({ ui }) => ui.appSettings.theme);
+    const isLanguageToggable = useSelector(({ ui }) => ui.appSettings.isLanguageToggable);
+    const isThemeToggable = useSelector(({ ui }) => ui.appSettings.isThemeToggable);
+    const supportedLanguages = useSelector(({ ui }) => ui.appSettings.supportedLanguages);
+    const textProvider = useSelector(({ ui }) => ui.textContent);
     const userLoggedIn = useSelector(({ auth }) => auth.user.authenticated);
 
     const toggleTheme = () => {
         if (currentTheme === 'light') return dispatch(themeDark());
         dispatch(themeLight());
+    };
+
+    const handleLanguageChange = (language) => {
+        dispatch(languageChanged(language));
     };
 
     const mainNavigationList = () => {
@@ -125,6 +145,19 @@ export default function Navbar({ menuItems = [] }) {
                             {currentTheme === 'dark' ? 'flare' : 'brightness_3'}
                         </Icon>
                         <Switch checked={currentTheme === 'dark'} onClick={toggleTheme} />
+                    </div>
+                )}
+                {isLanguageToggable && (
+                    <div className={classes.languageSelect}>
+                        <Select value={currentLanguage} onChange={(ev) => handleLanguageChange(ev.target?.value)}>
+                            {supportedLanguages?.map((language) => (
+                                <MenuItem key={language} value={language}>
+                                    {textProvider?.supportedLanguages
+                                        ? textProvider?.supportedLanguages[language] || language
+                                        : language}
+                                </MenuItem>
+                            ))}
+                        </Select>
                     </div>
                 )}
                 {userLoggedIn && (
@@ -195,14 +228,36 @@ export default function Navbar({ menuItems = [] }) {
                 <Divider />
 
                 <List className={classes.drawerList}>
-                    {isThemeToggable && (
-                        <ListItem className={classes.listItem} button>
-                            <Icon size="small" className={classes.itemLogo}>
-                                {currentTheme === 'dark' ? 'flare' : 'brightness_3'}
-                            </Icon>
-                            <Switch size="small" checked={currentTheme === 'dark'} onClick={toggleTheme} />
-                        </ListItem>
-                    )}
+                    <ListItem
+                        className={classes.listItem}
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+                        button
+                    >
+                        {isLanguageToggable && (
+                            <div className={classes.languageSelect}>
+                                <Select
+                                    value={currentLanguage}
+                                    onChange={(ev) => handleLanguageChange(ev.target?.value)}
+                                >
+                                    {supportedLanguages?.map((language) => (
+                                        <MenuItem key={language} value={language}>
+                                            {textProvider?.supportedLanguages
+                                                ? textProvider?.supportedLanguages[language] || language
+                                                : language}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </div>
+                        )}
+                        {isThemeToggable && (
+                            <div className={classes.themeButton}>
+                                <Icon size="small" className={classes.itemLogo}>
+                                    {currentTheme === 'dark' ? 'flare' : 'brightness_3'}
+                                </Icon>
+                                <Switch size="small" checked={currentTheme === 'dark'} onClick={toggleTheme} />
+                            </div>
+                        )}
+                    </ListItem>
                     {menuItems?.map((item, index) => {
                         if ((item.onlyLoggedOut && userLoggedIn) || (item.onlyLoggedIn && !userLoggedIn)) return null;
                         if (item.type === 'logout') {

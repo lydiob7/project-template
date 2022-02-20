@@ -159,7 +159,8 @@ const HomePage = () => {
         setTimeout(() => {
             dispatch(showMessage({ message: textProvider?.errorToastMessage, variant: 'error' }));
         }, 8200);
-    }, [dispatch]);
+        // eslint-disable-next-line
+    }, [dispatch, textProvider]);
 
     const toggleTheme = () => {
         if (currentTheme === 'light') return dispatch(themeDark());

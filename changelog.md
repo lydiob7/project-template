@@ -23,6 +23,7 @@
 -   Feature: Update Footer with hide options from uiSlice.
 -   Update: Clean page components imports.
 -   Feature: Add text provider on home page and translate to spanish.
+-   Feature: Add language picker on navbar and option to disable language change.
 
 ### v0.6.2
 

@@ -199,6 +199,10 @@ const englishContent = {
             confirmationWord: ['delete']
         }
     },
+    supportedLanguages: {
+        en: 'English',
+        es: 'Spanish'
+    },
     termsAndConditions: {
         title: 'Terms & Conditions',
         content: 'This is where the terms and conditions will go',

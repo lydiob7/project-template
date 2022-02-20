@@ -1,73 +1,78 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { appInformation, englishContent, navigationConfig, socialLinks, spanishContent } from 'config';
+import { appInformation, navigationConfig, socialLinks, supportedLanguages } from 'config';
 
 const slice = createSlice({
     name: 'ui',
     initialState: {
         appInformation,
+        appSettings: {
+            currentLanguage: 'es',
+            isLanguageCheckTriggered: true,
+            isPreferredThemeCheckTriggered: true,
+            isLanguageToggable: true,
+            isThemeToggable: true,
+            mantainanceMode: false,
+            supportedLanguages: Object.keys(supportedLanguages).slice(0, -1),
+            theme: 'light'
+        },
         footer: {
             isMenuItemsListVisible: true,
             isSocialLinksListVisible: true,
             isVisible: true,
-            menuItems: navigationConfig(spanishContent).footermenu,
+            menuItems: navigationConfig(supportedLanguages['default']).footermenu,
             socialLinks
         },
         headerSettings: {
             fixed: true
         },
-        isPreferredThemeCheckTriggered: true,
-        isThemeToggable: true,
-        mantainanceMode: false,
         sidebar: {
-            menuItems: navigationConfig(spanishContent).headermenu
+            menuItems: navigationConfig(supportedLanguages['default']).headermenu
         },
-        textContent: spanishContent,
-        theme: 'light'
+        textContent: supportedLanguages['default']
     },
     reducers: {
         themeDark: (state, action) => {
-            state.theme = 'dark';
+            state.appSettings.theme = 'dark';
         },
 
         themeLight: (state, action) => {
-            state.theme = 'light';
+            state.appSettings.theme = 'light';
         },
 
         setThemePreferredCheckOn: (state, action) => {
-            state.isPreferredThemeCheckTriggered = true;
+            state.appSettings.isPreferredThemeCheckTriggered = true;
         },
 
         setThemePreferredCheckOff: (state, action) => {
-            state.isPreferredThemeCheckTriggered = false;
+            state.appSettings.isPreferredThemeCheckTriggered = false;
         },
 
         setThemeToggableOn: (state, action) => {
-            state.isThemeToggable = true;
+            state.appSettings.isThemeToggable = true;
         },
 
         setThemeToggableOff: (state, action) => {
-            state.isThemeToggable = false;
+            state.appSettings.isThemeToggable = false;
         },
 
         mantainanceModeEnabled: (state, action) => {
-            state.mantainanceMode = true;
+            state.appSettings.mantainanceMode = true;
         },
 
         mantainanceModeDisabled: (state, action) => {
-            state.mantainanceMode = false;
+            state.appSettings.mantainanceMode = false;
         },
 
-        setEnglishLanguage: (state, action) => {
-            state.textContent = englishContent;
-            state.footer.menuItems = navigationConfig(englishContent).footermenu;
-            state.sidebar.menuItems = navigationConfig(englishContent).headermenu;
-        },
-
-        setSpanishLanguage: (state, action) => {
-            state.textContent = spanishContent;
-            state.footer.menuItems = navigationConfig(spanishContent).footermenu;
-            state.sidebar.menuItems = navigationConfig(spanishContent).headermenu;
+        languageChanged: (state, action) => {
+            state.appSettings.currentLanguage = action.payload;
+            state.textContent = supportedLanguages[action.payload] || supportedLanguages['default'];
+            state.footer.menuItems = navigationConfig(
+                supportedLanguages[action.payload] || supportedLanguages['default']
+            ).footermenu;
+            state.sidebar.menuItems = navigationConfig(
+                supportedLanguages[action.payload] || supportedLanguages['default']
+            ).headermenu;
         }
     }
 });
@@ -79,10 +84,9 @@ export const {
     setThemePreferredCheckOff,
     setThemeToggableOn,
     setThemeToggableOff,
+    languageChanged,
     mantainanceModeEnabled,
-    mantainanceModeDisabled,
-    setEnglishLanguage,
-    setSpanishLanguage
+    mantainanceModeDisabled
 } = slice.actions;
 
 export default slice.reducer;

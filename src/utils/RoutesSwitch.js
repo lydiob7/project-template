@@ -9,7 +9,7 @@ import MantainancePage from 'pages/others/MantainancePage';
 import { routes } from 'config';
 
 const RoutesSwitch = () => {
-    const mantainanceMode = useSelector(({ ui }) => ui.mantainanceMode);
+    const mantainanceMode = useSelector(({ ui }) => ui.appSettings.mantainanceMode);
 
     return (
         <Switch>

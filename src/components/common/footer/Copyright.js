@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEnglishLanguage, setSpanishLanguage } from 'store/uiSlice';
+import { languageChanged } from 'store/uiSlice';
 
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 
@@ -31,8 +31,8 @@ function Copyright({ rightsOwner, rightsOwnerWebsite, version, year }) {
                 <a style={{ color: 'inherit' }} target="_blank" rel="noreferrer" href={rightsOwnerWebsite}>
                     {rightsOwner}
                 </a>{' '}
-                <span onClick={() => dispatch(setEnglishLanguage())}>&copy;</span>{' '}
-                <span onClick={() => dispatch(setSpanishLanguage())}>{lastYearWithRights}.</span>{' '}
+                <span onClick={() => dispatch(languageChanged('en'))}>&copy;</span>{' '}
+                <span onClick={() => dispatch(languageChanged('es'))}>{lastYearWithRights}.</span>{' '}
                 {textProvider?.copyright}. {version && `v${version}`}
             </Typography>
         </Grid>

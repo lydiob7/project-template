@@ -8,8 +8,8 @@ import { theme } from './theme';
 
 export default function ThemeProvider({ children }) {
     const dispatch = useDispatch();
-    const themeColor = useSelector(({ ui }) => ui.theme);
-    const isPreferredThemeCheckTriggered = useSelector(({ ui }) => ui.isPreferredThemeCheckTriggered);
+    const themeColor = useSelector(({ ui }) => ui.appSettings.theme);
+    const isPreferredThemeCheckTriggered = useSelector(({ ui }) => ui.appSettings.isPreferredThemeCheckTriggered);
 
     useLayoutEffect(() => {
         if (

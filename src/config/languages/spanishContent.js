@@ -200,6 +200,10 @@ const spanishContent = {
             confirmationWord: ['eliminar']
         }
     },
+    supportedLanguages: {
+        en: 'Inglés',
+        es: 'Español'
+    },
     termsAndConditions: {
         title: 'Términos y Condiciones',
         content: 'Acá es dónde van a ir los términos y condiciones',
