@@ -24,6 +24,7 @@
 -   Update: Clean page components imports.
 -   Feature: Add text provider on home page and translate to spanish.
 -   Feature: Add language picker on navbar and option to disable language change.
+-   Feature: Add language check component.
 
 ### v0.6.2
 

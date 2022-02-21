@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Auth } from './auth';
 
 // Routes
-import { RoutesSwitch } from 'utils';
+import { LanguageCheck, RoutesSwitch } from 'utils';
 
 const store = configureStore();
 
@@ -16,9 +16,11 @@ const App = () => {
             <Provider store={store}>
                 <ThemeProvider>
                     <CssBaseline>
-                        <Auth>
-                            <RoutesSwitch />
-                        </Auth>
+                        <LanguageCheck>
+                            <Auth>
+                                <RoutesSwitch />
+                            </Auth>
+                        </LanguageCheck>
                     </CssBaseline>
                 </ThemeProvider>
             </Provider>
