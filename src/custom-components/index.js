@@ -29,6 +29,7 @@ export { default as KeyInfoTab } from 'components/profile/KeyInfoTab';
 export { default as Loader } from 'components/common/Loader';
 export { default as LoginForm } from 'components/forms/LoginForm';
 export { default as Logo } from 'components/common/Logo';
+export { default as Modal } from 'components/modals/Modal';
 export { default as Navbar } from 'components/common/Navbar';
 export { default as MenuButton } from 'components/menus/MenuButton';
 export { default as OtherGeneralTab } from 'components/profile/OtherGeneralTab';

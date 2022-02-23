@@ -41,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[1]
     },
     cardHeader: {
-        backgroundColor: theme.palette.type === 'light' ? theme.palette.secondary.main : '#121212',
-        color: theme.palette.type === 'light' ? theme.palette.secondary.contrastText : '#DADADA',
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
         '& .MuiToolbar-root': {
             display: 'flex',
             justifyContent: 'space-between'

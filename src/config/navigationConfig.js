@@ -1,3 +1,4 @@
+import { authRoles } from 'auth';
 import { parsePath } from 'utils/helpers';
 
 const navigationConfig = (language) => ({
@@ -64,6 +65,25 @@ const navigationConfig = (language) => ({
                     path: parsePath('/privacy-policy'),
                     icon: 'gavel_outlined',
                     title: language?.footer?.menuItems?.privacyPolicy
+                }
+            ]
+        },
+        {
+            title: language?.navigationMenu?.example,
+            onlyLoggedIn: true,
+            roles: [authRoles.admin, authRoles.user],
+            dropdown: [
+                {
+                    title: language?.navigationMenu?.onlyForAdmin,
+                    icon: 'lock_open_outlined',
+                    path: parsePath('/example-path'),
+                    roles: [authRoles.admin]
+                },
+                {
+                    title: language?.navigationMenu?.onlyForUser,
+                    icon: 'lock_open_outlined',
+                    path: parsePath('/example-path2'),
+                    roles: [authRoles.user]
                 }
             ]
         }

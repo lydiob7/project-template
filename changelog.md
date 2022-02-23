@@ -25,6 +25,8 @@
 -   Feature: Add text provider on home page and translate to spanish.
 -   Feature: Add language picker on navbar and option to disable language change.
 -   Feature: Add language check component.
+-   Feature: Add Modal component.
+-   Feature: Add "roles" property on navigation file and support on Navbar and MenuButton components.
 
 ### v0.6.2
 

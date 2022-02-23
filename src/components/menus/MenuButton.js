@@ -5,6 +5,8 @@ import { makeStyles, Menu, MenuItem } from '@material-ui/core';
 
 import { Button } from 'custom-components';
 
+import { authRoles } from 'auth';
+
 const useStyles = makeStyles((theme) => ({
     root: {},
     dropdown: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function MenuButton({ children, items }) {
+function MenuButton({ children, items, role }) {
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -29,11 +31,14 @@ function MenuButton({ children, items }) {
     };
 
     const open = Boolean(anchorEl);
-    const listItems = items?.map((link) => (
-        <Link key={link.path} className={classes.link} to={link.path}>
-            <MenuItem onClick={handleClose}>{link.title}</MenuItem>
-        </Link>
-    ));
+    const listItems = items?.map((link) => {
+        if (link.roles && !link.roles?.includes(authRoles[role])) return null;
+        return (
+            <Link key={link.path} className={classes.link} to={link.path}>
+                <MenuItem onClick={handleClose}>{link.title}</MenuItem>
+            </Link>
+        );
+    });
 
     return (
         <div className={classes.root}>

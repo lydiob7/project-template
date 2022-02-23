@@ -22,46 +22,9 @@ import {
 import { AuthUserCard, AuthUserSmallCard, Button, Logo, MenuButton, Switch } from 'custom-components';
 
 import { parsePath } from 'utils/helpers';
+import { authRoles } from 'auth';
 
 const useStyles = makeStyles((theme) => ({
-    menuBtn: {
-        color: theme.palette.text.primary,
-        '&:focus': {
-            outline: 'none'
-        }
-    },
-    mainNavigationListItem: {
-        '& .MuiButton-textPrimary': {
-            color: theme.palette.text.primary,
-            // textTransform: 'uppercase',
-            fontWeight: '700',
-            fontSize: '.8rem',
-            '&:focus': {
-                outline: 'none'
-            }
-        }
-    },
-    themeButton: {
-        display: 'flex',
-        alignItems: 'center',
-        margin: '0 10px'
-    },
-    subMenu: {
-        top: '80px!important'
-    },
-    drawerList: {
-        width: '100vw',
-        padding: '20px',
-        [theme.breakpoints.up('sm')]: {
-            width: 300
-        }
-    },
-    drawerListWrapper: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        height: '100%'
-    },
     closeMenuBtn: {
         position: 'absolute',
         right: '10px',
@@ -76,6 +39,37 @@ const useStyles = makeStyles((theme) => ({
             outline: 'none'
         }
     },
+    drawerList: {
+        width: '100vw',
+        padding: '20px',
+        [theme.breakpoints.up('sm')]: {
+            width: 300
+        }
+    },
+    drawerListWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100%'
+    },
+    itemLogo: {
+        opacity: 0.6,
+        marginRight: '5px'
+    },
+    languageSelect: {
+        fontSize: '.8rem',
+        minWidth: '100px',
+        [theme.breakpoints.up('lg')]: {
+            minWidth: 'auto'
+        }
+    },
+    languageSelectWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        [theme.breakpoints.up('lg')]: {
+            margin: '0 8px'
+        }
+    },
     listItem: {
         '& a': {
             display: 'flex',
@@ -84,13 +78,34 @@ const useStyles = makeStyles((theme) => ({
             textTransform: 'capitalize'
         }
     },
-    itemLogo: {
-        opacity: 0.6,
-        marginRight: '5px'
-    },
     logoutBtn: {
         color: 'inherit',
         textTransform: 'capitalize'
+    },
+    mainNavigationListItem: {
+        '& .MuiButton-textPrimary': {
+            color: theme.palette.text.primary,
+            // textTransform: 'uppercase',
+            fontWeight: '700',
+            fontSize: '.8rem',
+            '&:focus': {
+                outline: 'none'
+            }
+        }
+    },
+    menuBtn: {
+        color: theme.palette.text.primary,
+        '&:focus': {
+            outline: 'none'
+        }
+    },
+    subMenu: {
+        top: '80px!important'
+    },
+    themeButton: {
+        display: 'flex',
+        alignItems: 'center',
+        margin: '0 10px'
     }
 }));
 
@@ -106,7 +121,7 @@ export default function Navbar({ menuItems = [] }) {
     const isThemeToggable = useSelector(({ ui }) => ui.appSettings.isThemeToggable);
     const supportedLanguages = useSelector(({ ui }) => ui.appSettings.supportedLanguages);
     const textProvider = useSelector(({ ui }) => ui.textContent);
-    const userLoggedIn = useSelector(({ auth }) => auth.user.authenticated);
+    const { authenticated: userLoggedIn, data } = useSelector(({ auth }) => auth.user);
 
     const toggleTheme = () => {
         if (currentTheme === 'light') return dispatch(themeDark());
@@ -123,10 +138,11 @@ export default function Navbar({ menuItems = [] }) {
                 {menuItems?.map((item, index) => {
                     if ((item.onlyLoggedOut && userLoggedIn) || (item.onlyLoggedIn && !userLoggedIn)) return null;
                     if (item.type === 'logout' || item.type === 'user-menu') return null;
+                    if (item.roles && !item.roles?.includes(authRoles[data?.role])) return null;
 
                     if (item.dropdown) {
                         return (
-                            <MenuButton key={index} items={item.dropdown}>
+                            <MenuButton key={index} items={item.dropdown} role={data?.role}>
                                 {item.title}
                             </MenuButton>
                         );
@@ -148,8 +164,12 @@ export default function Navbar({ menuItems = [] }) {
                     </div>
                 )}
                 {isLanguageToggable && (
-                    <div className={classes.languageSelect}>
-                        <Select value={currentLanguage} onChange={(ev) => handleLanguageChange(ev.target?.value)}>
+                    <div className={classes.languageSelectWrapper}>
+                        <Select
+                            classes={{ root: classes.languageSelect }}
+                            value={currentLanguage}
+                            onChange={(ev) => handleLanguageChange(ev.target?.value)}
+                        >
                             {supportedLanguages?.map((language) => (
                                 <MenuItem key={language} value={language}>
                                     {textProvider?.supportedLanguages
@@ -190,13 +210,15 @@ export default function Navbar({ menuItems = [] }) {
                 <List className={classes.drawerList}>
                     {menuItems?.map((item, index) => {
                         if ((item.onlyLoggedOut && userLoggedIn) || (item.onlyLoggedIn && !userLoggedIn)) return null;
-
                         if (item.type === 'logout' || item.type === 'user-menu') return null;
+                        if (item.roles && !item.roles?.includes(authRoles[data?.role])) return null;
 
                         if (item.dropdown) {
                             return (
                                 <List button>
                                     {item.dropdown.map((ditem, index2) => {
+                                        if (ditem.roles && !ditem.roles?.includes(authRoles[data?.role])) return null;
+
                                         return (
                                             <ListItem
                                                 className={classes.listItem}
@@ -234,8 +256,12 @@ export default function Navbar({ menuItems = [] }) {
                         button
                     >
                         {isLanguageToggable && (
-                            <div className={classes.languageSelect}>
+                            <div className={classes.languageSelectWrapper}>
+                                <Icon size="small" className={classes.itemLogo}>
+                                    language
+                                </Icon>
                                 <Select
+                                    classes={{ root: classes.languageSelect }}
                                     value={currentLanguage}
                                     onChange={(ev) => handleLanguageChange(ev.target?.value)}
                                 >
