@@ -36,6 +36,7 @@ function MantainancePage({ mantainanceimg = '/images/mantainance.svg' }) {
     const classes = useStyles();
 
     const appInformation = useSelector(({ ui }) => ui.appInformation);
+    const textProvider = useSelector(({ ui }) => ui.textContent.mantainancePage);
 
     return (
         <main className={classes.root}>
@@ -47,13 +48,12 @@ function MantainancePage({ mantainanceimg = '/images/mantainance.svg' }) {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography className={classes.title} variant="h3" color="textPrimary">
-                                This site is under mantainance.
+                                {textProvider?.pageTitle}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography className={classes.content} variant="body1">
-                                We are making some updates to bring you the best experience. Sorry for the
-                                inconvenience, we'll be back very soon!
+                                {textProvider?.message}
                                 {/* You can check out our{' '}
                                     <Link to="/faq" className="color-text">
                                         Help Center
@@ -61,7 +61,7 @@ function MantainancePage({ mantainanceimg = '/images/mantainance.svg' }) {
                             </Typography>
                         </Grid>
                         <Grid container justifyContent="center" item xs={12}>
-                            <Button href={appInformation?.creatorWebsite}>Visit our Website</Button>
+                            <Button href={appInformation?.creatorWebsite}>{textProvider?.visitWebsiteButton}</Button>
                         </Grid>
                     </Grid>
                 </Grid>

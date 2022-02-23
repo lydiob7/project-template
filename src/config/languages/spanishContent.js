@@ -1,4 +1,10 @@
 const spanishContent = {
+    errorPage: {
+        pageTitle: 'Ups! Página no encontrada.',
+        message:
+            'La página que estás buscando puede haber sido removida, cambió de nombre, o está temporalmente fuera de servicio.',
+        homeButton: 'Volver al inicio'
+    },
     footer: {
         copyright: 'Todos los derechos reservados',
         menuItems: {
@@ -112,6 +118,12 @@ const spanishContent = {
                 mailResentMessage: 'El E-mail ha sido enviado nuevamente'
             }
         }
+    },
+    mantainancePage: {
+        pageTitle: 'Este sitio está bajo mantenimiento.',
+        message:
+            'Estamos haciendo algunas actualizaciones para ofrecerle una mejor experiencia. Perdón por los inconvenientes, estaremos de vuelta muy pronto!',
+        visitWebsiteButton: 'Visita nuestra página web'
     },
     navigationMenu: {
         account: 'Cuenta',

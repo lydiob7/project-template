@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
 
@@ -35,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
 function ErrorPage({ errorimg = '/images/404.svg' }) {
     const classes = useStyles();
 
+    const textProvider = useSelector(({ ui }) => ui.textContent.errorPage);
+
     return (
         <main className={classes.root}>
             <Container>
@@ -45,13 +48,12 @@ function ErrorPage({ errorimg = '/images/404.svg' }) {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography className={classes.title} variant="h3" color="textPrimary">
-                                Oops! Page not found.
+                                {textProvider?.pageTitle}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography className={classes.content} variant="body1">
-                                The page you are looking for might have been removed, had its name changed, or is
-                                temporarily unavailable.
+                                {textProvider?.message}
                                 {/* You can check out our{' '}
                                     <Link to="/faq" className="color-text">
                                         Help Center
@@ -60,7 +62,7 @@ function ErrorPage({ errorimg = '/images/404.svg' }) {
                         </Grid>
                         <Grid container justifyContent="center" item xs={12}>
                             <Link to={parsePath()}>
-                                <Button>Back to Home</Button>
+                                <Button>{textProvider?.homeButton}</Button>
                             </Link>
                         </Grid>
                     </Grid>

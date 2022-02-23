@@ -27,6 +27,8 @@
 -   Feature: Add language check component.
 -   Feature: Add Modal component.
 -   Feature: Add "roles" property on navigation file and support on Navbar and MenuButton components.
+-   Feature: Provide text from store on error and mantainance page.
+-   Feature: Update Menu Button to support roles.
 
 ### v0.6.2
 

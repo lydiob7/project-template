@@ -1,4 +1,10 @@
 const englishContent = {
+    errorPage: {
+        pageTile: 'Oops! Page not found.',
+        message:
+            'The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.',
+        homeButton: 'Back to Home'
+    },
     footer: {
         copyright: 'All rights reserved',
         menuItems: {
@@ -111,6 +117,12 @@ const englishContent = {
                 mailResentMessage: 'The E-mail has been re-sent'
             }
         }
+    },
+    mantainancePage: {
+        pageTile: 'This site is under mantainance.',
+        message:
+            "We are making some updates to bring you the best experience. Sorry for the inconvenience, we'll be back very soon!",
+        visitWebsiteButton: 'Visit our Website'
     },
     navigationMenu: {
         account: 'Account',
