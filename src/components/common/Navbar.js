@@ -82,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
         color: 'inherit',
         textTransform: 'capitalize'
     },
+    mainNavigationWrapper: {
+        display: 'flex',
+        alignItems: 'center'
+    },
     mainNavigationListItem: {
         '& .MuiButton-textPrimary': {
             color: theme.palette.text.primary,
@@ -134,7 +138,7 @@ export default function Navbar({ menuItems = [] }) {
 
     const mainNavigationList = () => {
         return (
-            <>
+            <nav className={classes.mainNavigationWrapper}>
                 {menuItems?.map((item, index) => {
                     if ((item.onlyLoggedOut && userLoggedIn) || (item.onlyLoggedIn && !userLoggedIn)) return null;
                     if (item.type === 'logout' || item.type === 'user-menu') return null;
@@ -187,12 +191,12 @@ export default function Navbar({ menuItems = [] }) {
                         items={menuItems?.filter((item) => item.type === 'logout' || item.type === 'user-menu')}
                     />
                 )}
-            </>
+            </nav>
         );
     };
 
     const drawerList = () => (
-        <div className={classes.drawerListWrapper}>
+        <nav className={classes.drawerListWrapper}>
             <div>
                 <Logo
                     size="small"
@@ -306,7 +310,7 @@ export default function Navbar({ menuItems = [] }) {
                     })}
                 </List>
             </div>
-        </div>
+        </nav>
     );
 
     return (

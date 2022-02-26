@@ -14,6 +14,9 @@ import {
 } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
+    headerFixed: {
+        marginTop: '60px'
+    },
     root: {},
     messageContainer: {
         display: 'flex',
@@ -47,7 +50,7 @@ const variantIcon = {
     info: InfoOutlinedIcon
 };
 
-function ToastMessage(props) {
+function ToastMessage({ fixed }) {
     const dispatch = useDispatch();
     const state = useSelector(({ messages }) => messages.state);
     const options = useSelector(({ messages }) => messages.options);
@@ -62,7 +65,7 @@ function ToastMessage(props) {
             open={state}
             onClose={() => dispatch(hideMessage())}
             classes={{
-                root: classes.root
+                root: clsx(classes.root, fixed && classes.headerFixed)
             }}
             ContentProps={{
                 variant: 'body2',

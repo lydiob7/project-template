@@ -12,6 +12,9 @@ const spanishContent = {
             privacyPolicy: 'Política de privacidad'
         }
     },
+    general: {
+        skipNavigationAnchor: 'Saltar navegación'
+    },
     homePage: {
         title: 'Título',
         subtitle: 'Estos son todos los componentes disponibles en esta librería.',

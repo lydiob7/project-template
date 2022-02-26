@@ -58,6 +58,30 @@ export const theme = (color) =>
                     a: {
                         backgroundColor: 'transparent',
                         textDecoration: 'none !important'
+                    },
+                    '.fs-900': {
+                        fontSize: '2rem'
+                    },
+                    '.fs-800': {
+                        fontSize: '1.6rem'
+                    },
+                    '.fs-700': {
+                        fontSize: '1.4rem'
+                    },
+                    '.fs-600': {
+                        fontSize: '1.2rem'
+                    },
+                    '.fw-700': {
+                        fontWeight: '700'
+                    },
+                    '.fw-600': {
+                        fontWeight: '600'
+                    },
+                    '.fw-500': {
+                        fontWeight: '500'
+                    },
+                    '.fw-400': {
+                        fontWeight: '400'
                     }
                 }
             },

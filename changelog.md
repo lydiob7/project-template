@@ -29,6 +29,9 @@
 -   Feature: Add "roles" property on navigation file and support on Navbar and MenuButton components.
 -   Feature: Provide text from store on error and mantainance page.
 -   Feature: Update Menu Button to support roles.
+-   Feature: Give margin top to Toast Message if header is fixed.
+-   Feature: Change logo title to h1 for better semantics.
+-   Feature: Add general classes for text sizes and weights.
 
 ### v0.6.2
 

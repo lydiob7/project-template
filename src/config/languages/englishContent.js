@@ -12,6 +12,9 @@ const englishContent = {
             privacyPolicy: 'Privacy Policy'
         }
     },
+    general: {
+        skipNavigationAnchor: 'Skip navigation'
+    },
     homePage: {
         title: 'Title',
         subtitle: 'These are all the components available on this library.',

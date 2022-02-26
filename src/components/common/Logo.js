@@ -1,40 +1,48 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 
 import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
+    appTitle: {
+        display: 'inline',
+        color: theme.palette.text.primary,
+        marginLeft: '10px',
+        [theme.breakpoints.down('md')]: {
+            fontSize: '1.3rem'
+        }
+    },
     root: {
-        maxWidth: '250px',
+        maxWidth: '350px',
         position: 'relative',
         zIndex: '1199',
         '& a': {
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
             textDecoration: 'none',
             '& img': {
                 width: '30px',
                 height: '30px'
-            },
-            '& h2': {
-                display: 'inline',
-                color: theme.palette.text.primary,
-                marginLeft: '10px'
             }
-        }
+        },
+        [theme.breakpoints.up('md')]: {}
     }
 }));
 
-export default function Logo({ imageSrc, className, title }) {
-    const classes = useStyles();
+export default function Logo({ imageSrc, className, style, title }) {
+    const internalClasses = useStyles();
+
     return (
-        <div className={classes.root}>
-            <Link to={parsePath()} className={className}>
+        <div className={clsx(internalClasses.root, className)} style={style}>
+            <Link to={parsePath()}>
                 {imageSrc && <img src={imageSrc} alt={`${title} Logo`} />}
-                &nbsp;<h2>{title}</h2>
+                &nbsp;
+                <Typography className={clsx(internalClasses.appTitle, 'fs-800 fw-600')} variant="h1">
+                    {title}
+                </Typography>
             </Link>
         </div>
     );
