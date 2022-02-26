@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
@@ -39,34 +40,32 @@ function MantainancePage({ mantainanceimg = '/images/mantainance.svg' }) {
     const textProvider = useSelector(({ ui }) => ui.textContent.mantainancePage);
 
     return (
-        <main className={classes.root}>
-            <Container>
-                <Grid container justifyContent="center">
-                    <Grid container spacing={4} justifyContent="center" item xs={12} sm={6}>
-                        <Grid item xs={12}>
-                            <img src={parsePath(mantainanceimg)} alt="Mantainance" />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography className={classes.title} variant="h3" color="textPrimary">
-                                {textProvider?.pageTitle}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography className={classes.content} variant="body1">
-                                {textProvider?.message}
-                                {/* You can check out our{' '}
+        <Container component="main" className={classes.root}>
+            <Grid container justifyContent="center">
+                <Grid container spacing={4} justifyContent="center" item xs={12} sm={6}>
+                    <Grid item xs={12}>
+                        <img src={parsePath(mantainanceimg)} alt="Mantainance" />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography className={clsx(classes.title, 'fs-800')} variant="h2" color="textPrimary">
+                            {textProvider?.pageTitle}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography className={classes.content} variant="body1">
+                            {textProvider?.message}
+                            {/* You can check out our{' '}
                                     <Link to="/faq" className="color-text">
                                         Help Center
                                     </Link> */}
-                            </Typography>
-                        </Grid>
-                        <Grid container justifyContent="center" item xs={12}>
-                            <Button href={appInformation?.creatorWebsite}>{textProvider?.visitWebsiteButton}</Button>
-                        </Grid>
+                        </Typography>
+                    </Grid>
+                    <Grid container justifyContent="center" item xs={12}>
+                        <Button href={appInformation?.creatorWebsite}>{textProvider?.visitWebsiteButton}</Button>
                     </Grid>
                 </Grid>
-            </Container>
-        </main>
+            </Grid>
+        </Container>
     );
 }
 

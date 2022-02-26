@@ -47,9 +47,21 @@ const AuthCard = ({ form = 'login', onSubmit = () => {} }) => {
                     <img src={parsePath(appInformation?.appLogo)} alt={appInformation?.appTitle} />
                 )}
                 <div>
-                    {form === 'forgot-pwd' && <Typography variant="h5">{textProvider.forgotPwdTitle}</Typography>}
-                    {form === 'login' && <Typography variant="h5">{textProvider.loginTitle}</Typography>}
-                    {form === 'signup' && <Typography variant="h5">{textProvider.registerTitle}</Typography>}
+                    {form === 'forgot-pwd' && (
+                        <Typography variant="h3" className="fs-500">
+                            {textProvider.forgotPwdTitle}
+                        </Typography>
+                    )}
+                    {form === 'login' && (
+                        <Typography variant="h3" className="fs-500">
+                            {textProvider.loginTitle}
+                        </Typography>
+                    )}
+                    {form === 'signup' && (
+                        <Typography variant="h3" className="fs-500">
+                            {textProvider.registerTitle}
+                        </Typography>
+                    )}
                     <TitleDecoration />
                 </div>
             </div>

@@ -27,22 +27,20 @@ const TermsAndConditions = () => {
     const textProvider = useSelector(({ ui }) => ui.textContent.termsAndConditions);
 
     return (
-        <main className={classes.root}>
-            <Container>
-                <Grid container justifyContent="center">
-                    <Grid container spacing={4} justifyContent="center" item xs={12} sm={6}>
-                        <Grid item xs={12}>
-                            <Title title={textProvider?.title} subtitle={textProvider?.content} variant="h4" />
-                        </Grid>
-                        <Grid container justifyContent="center" item xs={12}>
-                            <Link to={parsePath()}>
-                                <Button>{textProvider?.actionButton}</Button>
-                            </Link>
-                        </Grid>
+        <Container component="main" className={classes.root}>
+            <Grid container justifyContent="center">
+                <Grid container spacing={4} justifyContent="center" item xs={12} sm={6}>
+                    <Grid item xs={12}>
+                        <Title title={textProvider?.title} subtitle={textProvider?.content} variant="h4" />
+                    </Grid>
+                    <Grid container justifyContent="center" item xs={12}>
+                        <Link to={parsePath()}>
+                            <Button>{textProvider?.actionButton}</Button>
+                        </Link>
                     </Grid>
                 </Grid>
-            </Container>
-        </main>
+            </Grid>
+        </Container>
     );
 };
 

@@ -100,6 +100,9 @@ export const theme = (color) =>
                     },
                     '.fw-300': {
                         fontWeight: '300'
+                    },
+                    '.text-center': {
+                        textAlign: 'center'
                     }
                 }
             },

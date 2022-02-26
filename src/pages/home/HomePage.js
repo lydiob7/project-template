@@ -175,7 +175,7 @@ const HomePage = () => {
     };
 
     return (
-        <Container maxWidth="md" style={{ minHeight: '100vh' }}>
+        <Container component="main" maxWidth="md" style={{ minHeight: '100vh' }}>
             <Title title={textProvider?.title} subtitle={textProvider?.subtitle} subtitleSize="large" />
             <Typography variant="body1" style={{ textAlign: 'center', margin: '1rem 0' }}>
                 {textProvider?.documentationInfo}{' '}

@@ -123,7 +123,7 @@ const englishContent = {
         }
     },
     mantainancePage: {
-        pageTile: 'This site is under mantainance.',
+        pageTitle: 'This site is under mantainance.',
         message:
             "We are making some updates to bring you the best experience. Sorry for the inconvenience, we'll be back very soon!",
         visitWebsiteButton: 'Visit our Website'

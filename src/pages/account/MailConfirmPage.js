@@ -9,7 +9,6 @@ import { parsePath } from 'utils/helpers';
 
 const useStyles = makeStyles((theme) => ({
     bold: {
-        fontWeight: '600',
         margin: '1.4rem 0'
     },
     cardContent: {
@@ -34,11 +33,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.main,
         cursor: 'pointer'
     },
-    root: {},
-    typography: {
-        fontSize: '1.2rem',
-        textAlign: 'center'
-    }
+    root: {}
 }));
 
 function MailConfirmPage({ history, onSubmit: handleSubmit = () => {} }) {
@@ -67,16 +62,16 @@ function MailConfirmPage({ history, onSubmit: handleSubmit = () => {} }) {
                         </Icon>
                     </div>
 
-                    <Typography variant="h5" className={clsx(classes.typography, classes.bold)}>
+                    <Typography variant="h3" className={clsx(classes.bold, 'fs-200 fw-600')}>
                         {textProvider.title}
                     </Typography>
 
-                    <Typography className={clsx(classes.typography)} color="textSecondary">
+                    <Typography className="fs-200 text-center" color="textSecondary">
                         {textProvider.sentLinkTo}{' '}
                         <b>{(history?.location?.state && history?.location?.state[0]?.email) || yourEmailDefault}</b>.
                     </Typography>
 
-                    <Typography className={clsx(classes.typography)} color="textSecondary">
+                    <Typography className="fs-200 text-center" color="textSecondary">
                         {textProvider.checkInbox}
                     </Typography>
 
