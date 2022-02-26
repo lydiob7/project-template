@@ -40,7 +40,7 @@ export default function Logo({ imageSrc, className, style, title }) {
             <Link to={parsePath()}>
                 {imageSrc && <img src={imageSrc} alt={`${title} Logo`} />}
                 &nbsp;
-                <Typography className={clsx(internalClasses.appTitle, 'fs-800 fw-600')} variant="h1">
+                <Typography className={clsx(internalClasses.appTitle, 'fs-500 fw-600')} variant="h1">
                     {title}
                 </Typography>
             </Link>

@@ -34,7 +34,7 @@
 -   Feature: Change navigation tag to nav on Navbar for better semantics.
 -   Feature: Add general classes for text sizes and weights.
 -   Feature: Add Skip navigation link on Layout default.
--   Bugfix: Fix Language Check.
+-   Feature: Update Title component with proper tags for better semantics.
 
 ### v0.6.2
 

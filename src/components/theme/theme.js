@@ -60,16 +60,31 @@ export const theme = (color) =>
                         textDecoration: 'none !important'
                     },
                     '.fs-900': {
-                        fontSize: '2rem'
+                        fontSize: '2.4rem'
                     },
                     '.fs-800': {
-                        fontSize: '1.6rem'
+                        fontSize: '2.2rem'
                     },
                     '.fs-700': {
-                        fontSize: '1.4rem'
+                        fontSize: '2rem'
                     },
                     '.fs-600': {
+                        fontSize: '1.8rem'
+                    },
+                    '.fs-500': {
+                        fontSize: '1.6rem'
+                    },
+                    '.fs-400': {
+                        fontSize: '1.4rem'
+                    },
+                    '.fs-300': {
+                        fontSize: '1.3rem'
+                    },
+                    '.fs-200': {
                         fontSize: '1.2rem'
+                    },
+                    '.fs-100': {
+                        fontSize: '1rem'
                     },
                     '.fw-700': {
                         fontWeight: '700'
@@ -82,6 +97,9 @@ export const theme = (color) =>
                     },
                     '.fw-400': {
                         fontWeight: '400'
+                    },
+                    '.fw-300': {
+                        fontWeight: '300'
                     }
                 }
             },
