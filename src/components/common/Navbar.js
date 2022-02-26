@@ -146,14 +146,14 @@ export default function Navbar({ menuItems = [] }) {
 
                     if (item.dropdown) {
                         return (
-                            <MenuButton key={index} items={item.dropdown} role={data?.role}>
+                            <MenuButton key={item.title + index} items={item.dropdown} role={data?.role}>
                                 {item.title}
                             </MenuButton>
                         );
                     }
 
                     return (
-                        <Link className={classes.mainNavigationListItem} to={item.path} key={index}>
+                        <Link className={classes.mainNavigationListItem} to={item.path} key={item.title + index}>
                             <Button variant="text">{item.title}</Button>
                         </Link>
                     );
@@ -174,8 +174,8 @@ export default function Navbar({ menuItems = [] }) {
                             value={currentLanguage}
                             onChange={(ev) => handleLanguageChange(ev.target?.value)}
                         >
-                            {supportedLanguages?.map((language) => (
-                                <MenuItem key={language} value={language}>
+                            {supportedLanguages?.map((language, index) => (
+                                <MenuItem key={language + index} value={language}>
                                     {textProvider?.supportedLanguages
                                         ? textProvider?.supportedLanguages[language] || language
                                         : language}
@@ -226,7 +226,7 @@ export default function Navbar({ menuItems = [] }) {
                                         return (
                                             <ListItem
                                                 className={classes.listItem}
-                                                key={index2}
+                                                key={ditem.title + index2}
                                                 onClick={() => setNavOpen(false)}
                                             >
                                                 {ditem.icon && <Icon className={classes.itemLogo}>{ditem.icon}</Icon>}
@@ -239,7 +239,12 @@ export default function Navbar({ menuItems = [] }) {
                         }
 
                         return (
-                            <ListItem className={classes.listItem} button key={index} onClick={() => setNavOpen(false)}>
+                            <ListItem
+                                className={classes.listItem}
+                                button
+                                key={item.title + index}
+                                onClick={() => setNavOpen(false)}
+                            >
                                 <Link to={item.path}>
                                     {item.icon && <Icon className={classes.itemLogo}>{item.icon}</Icon>}
                                     <ListItemText primary={item.title} />
@@ -269,8 +274,8 @@ export default function Navbar({ menuItems = [] }) {
                                     value={currentLanguage}
                                     onChange={(ev) => handleLanguageChange(ev.target?.value)}
                                 >
-                                    {supportedLanguages?.map((language) => (
-                                        <MenuItem key={language} value={language}>
+                                    {supportedLanguages?.map((language, index) => (
+                                        <MenuItem key={language + index} value={language}>
                                             {textProvider?.supportedLanguages
                                                 ? textProvider?.supportedLanguages[language] || language
                                                 : language}
@@ -295,7 +300,7 @@ export default function Navbar({ menuItems = [] }) {
                                 <ListItem
                                     className={classes.listItem}
                                     button
-                                    key={index}
+                                    key={item.title + index}
                                     onClick={() => {
                                         setNavOpen(false);
                                         return dispatch(logoutUser());

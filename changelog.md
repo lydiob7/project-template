@@ -31,7 +31,10 @@
 -   Feature: Update Menu Button to support roles.
 -   Feature: Give margin top to Toast Message if header is fixed.
 -   Feature: Change logo title to h1 for better semantics.
+-   Feature: Change navigation tag to nav on Navbar for better semantics.
 -   Feature: Add general classes for text sizes and weights.
+-   Feature: Add Skip navigation link on Layout default.
+-   Bugfix: Fix Language Check.
 
 ### v0.6.2
 
