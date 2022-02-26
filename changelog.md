@@ -35,6 +35,7 @@
 -   Feature: Add general classes for text sizes and weights.
 -   Feature: Add Skip navigation link on Layout default.
 -   Feature: Update Title component with proper tags for better semantics.
+-   Feature: Update Landing page with correct semantic tag names.
 
 ### v0.6.2
 

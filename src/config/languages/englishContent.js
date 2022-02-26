@@ -39,6 +39,7 @@ const englishContent = {
         secondaryButton: 'Secondary Button',
         outlinedButton: 'Outlined Button',
         dangerButton: 'Danger Button',
+        aSectionTitle: 'A Section Title',
         reportModalButton: 'Report Modal',
         imageModalButton: 'Image Modal',
         confirmationModalButton: 'Confirmation Modal',

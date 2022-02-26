@@ -39,6 +39,7 @@ const spanishContent = {
         secondaryButton: 'Botón secundario',
         outlinedButton: 'Botón delineado',
         dangerButton: 'Botón de peligro',
+        aSectionTitle: 'Un título de sección',
         reportModalButton: 'Modal para reporte',
         imageModalButton: 'Modal de imágenes',
         confirmationModalButton: 'Modal de confirmación',

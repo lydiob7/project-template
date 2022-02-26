@@ -239,7 +239,9 @@ const HomePage = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={4}>
-                    <Typography variant="h4">A Section Title</Typography>
+                    <Typography variant="h2" className="fs-700">
+                        {textProvider?.aSectionTitle}
+                    </Typography>
                     <TitleDecoration style={{ marginBottom: '20px' }} />
                     <Button onClick={() => setIsReportModalOpen(true)} fullWidth>
                         {textProvider?.reportModalButton}

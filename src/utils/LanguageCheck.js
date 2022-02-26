@@ -13,7 +13,7 @@ const LanguageCheck = ({ children }) => {
             if (appSettings?.supportedLanguages.includes(lang)) dispatch(languageChanged(lang));
             else dispatch(languageChanged('default'));
         }
-    }, [appSettings?.isLanguageCheckTriggered, appSettings?.supportedLanguages]);
+    }, [dispatch, appSettings?.isLanguageCheckTriggered, appSettings?.supportedLanguages]);
 
     return <>{children}</>;
 };

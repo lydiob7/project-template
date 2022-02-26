@@ -1,34 +1,22 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '45px',
-        height: '4px',
+        height: '3px',
         borderRadius: '30px',
         backgroundColor: theme.palette.primary.main,
         position: 'relative',
-        marginTop: '10px',
-        '&::after': {
-            position: 'absolute',
-            content: '""',
-            bottom: 0,
-            right: '13px',
-            width: '5px',
-            height: '5px',
-            backgroundColor: theme.palette.background.default
-        }
+        marginTop: '10px'
     }
 }));
 
-const TitleDecoration = ({ className, id, style }) => {
-    const classes = useStyles();
-    return (
-        <div className={className} id={id} style={style}>
-            <div className={classes.root}></div>
-        </div>
-    );
+const TitleDecoration = ({ className, ...props }) => {
+    const internalClasses = useStyles();
+    return <div className={clsx(internalClasses.root, className)} {...props}></div>;
 };
 
 export default TitleDecoration;

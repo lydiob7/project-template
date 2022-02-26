@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import clsx from 'clsx';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -58,16 +59,16 @@ const LandingPage = ({ history, form = 'signup', onSubmit = () => {} }) => {
     }, [history, authenticated, data?.role]);
 
     return (
-        <Container maxWidth="lg" style={{ minHeight: '100vh', padding: '5vh 0' }}>
+        <Container component="main" maxWidth="lg" style={{ minHeight: '100vh', padding: '5vh 0' }}>
             <Grid item xs={12}>
-                <Typography className={classes.pageTitle} variant="h4">
+                <Typography className={clsx(classes.pageTitle, 'fs-800')} variant="h2">
                     {appInformation?.appTitle}
                 </Typography>
             </Grid>
             <Grid className={classes.wrapper} container spacing={4}>
-                <Grid container item xs={10} sm={8} lg={5}>
+                <Grid component="aside" container item xs={10} sm={8} lg={5}>
                     <Grid item xs={12}>
-                        <Typography className={classes.title} variant="h5">
+                        <Typography className={clsx(classes.title, 'fs-400')} variant="h3">
                             {content?.title}
                         </Typography>
                     </Grid>
