@@ -187,7 +187,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                 <Grid item component={Card} xs={12} className={classes.card}>
                     <AppBar className={classes.cardHeader} position="static" elevation={0}>
                         <Toolbar>
-                            <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
+                            <Typography variant="body1" color="inherit" className="flex-1 px-12 font-medium">
                                 {text?.generalTab?.keyInformation?.title}
                             </Typography>
                         </Toolbar>
@@ -324,7 +324,7 @@ function KeyInfoTab({ setIsDataChanged, user }) {
                 <Grid item component={Card} xs={12} className={classes.card}>
                     <AppBar className={classes.cardHeader} position="static" elevation={0}>
                         <Toolbar>
-                            <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
+                            <Typography variant="body1" color="inherit" className="flex-1 px-12 font-medium">
                                 {text?.generalTab?.otherInformation?.title}
                             </Typography>
                         </Toolbar>

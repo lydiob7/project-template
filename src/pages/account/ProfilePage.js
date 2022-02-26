@@ -221,8 +221,9 @@ function ProfilePage() {
                 message={textProvider.unsavedChangesMessage}
             />
 
-            <form className={classes.topBg}>
-                {/* <label htmlFor="photoURL" className={classes.bgImageLabel}>
+            <header>
+                <form className={classes.topBg}>
+                    {/* <label htmlFor="photoURL" className={classes.bgImageLabel}>
                     <input
                         onChange={(value) => handleFileChange(value, 'bg')}
                         id="photoURL"
@@ -235,9 +236,10 @@ function ProfilePage() {
                         <EditIcon />
                     </Fab>
                 </label> */}
-            </form>
+                </form>
+            </header>
 
-            <Container maxWidth="lg">
+            <Container component="main" maxWidth="lg">
                 <div className={classes.profileInformation}>
                     <div>
                         <Avatar className={clsx(classes.avatar)} src={user.photoURL || fallBackProfileImage} />
@@ -260,7 +262,7 @@ function ProfilePage() {
                     <div className={classes.profileNameWrapper}>
                         <div>
                             <div className={classes.profileName}>
-                                <Typography variant="h4" color="inherit">
+                                <Typography variant="h2" className="fs-500" color="inherit">
                                     {user?.displayName}
                                 </Typography>
                                 {user?.isApproved && (

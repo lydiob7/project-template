@@ -206,7 +206,7 @@ function OtherGeneralTab({ setIsDataChanged, user }) {
                 <Grid item component={Card} xs={12} className={classes.card}>
                     <AppBar className={classes.cardHeader} position="static" elevation={0}>
                         <Toolbar>
-                            <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
+                            <Typography variant="body1" color="inherit" className="flex-1 px-12 font-medium">
                                 {text?.otherTab?.generalInformation?.title}
                             </Typography>
                         </Toolbar>
@@ -220,7 +220,7 @@ function OtherGeneralTab({ setIsDataChanged, user }) {
                 <Grid item component={Card} xs={12} className={classes.card}>
                     <AppBar className={classes.cardHeader} position="static" elevation={0}>
                         <Toolbar>
-                            <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
+                            <Typography variant="body1" color="inherit" className="flex-1 px-12 font-medium">
                                 {text?.otherTab?.moreInformation?.title}
                             </Typography>
                         </Toolbar>

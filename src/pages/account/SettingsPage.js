@@ -146,9 +146,9 @@ function SettingsPage() {
 
     return (
         <div>
-            <div className={classes.topBg}></div>
+            <header className={classes.topBg}></header>
 
-            <Container maxWidth="lg">
+            <Container component="main" maxWidth="lg">
                 <div className={classes.profileInformation}>
                     <div>
                         <Avatar className={clsx(classes.avatar)} src={user.photoURL || fallBackProfileImage} />
@@ -156,7 +156,7 @@ function SettingsPage() {
                     <div className={classes.profileNameWrapper}>
                         <div>
                             <div className={classes.profileName}>
-                                <Typography variant="h4" color="inherit">
+                                <Typography variant="h2" className="fs-500" color="inherit">
                                     {user?.displayName}
                                 </Typography>
                                 {user?.isApproved && (

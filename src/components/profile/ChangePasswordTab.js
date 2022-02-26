@@ -74,7 +74,7 @@ function ChangePasswordTab({ history, onSubmit: onHandleSubmit = () => {} }) {
                 <div initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}>
                     <Card>
                         <CardContent className={clsx(classes.card, classes.flexCenter)}>
-                            <Typography className={classes.title} variant="h6">
+                            <Typography className={clsx(classes.title, 'fs-400')} variant="h3">
                                 {textProvider.title}
                             </Typography>
 

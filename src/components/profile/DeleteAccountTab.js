@@ -84,7 +84,7 @@ function DeleteAccountTab({ onSubmit: onHandleSubmit = () => {}, logoutUser = ()
                 <div initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}>
                     <Card>
                         <CardContent className={clsx(classes.card, classes.flexCenter)}>
-                            <Typography variant="h6" className={classes.title}>
+                            <Typography className={clsx(classes.title, 'fs-400')} variant="h3">
                                 {textProvider.title}
                             </Typography>
 

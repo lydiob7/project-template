@@ -65,7 +65,7 @@ function GeneralSettingsTab() {
                     <Card variants={item} className="w-full mb-32 rounded-16 shadow">
                         <AppBar className={classes.cardHeader} position="static" elevation={0}>
                             <Toolbar className="px-8">
-                                <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
+                                <Typography variant="body1" color="inherit" className="flex-1 px-12 font-medium">
                                     {textProvider.menu.title}
                                 </Typography>
                             </Toolbar>

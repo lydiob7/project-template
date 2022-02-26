@@ -37,6 +37,7 @@
 -   Feature: Update Title component with proper tags for better semantics.
 -   Feature: Update Landing page with correct semantic tag names.
 -   Feature: Update Error, Mantainance, Terms, Privacy pages and Auth Card, MailConfirm and ForgotPassword components for better semantic tags.
+-   Feature: Update tags on Profile and Settings pages and tabs for better semantics.
 
 ### v0.6.2
 
